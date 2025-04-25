@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+<! --http://localhost:8082/front/LoginPage.php -->
 <head>
     <title>HTML Login Form</title>
     <link rel="stylesheet" href="style.css">
@@ -18,26 +18,35 @@
             <div class="input-box">
                 <input type="text" placeholder="Username"
                        required>
-                <i class='bx bxs-user' ></i>
+                <i class='bx bxs-user icon' ></i>
             </div>
             <div class="input-box">
-                <input type="pass" placeholder="Password"
+                <input type="pass"
+                       style="-webkit-text-security: circle"
+                       placeholder="Password"
                        required>
-                <i class='bx bxs-lock-alt' ></i>
+                <i class='bx bxs-lock-alt icon' ></i>
+                <i class='bx bx-show eye' id="togglePasswor"></i>
             </div>
 
             <button type="submit" class="btn">Login</button>
+
+
+            <div class="register-link">
+                <p>Not registered?
+                    <a href="../RegisterPage/RegisterPage.php" style="text-decoration: none;">
+                        Create an account
+                    </a>
+                </p>
+            </div>
         </form>
+
     </div>
 
-    <p>Not registered?
-        <a href="#" style="text-decoration: none;">
-            Create an account
-        </a>
-    </p>
 
 
 </div>
+
 </body>
 
 </html>
