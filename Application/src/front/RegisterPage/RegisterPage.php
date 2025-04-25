@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<! --http://localhost:8082/front/LoginPage.php -->
+<head>
+    <title>HTML Login Form</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+<div class="main">
+
+    <div class="wrapper">
+
+        <form action="">
+            <h1>Register</h1>
+
+            <div class="input-box">
+                <input type="text" placeholder="Username"
+                       required>
+                <i class='bx bxs-user' ></i>
+            </div>
+            <div class="input-box">
+                <input type="pass"
+                       style="-webkit-text-security: circle"
+                       placeholder="Password"
+                       required>
+                <i class='bx bxs-lock-alt' ></i>
+                <i class='bx bx-show eye'></i>
+            </div>
+            <div class="input-box">
+                <input type="confirmPass"
+                       style="-webkit-text-security: circle"
+                       placeholder="Confirm Password"
+                       required>
+                <i class='bx bxs-lock-alt' ></i>
+                <i class='bx bx-show eye'></i>
+            </div>
+
+            <button type="submit" class="btn">Register</button>
+
+
+            <div class="register-link">
+                <p>Already have an account?
+                    <a href="../LoginPage/LoginPage.php" style="text-decoration: none;">
+                        Log in
+                    </a>
+                </p>
+            </div>
+        </form>
+
+    </div>
+
+
+</div>
+</body>
+
+</html>
