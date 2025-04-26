@@ -1,0 +1,19 @@
+RewriteEngine On
+
+# Dacă există fișierul cerut direct (de exemplu api/auth/login.php), îl servim normal
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Dacă URL-ul începe cu "api/" sau "includes/", nu redirecționăm
+RewriteCond %{REQUEST_URI} ^/(api|includes) [NC]
+RewriteRule ^ - [L]
+
+# Redirecționează http://localhost:8082/index către front/index.php
+RewriteRule ^index$ /front/index.html [L]
+
+# Redirecționează http://localhost:8082/login către front/LoginPage/LoginPage.html
+RewriteRule ^login$ /front/LoginPage/LoginPage.html [L]
+
+# Redirecționează http://localhost:8082/register către front/RegisterPage/RegisterPage.html
+RewriteRule ^register$ /front/RegisterPage/RegisterPage.html [L]
