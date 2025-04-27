@@ -30,7 +30,7 @@ $stmt->execute();
 $stmt->store_result();
 
 if ($stmt->num_rows > 0) {
-    http_response_code(409); // Conflict
+    http_response_code(409);
     echo json_encode(["message" => "Username or email already exists."]);
     exit();
 }
@@ -41,10 +41,10 @@ $insert = $conn->prepare("INSERT INTO users (username, email, password) VALUES (
 $insert->bind_param("sss", $username, $email, $hashedPassword);
 
 if ($insert->execute()) {
-    http_response_code(201); // Created
+    http_response_code(201);
     echo json_encode(["message" => "User registered successfully."]);
 } else {
-    http_response_code(500); // Server error
+    http_response_code(500);
     echo json_encode(["message" => "Failed to register user."]);
 }
 
