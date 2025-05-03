@@ -1,0 +1,64 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+:root {
+    --primary-color: #aeacac;
+    --second-color: #dcdbdb;
+    --white-color: #ffffff;
+    --black-color: #000000;
+    --medium-gray-color: #cdcbcb;
+
+    --border-radius-button:20px;
+
+    --font-size-s: 0.9rem;
+    --font-size-n:1rem;
+    --font-size-m:1.12rem;
+    --font-size-l:1.5rem;
+    --font-size-xl:2rem;
+    --font-size-xxl:4rem;
+}
+
+body {
+    background: var(--second-color);
+    align-items: center;
+    text-align: center;
+    height: 100vh;
+}
+
+.main{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    font-size: var(--font-size-xl);
+}
+
+.main .about{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 100px;
+}
+
+.about .about-box{
+    align-items: center;
+    text-align: center;
+}
+
+.main .title{
+
+}
+
+.about .user-image{
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+
+}
