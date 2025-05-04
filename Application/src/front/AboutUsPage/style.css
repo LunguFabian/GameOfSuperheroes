@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -13,14 +12,14 @@
     --black-color: #000000;
     --medium-gray-color: #cdcbcb;
 
-    --border-radius-button:20px;
+    --border-radius-button: 20px;
 
     --font-size-s: 0.9rem;
-    --font-size-n:1rem;
-    --font-size-m:1.12rem;
-    --font-size-l:1.5rem;
-    --font-size-xl:2rem;
-    --font-size-xxl:4rem;
+    --font-size-n: 1rem;
+    --font-size-m: 1.12rem;
+    --font-size-l: 1.5rem;
+    --font-size-xl: 2rem;
+    --font-size-xxl: 4rem;
 }
 
 header {
@@ -38,7 +37,7 @@ a {
     text-decoration: none;
 }
 
-header .navbar{
+header .navbar {
     display: flex;
     padding: 20px;
     align-items: center;
@@ -47,26 +46,26 @@ header .navbar{
     transition: left 0.5s ease;
 }
 
-.navbar .nav-logo .logo-text{
-    color:var(--black-color);
+.navbar .nav-logo .logo-text {
+    color: var(--black-color);
     font-size: var(--font-size-bar);
     font-weight: var(--font-weight-semibold);
     transition: 0.3s ease;
 }
 
-.navbar .nav-logo .logo-text:hover{
+.navbar .nav-logo .logo-text:hover {
     background: var(--primary-color);
     color: var(--white-color);
     border-radius: var(--border-radius-button);
     border: none;
 }
 
-.navbar .nav-menu{
+.navbar .nav-menu {
     display: flex;
-    gap:10px;
+    gap: 10px;
 }
 
-.navbar .nav-menu .nav-link{
+.navbar .nav-menu .nav-link {
     text-decoration: none;
     padding: 10px 18px;
     color: var(--black-color);
@@ -75,7 +74,7 @@ header .navbar{
     transition: 0.3s ease;
 }
 
-.navbar .nav-menu .nav-link:hover{
+.navbar .nav-menu .nav-link:hover {
     padding: 10px 18px;
     background: var(--primary-color);
     color: var(--white-color);
@@ -83,7 +82,7 @@ header .navbar{
     border: none;
 }
 
-#menu-close-button,#menu-open-button{
+#menu-close-button, #menu-open-button {
     display: none;
 }
 
@@ -94,7 +93,7 @@ body {
     height: 100vh;
 }
 
-.main{
+.main {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -104,7 +103,7 @@ body {
     gap: 40px;
 }
 
-.main .about{
+.main .about {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -122,37 +121,37 @@ body {
     margin-top: 20px;
 }
 
-.main .about .about-box{
+.main .about .about-box {
     align-items: center;
     text-align: center;
 }
 
-.main .about .about-box .user-image{
+.main .about .about-box .user-image {
     border-radius: 60px;
 }
 
-.main .title{
+.main .title {
 
 }
 
-.about .user-image{
+.about .user-image {
     height: 300px;
     width: 300px;
     object-fit: cover;
 }
 
 
-@media screen and (max-width: 900px){
-    :root{
+@media screen and (max-width: 900px) {
+    :root {
         --font-size-s: 0.9rem;
-        --font-size-n:1rem;
-        --font-size-m:1rem;
-        --font-size-l:1.3rem;
-        --font-size-xl:1.5rem;
-        --font-size-xxl:1.8rem;
+        --font-size-n: 1rem;
+        --font-size-m: 1rem;
+        --font-size-l: 1.3rem;
+        --font-size-xl: 1.5rem;
+        --font-size-xxl: 1.8rem;
     }
 
-    header .navbar{
+    header .navbar {
         display: flex;
         padding: 20px;
         align-items: center;
@@ -160,40 +159,40 @@ body {
         background: var(--primary-color);
     }
 
-    #menu-close-button,#menu-open-button{
+    #menu-close-button, #menu-open-button {
         display: block;
         font-size: var(--font-size-l);
     }
 
-    body.show-mobile-menu header::before{
-        content : "";
+    body.show-mobile-menu header::before {
+        content: "";
         position: fixed;
         left: 0;
         right: 0;
         height: 100%;
         width: 100%;
-        backdrop-filter: blur(3px) ;
-        background: rgba(0,0,0,0.2);
+        backdrop-filter: blur(3px);
+        background: rgba(0, 0, 0, 0.2);
     }
 
-    .navbar #menu-close-button{
+    .navbar #menu-close-button {
         position: absolute;
         right: 30px;
-        top:30px;
+        top: 30px;
         transition: 0.2s ease;
     }
 
-    .navbar #menu-open-button{
+    .navbar #menu-open-button {
         color: white;
         transition: 0.2s ease;
     }
 
-    .navbar #menu-open-button:hover{
+    .navbar #menu-open-button:hover {
         color: black;
     }
 
-    .navbar #menu-close-button:hover{
-        color:gray;
+    .navbar #menu-close-button:hover {
+        color: gray;
     }
 
     .navbar .nav-menu {
@@ -211,11 +210,11 @@ body {
         overflow-y: auto;
     }
 
-    body.show-mobile-menu .navbar .nav-menu{
+    body.show-mobile-menu .navbar .nav-menu {
         left: 0;
     }
 
-    .navbar .nav-menu .nav-link{
+    .navbar .nav-menu .nav-link {
         color: var(--black-color);
         display: block;
         margin-top: 17px;
