@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+:root {
+    --primary-color: #dddddd;
+    --second-color: #dcdbdb;
+    --white-color: #ffffff;
+    --black-color: #000000;
+    --medium-gray-color: #cdcbcb;
+
+    --border-radius-button: 20px;
+
+    --font-size-s: 0.9rem;
+    --font-size-n: 1rem;
+    --font-size-m: 1.12rem;
+    --font-size-l: 1.5rem;
+    --font-size-xl: 2rem;
+    --font-size-xxl: 4rem;
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: var(--font-size-xl);
+    padding: 80px 0;
+    gap: 40px;
+    background: var(--second-color);
+}
+
+.main-page{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+   /* justify-content: space-between;*/
+
+    background: var(--second-color);
+}
+
+.main-page .left-side{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    gap:40px;
+
+    padding: 20px;
+}
+
+.left-side .profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    height: 300px;
+    width: 180px;
+
+    gap:10px;
+    padding: 20px;
+
+    background: #f6f6f6;
+    border: 2px solid  #f6f6f6;
+    border-radius: var(--border-radius-button);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.profile-img {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+
+    border-radius: 50px;
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.left-side .hero{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+    gap:10px;
+
+    background: #f6f6f6;
+    border: 2px solid  #f6f6f6;
+    border-radius: var(--border-radius-button);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    padding: 20px;
+
+}
+
+.left-side .hero .hero-info{
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+
+    gap:4px;
+
+    height: auto;
+    width: auto;
+}
+
+.right-side{
+    padding-left: 20px;
+
+    background: #f6f6f6;
+    border: 2px solid  #f6f6f6;
+    border-radius: var(--border-radius-button);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.right-side .
+
+
