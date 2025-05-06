@@ -3,19 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Title</title>
 </head>
 <body>
+<header>
+    <nav class="navbar">
+        <a href="../WelcomePage/index.html" class="nav-logo">
+            <h2 class="logo-text">SuperHeroes</h2>
+        </a>
+        <ul class="nav-menu">
+            <i id="menu-close-button" class='bx bx-x-circle'></i>
 
+            <li class="nav-item">
+                <a href="../ProfilePage/ProfilePage.html" class="nav-link">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">vedem</a>
+            </li>
+            <li class="nav-item">
+                <a href="../AboutUsPage/AboutUs.html" class="nav-link">About</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">vedem</a>
+            </li>
+        </ul>
+
+        <i id="menu-open-button" class='bx bx-menu'></i>
+    </nav>
+</header>
 <main>
     <div class="main-page">
         <div class="left-side">
             <div class="profile">
                 <img src="profileImg.png" alt="profile" class="profile-img">
                 <h3 class="user-name">username</h3>
-                <p class="points">points</p>
-                <h3 class="rank">#rank</h3>
-                <button type="button">Edit Profile</button>
+                <div class="profile-info">
+                    <p class="rank">#rank</p>
+                    <p class="points">points</p>
+                </div>
+                <button type="button" class="profile-button">Edit Profile</button>
             </div>
             <div class="hero">
                 <h2 class="your-hero">Hero Name</h2>
@@ -29,20 +56,26 @@
             </div>
         </div>
         <div class="right-side">
-            <h1>PROFILE</h1>
             <div class="game-history">
                 <h1 class="title">Game History</h1>
+                <div class="game-header">
+                    <span class="col col-number">#</span>
+                    <span class="col col-name">Game Name</span>
+                    <span class="col col-difficulty">Difficulty</span>
+                    <span class="col col-points">Points</span>
+                </div>
                 <ul class="list-games">
-                    <p class="game-info">game info</p>
-                    <p class="game-info">game info</p>
-                    <p class="game-info">game info</p>
-                    <p class="game-info">game info</p>
-                    <p class="game-info">game info</p>
-                    <p class="game-info">game info</p>
+                    <li class="game-info">game info</li>
+                    <li class="game-info">game info</li>
+                    <li class="game-info">game info</li>
+                    <li class="game-info">game info</li>
+                    <li class="game-info">game info</li>
+                    <li class="game-info">game info</li>
                 </ul>
             </div>
         </div>
     </div>
 </main>
+<script src="script.js"></script>
 </body>
 </html>
