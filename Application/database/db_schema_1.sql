@@ -8,5 +8,5 @@ CREATE table users(
     score INT DEFAULT 0
 );
 
-INSERT INTO users(username, email, password)
-VALUES ('user1','user1@email.com','parola');
+-- added this for rank
+ALTER TABLE users ADD COLUMN userRank VARCHAR(50);

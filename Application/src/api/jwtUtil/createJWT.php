@@ -10,6 +10,6 @@ function generateJWT($payload): string
     $headerEncoded = base64UrlEncode(json_encode($header));
     $payloadEncoded = base64UrlEncode(json_encode($payload));
 
-    $signature=base64UrlEncode(hash_hmac('sha256', $headerEncoded.'.'.$payloadEncoded, $key, true));
+    $signature=base64UrlEncode(hash_hmac('sha256', $headerEncoded . '.' . $payloadEncoded, $key, true));
     return $headerEncoded.'.'.$payloadEncoded.'.'.$signature;
 }
