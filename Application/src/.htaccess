@@ -10,7 +10,7 @@ RewriteCond %{REQUEST_URI} ^/(api|includes) [NC]
 RewriteRule ^ - [L]
 
 # Redirecționează http://localhost:8082/index către front/index.php
-RewriteRule ^index$ /front/index.html [L]
+RewriteRule ^index$ /front/WelcomePage/index.html [L]
 
 # Redirecționează http://localhost:8082/login către front/LoginPage/LoginPage.html
 RewriteRule ^login$ /front/LoginPage/LoginPage.html [L]

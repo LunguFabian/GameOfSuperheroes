@@ -6,6 +6,12 @@ header("Access-Control-Allow-Methods: POST");
 
 include_once('../../includes/db.php');
 
+if($_SERVER["REQUEST_METHOD"] != "POST"){
+    http_response_code(405);
+    echo json_encode(["message"=>"Method not allowed."]);
+    exit();
+}
+
 $data = json_decode(file_get_contents("php://input"), true);
 
 if (!isset($data['username'], $data['email'], $data['password'])) {
@@ -24,14 +30,25 @@ if (empty($username) || empty($email) || empty($password)) {
     exit();
 }
 
-$stmt = $conn->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
-$stmt->bind_param("ss", $username, $email);
-$stmt->execute();
-$stmt->store_result();
+$username_check = $conn->prepare("SELECT id FROM users WHERE username = ?");
+$username_check->bind_param("s", $username);
+$username_check->execute();
+$username_check->store_result();
 
-if ($stmt->num_rows > 0) {
+if ($username_check->num_rows > 0) {
     http_response_code(409);
-    echo json_encode(["message" => "Username or email already exists."]);
+    echo json_encode(["message" => "Username already exists."]);
+    exit();
+}
+
+$email_check = $conn->prepare("SELECT id FROM users WHERE email = ?");
+$email_check->bind_param("s", $email);
+$email_check->execute();
+$email_check->store_result();
+
+if ($email_check->num_rows > 0) {
+    http_response_code(409);
+    echo json_encode(["message" => "Email already exists."]);
     exit();
 }
 
@@ -48,7 +65,8 @@ if ($insert->execute()) {
     echo json_encode(["message" => "Failed to register user."]);
 }
 
-$stmt->close();
+$username_check->close();
+$email_check->close();
 $insert->close();
 $conn->close();
 
