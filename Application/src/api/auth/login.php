@@ -5,7 +5,13 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST');
 
 include_once("../../includes/db.php");
-include_once("../jwtUtil/JWT.php");
+include_once("../jwtUtil/createJWT.php");
+
+if($_SERVER["REQUEST_METHOD"] != "POST"){
+    http_response_code(405);
+    echo json_encode(["message"=>"Method not allowed."]);
+    exit();
+}
 
 $data = json_decode(file_get_contents("php://input"),true);
 
@@ -44,7 +50,7 @@ if(!password_verify($password, $user['password'])) {
 }
 
 $payload=[
-    "username"=>$user['username'],
+    "id"=>$user['id'],
     "exp"=>time()+3600
 ];
 
