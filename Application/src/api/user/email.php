@@ -2,18 +2,20 @@
 global $conn;
 header('Content-Type: application/json; charset=UTF-8');
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Methods: PUT");
 header("Access-Control-Allow-Headers:Authorization");
 
 include_once('../../includes/db.php');
 include_once('../jwtUtil/validateJWT.php');
 include_once('../jwtUtil/decodeJWT.php');
 
-if($_SERVER["REQUEST_METHOD"] != "GET"){
+if($_SERVER["REQUEST_METHOD"] != "PUT"){
     http_response_code(405);
     echo json_encode(["message"=>"Method not allowed."]);
     exit();
 }
+
+$data = json_decode(file_get_contents("php://input"), true);
 
 $headers=getallheaders();
 if(!isset($headers['Authorization'])){
@@ -39,22 +41,12 @@ if(!$user_id){
     exit();
 }
 
-$stmt = $conn->prepare("SELECT username,score,userRank FROM `users` WHERE `id`=?");
-$stmt->bind_param("i",$user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$user = $result->fetch_assoc();
+$newEmail = trim($payload['newEmail'] ?? '');
+$password = trim($payload['password'] ?? '');
 
-if(!$user){
-    http_response_code(404);
-    echo json_encode(["message"=>"User not found!"]);
+if(empty($newEmail) || empty($password)){
+    http_response_code(400);
+    echo json_encode(["message"=>"Both new email and password are required"]);
     exit();
 }
-
-
-echo json_encode($user);
-
-$stmt->close();
-$conn->close();
-
 

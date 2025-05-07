@@ -5,9 +5,9 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Headers:Authorization");
 
-include_once('../../includes/db.php');
-include_once('../jwtUtil/validateJWT.php');
-include_once('../jwtUtil/decodeJWT.php');
+include_once("../../includes/db.php");
+include_once("../jwtUtil/decodeJWT.php");
+include_once("../jwtUtil/validateJWT.php");
 
 if($_SERVER["REQUEST_METHOD"] != "GET"){
     http_response_code(405);
@@ -22,7 +22,7 @@ if(!isset($headers['Authorization'])){
     exit();
 }
 
-$token=str_replace('Bearer ', '', $headers['Authorization']);
+$token = str_replace('Bearer ', '', $headers['Authorization']);
 
 if(!validateJWT($token)){
     http_response_code(401);
@@ -39,7 +39,7 @@ if(!$user_id){
     exit();
 }
 
-$stmt = $conn->prepare("SELECT username,score,userRank FROM `users` WHERE `id`=?");
+$stmt = $conn->prepare("SELECT username,email FROM `users` WHERE `id`=?");
 $stmt->bind_param("i",$user_id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -51,10 +51,7 @@ if(!$user){
     exit();
 }
 
-
 echo json_encode($user);
 
 $stmt->close();
 $conn->close();
-
-
