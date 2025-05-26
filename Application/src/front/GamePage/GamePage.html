@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SuperHeroesGame</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header>
+  <div>SuperHeroesGame</div>
+  <nav>
+    <a href="../ProfilePage/ProfilePage.html">Profile</a> |
+    <a href="#">Vedem</a> |
+    <a href="../AboutUsPage/AboutUs.html">About</a>
+  </nav>
+</header>
+
+<div class="container">
+  <h1>GAME TITLE</h1>
+  <p id="difficultyDisplay"></p>
+  <div class="grey-box" id="mainBox">
+    <div id="storyText"></div>
+    <button class="btn" id="continueBtn" style="display:none;">Continuă</button>
+    <div id="quiz">
+      <p><strong>Intrebare:</strong> Ce alegi?</p>
+
+      <div id="multiple-options">
+        <div class="quiz-option">Raspuns 1</div>
+        <div class="quiz-option">Raspuns 2</div>
+        <div class="quiz-option" id="third-option">Raspuns 3</div>
+      </div>
+
+      <div id="input-answer" style="display:none;">
+        <input type="text" id="textAnswer" placeholder="Scrie raspunsul..." />
+      </div>
+
+      <button class="btn" id="nextBtn">Next</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
