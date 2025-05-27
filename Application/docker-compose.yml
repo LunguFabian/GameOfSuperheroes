@@ -18,3 +18,4 @@ services:
       MYSQL_PASSWORD: pass
     ports:
       - "3307:3306"
+    command: --log-bin-trust-function-creators=1

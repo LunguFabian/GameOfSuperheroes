@@ -21,11 +21,6 @@ function validateJWT($jwt):bool{
     $decodedPayload=decodeJWT($jwt);
 
     if(!isset($decodedPayload['exp'])|| $decodedPayload['exp']<time()){
-        echo json_encode([
-            "message" => "Token expired.",
-            "exp" => $decodedPayload['exp'],
-            "now" => time()
-        ]);
         return false;
     }
 
