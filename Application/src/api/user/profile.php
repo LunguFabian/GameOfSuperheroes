@@ -39,7 +39,7 @@ if(!$user_id){
     exit();
 }
 
-$stmt = $conn->prepare("SELECT username,score,userRank FROM `users` WHERE `id`=?");
+$stmt = $conn->prepare("SELECT username,score,userRank,hero_id FROM `users` WHERE `id`=?");
 $stmt->bind_param("i",$user_id);
 $stmt->execute();
 $result = $stmt->get_result();

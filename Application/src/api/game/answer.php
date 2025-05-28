@@ -77,11 +77,11 @@ $correct_answer=$question["option{$correct_option_index}"]??null;
 $is_correct= strtolower(trim($answer)) === strtolower(trim($correct_answer));
 
 $new_score=$game['score'];
+if($new_score==-1){
+    $new_score=0;
+}
 if($is_correct){
     $question_score=$question['score'];
-    if($new_score==-1){
-        $new_score=0;
-    }
     $new_score=$new_score+$question_score;
 
     $stmt = $conn->prepare("UPDATE games SET score = ? WHERE id = ?");
