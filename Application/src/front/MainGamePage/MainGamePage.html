@@ -9,7 +9,7 @@
 <body>
 <header>
     <nav class="navbar">
-        <a href="/home" class="nav-logo">
+        <a href="#" class="nav-logo">
             <h2 class="logo-text">SuperHeroes</h2>
         </a>
     </nav>
@@ -37,17 +37,8 @@
         </div>
     </div>
 </main>
-<script>const menuOpenButton = document.querySelector("#menu-open-button");
-const menuCloseButton = document.querySelector("#menu-close-button");
-
+<script>
 console.log("1");
-
-menuOpenButton.addEventListener("click", () => {
-    document.body.classList.toggle("show-mobile-menu");
-})
-
-menuCloseButton.addEventListener("click", () => menuOpenButton.click());
-
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("token");
     if (!token) {
