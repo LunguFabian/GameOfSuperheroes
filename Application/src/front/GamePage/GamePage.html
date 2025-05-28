@@ -113,15 +113,15 @@ function configureDifficultyUI(difficulty) {
 }
 
 function typeStory(text) {
-  let i = 0;
-  textBox.textContent = '';
+  let i = -1;
+  textBox.textContent = ' ';
 
   function typeChar() {
     if (i < text.length) {
+      console.log(text.charAt(i));
       textBox.textContent += text.charAt(i);
-      if (i % 40 === 0) textBox.innerText += '\n';
       i++;
-      setTimeout(typeChar, 40);
+      setTimeout(typeChar, 20);
     } else {
       continueBtn.style.display = 'inline-block';
     }
@@ -129,14 +129,6 @@ function typeStory(text) {
 
   typeChar();
 }
-
-document.addEventListener('keydown', function (e) {
-  if (e.code === 'Space' && currentPart < storyParts.length) {
-    e.preventDefault();
-    textBox.textContent = storyParts[currentPart];
-    continueBtn.style.display = 'inline-block';
-  }
-});
 
 continueBtn.addEventListener('click', () => {
   continueBtn.style.display = 'none';
@@ -214,7 +206,7 @@ nextBtn.addEventListener('click', () => {
             if (data.is_correct) {
               alert("✔️ Corect! Scor curent: " + data.score);
             } else {
-              alert("❌ Gresit! Scor curent: " + data.score);
+              alert("❌ Gresit!");
             }
 
             currentPart++;
