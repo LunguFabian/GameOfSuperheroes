@@ -1,4 +1,5 @@
-Use heroes_db;
+Use
+    heroes_db;
 
 CREATE table users
 (
@@ -10,7 +11,7 @@ CREATE table users
 );
 
 ALTER TABLE users
-ADD COLUMN userRank VARCHAR(50);
+    ADD COLUMN userRank VARCHAR(50);
 
 CREATE TABLE heroes
 (
@@ -27,7 +28,7 @@ CREATE TABLE villains
 
 CREATE TABLE nemesis
 (
-    id         INT AUTO_INCREMENT,
+    id         INT AUTO_INCREMENT PRIMARY KEY,
     hero_id    INT NOT NULL,
     villain_id INT NOT NULL,
     FOREIGN KEY (hero_id) REFERENCES heroes (id),
@@ -85,7 +86,8 @@ CREATE TABLE game_info
     FOREIGN KEY (question3_id) REFERENCES questions (id)
 );
 
-DELIMITER //
+DELIMITER
+//
 
 CREATE TRIGGER after_game_insert
     AFTER INSERT
@@ -137,5 +139,46 @@ END;
 DELIMITER ;
 
 ALTER TABLE users
-ADD COLUMN hero_id INT DEFAULT NULL,
-ADD CONSTRAINT fk_user_hero FOREIGN KEY (hero_id) REFERENCES heroes(id);
+    ADD COLUMN hero_id INT DEFAULT NULL,
+    ADD CONSTRAINT fk_user_hero FOREIGN KEY (hero_id) REFERENCES heroes (id);
+
+INSERT INTO heroes(name, image_url)
+VALUES ('Iron Man', 'https://example.com/images/ironman.png'),
+       ('Spider-Man', 'https://example.com/images/spiderman.png'),
+       ('Captain Marvel', 'https://example.com/images/captainmarvel.png');
+
+
+INSERT INTO villains(name)
+VALUES ('Thanos'),
+       ('Green Goblin'),
+       ('Ronan the Accuser'),
+       ('Ultron');
+
+INSERT INTO nemesis(hero_id, villain_id)
+VALUES (1, 1),
+       (1, 4),
+       (2, 1),
+       (2, 2),
+       (3, 1),
+       (3, 3);
+
+INSERT INTO questions (question_text, option1, option2, option3, option4, correct_option, difficulty, score)
+VALUES ('Care este capitala Franței?', 'Paris', 'Londra', NULL, NULL, 1, 'easy', 10),
+       ('Cine a scris "Romeo și Julieta"?', 'William Shakespeare', 'Mark Twain', NULL, NULL, 1, 'easy', 12),
+       ('Ce planetă este cunoscută ca „Planeta Roșie”?', 'Venus', 'Marte', NULL, NULL, 2, 'easy', 10),
+       ('Care este simbolul chimic pentru aur?', 'Au', 'Ag', NULL, NULL, 1, 'easy', 5),
+       ('În ce an a ajuns omul pentru prima dată pe Lună?', '1965', '1969', NULL, NULL, 2, 'easy', 5),
+       ('Ce limbă se vorbește în Brazilia?', 'Spaniolă', 'Portugheză', NULL, NULL, 2, 'easy', 5);
+
+INSERT INTO scenarios (part1, part2, part3, part4)
+VALUES ('Într-o noapte haotică, un portal interdimensional se deschide în mijlocul orașului. O versiune distorsionată a lumii tale apare prin el. Din oglindă te privește un oraș rupt, inversat… și condus de [ENEMY_NAME].',
+        'Traversezi portalul. În această lume, eroii sunt venerați ca zei, iar cetățenii trăiesc în frică. În această lume, tu ești o legendă… dar și un dictator. [ENEMY_NAME] a deturnat imaginea ta și a construit o întreagă societate în jurul fricii.',
+        'Ajungi în centrul capitalei. Totul e tăcut. Roboții de patrulare te confundă cu „varianta ta malefică” și te conduc direct în palatul central. Acolo, [ENEMY_NAME] te așteaptă, cu un zâmbet rece: „Acum înțelegi cât de ușor e să controlezi lumea…”',
+        'Într-o confruntare de voințe, distrugi mecanismul care menținea deschis portalul și eliberezi populația din hipnoză. În haosul prăbușirii dimensiunii oglindă, te întorci în lumea ta. În urma ta, oglinda se sparge în mii de cioburi. Răul a fost închis. Pentru acum.'),
+       ('O alertă de grad zero vine direct de la o rețea satelitară de securitate. Cineva a declanșat „Codul Apocalipsei” — un set de protocoale de distrugere globală scrise în caz de invazie extraterestră. Dar nu a fost nicio invazie. Doar [ENEMY_NAME].',
+        'Ajungi într-un buncăr subteran vechi de decenii. Acolo, calculatoare masive, tuburi catodice, și un terminal aprins. Ecranul afișează un countdown. Lipsesc exact 9 minute până la declanșarea autodistrugerii a 3 continente.',
+        'Reușești să pătrunzi în sistem. Dar ai de rezolvat o serie de ecuații și coduri logice rămase din vremea Războiului Rece. [ENEMY_NAME] ți-a lăsat capcane. Greșești? Se accelerează timer-ul. Te concentrezi.',
+        'Cu 7 secunde rămase, tastezi ultimele caractere. Sirena se oprește. Ecranul devine negru. Aerul devine din nou respirabil. Pe camera de supraveghere, [ENEMY_NAME] îți face o reverență sarcastică. „Ai câștigat azi. Dar mâine… voi rescrie Codul.”');
+
+
+update users set hero_id = 1 where id=1;

@@ -145,6 +145,23 @@ header .navbar{
     background: transparent;
 }
 
+.hero-section .hero-details .button.play {
+    font-size: var(--font-size-xl);
+    padding: 14px 40px;
+    background: #2ecc71;
+    color: var(--white-color);
+    border: 2px solid transparent;
+    border-radius: var(--border-radius-button);
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.hero-section .hero-details .button.play:hover {
+    background: transparent;
+    border-color: #2ecc71;
+    color: #2ecc71;
+}
+
 @media screen and (max-width: 900px) {
     :root {
         --font-size-s: 0.9rem;

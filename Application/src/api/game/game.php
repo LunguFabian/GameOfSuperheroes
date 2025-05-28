@@ -110,7 +110,7 @@ while ($row = $question_result->fetch_assoc()) {
     $question=[
         "id" => $row["id"],
         "text" => $row["question_text"],
-        "type" => $game['difficulty'],
+        "difficulty" => $game['difficulty'],
     ];
     if($game['difficulty']=="easy"){
         $question['options']=[
@@ -124,6 +124,8 @@ while ($row = $question_result->fetch_assoc()) {
             $row['option3'],
             $row['option4'],
         ];
+    } else if($game['difficulty']=="hard"){
+        $question['options']=null;
     }
     $questions[]=$question;
 }

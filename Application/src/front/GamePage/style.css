@@ -31,7 +31,7 @@ h1 {
 
 #storyText {
     white-space: pre-wrap;
-    font-size: 16px;
+    font-family: 'Courier New', monospace;
     line-height: 1.5;
 }
 
