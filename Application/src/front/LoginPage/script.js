@@ -24,7 +24,8 @@ form.addEventListener('submit', async (event) => {
         if (response.ok) {
             localStorage.setItem('token', result.token);
             alert('Login successfully!');
-            window.location.href='/index'   ;
+            window.location.href='/home';
+
         }else
         {
             alert(result.message||'Login failed.');
