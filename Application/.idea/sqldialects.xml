@@ -2,5 +2,6 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/database/db_schema_1.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/api/game/game.php" dialect="GenericSQL" />
   </component>
 </project>
