@@ -39,7 +39,10 @@ if(!$user_id){
     exit();
 }
 
-$stmt = $conn->prepare("SELECT username,score,userRank,hero_id FROM `users` WHERE `id`=?");
+$stmt = $conn->prepare("SELECT username,score,userRank,image_url AS hero_img 
+                                FROM users u JOIN heroes h 
+                                ON u.hero_id=h.id 
+                                WHERE u.id=?");
 $stmt->bind_param("i",$user_id);
 $stmt->execute();
 $result = $stmt->get_result();

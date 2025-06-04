@@ -9,7 +9,7 @@
 <body>
 <header>
     <nav class="navbar">
-        <a href="#" class="nav-logo">
+        <a href="/home" class="nav-logo">
             <h2 class="logo-text">SuperHeroes</h2>
         </a>
     </nav>
@@ -42,7 +42,7 @@ console.log("1");
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("token");
     if (!token) {
-        window.location.href = '../NotAuthorizedPage/NotAuthorized.html'
+        window.location.href = 'front/NotAuthorizedPage/NotAuthorized.html'
         return;
     }
 

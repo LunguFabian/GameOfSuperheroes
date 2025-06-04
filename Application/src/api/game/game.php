@@ -68,7 +68,17 @@ if ($game['score'] != -1) {
     exit();
 }
 
-$stmt = $conn->prepare("SELECT v.name
+$stmt = $conn->prepare("SELECT image_url
+                            FROM heroes
+                            WHERE id = ? ");
+$stmt->bind_param("i", $game['hero_id']);
+$stmt->execute();
+$result = $stmt->get_result();
+$hero = $result->fetch_assoc();
+$hero_img= $hero['image_url'] ?? "";
+$stmt->close();
+
+$stmt = $conn->prepare("SELECT v.name,v.image_url
                             FROM villains v JOIN nemesis n 
                             ON v.id = n.villain_id
                             WHERE n.hero_id = ? 
@@ -78,6 +88,8 @@ $stmt->bind_param("i", $game['hero_id']);
 $stmt->execute();
 $villain_result = $stmt->get_result();
 $villain = $villain_result->fetch_assoc();
+$villain_name = $villain['name'] ?? "the enemy";
+$villain_img = $villain['image_url'] ?? "";
 $stmt->close();
 
 $stmt = $conn->prepare("SELECT part1,part2,part3,part4
@@ -89,7 +101,7 @@ $scenario_result = $stmt->get_result();
 $scenario = $scenario_result->fetch_assoc();
 $stmt->close();
 
-$villain_name = $villain['name'] ?? "the enemy";
+
 
 $scenario_parts = [
     "part1" => str_replace("[ENEMY_NAME]", $villain_name, $scenario['part1']),
@@ -134,7 +146,9 @@ echo json_encode([
     "scenario"=>$scenario_parts,
     "questions"=>$questions,
     "difficulty"=>$game['difficulty'],
-    "game_id"=>$game['id']
+    "game_id"=>$game['id'],
+    "villain_image"=>$villain_img,
+    "hero_image"=>$hero_img,
 ]);
 
 $conn->close();

@@ -42,7 +42,7 @@ if (!$user_id) {
 $games_history = [];
 $stmt = $conn->prepare("SELECT h.name as hero_name,g.difficulty,g.score 
                                FROM games g JOIN heroes h ON g.hero_id=h.id 
-                               WHERE g.user_id=?");
+                               WHERE g.user_id=? and g.score>-1;");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();

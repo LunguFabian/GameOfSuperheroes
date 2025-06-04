@@ -18,4 +18,6 @@ services:
       MYSQL_PASSWORD: pass
     ports:
       - "3307:3306"
+    volumes:
+      - ./database_volume:/var/lib/mysql
     command: --log-bin-trust-function-creators=1
