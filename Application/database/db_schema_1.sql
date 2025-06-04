@@ -213,4 +213,8 @@ ALTER TABLE villains
 
 update users set hero_id = 3 where id=3;
 
+Update heroes set image_url='front/images/iron-man.png' where id=1;
+
+UPDATE users set score=229 where id=1;
+
 
