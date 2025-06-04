@@ -8,15 +8,6 @@
 </head>
 <body>
 
-<header>
-  <div>SuperHeroesGame</div>
-  <nav>
-    <a href="../ProfilePage/ProfilePage.html">Profile</a> |
-    <a href="#">Vedem</a> |
-    <a href="../AboutUsPage/AboutUs.html">About</a>
-  </nav>
-</header>
-
 <div class="container">
   <h1>GAME TITLE</h1>
   <p id="difficultyDisplay"></p>
@@ -36,15 +27,17 @@
       </div>
       <button class="btn" id="nextBtn">Next</button>
     </div>
-  </div>
-</div>
 
-<div id="gameOverPopup">
-  <div class="popup-content">
-    <h2>Game Over!</h2>
-    <div>Scorul tău: <span id="finalScore">0</span></div>
-    <div id="popupCountdown">Veți fi redirecționat în <span id="popupTimer">15</span> secunde</div>
-    <button id="playAgainBtn">Play Again</button>
+    <div id="gameOverPopup">
+      <div class="popup-content">
+        <h2>Game Over!</h2>
+        <div>Scorul tău: <span id="finalScore">0</span></div>
+        <div id="popupCountdown">Veți fi redirecționat în <span id="popupTimer">15</span> secunde</div>
+        <button id="playAgainBtn">Play Again</button>
+      </div>
+  </div>
+
+
   </div>
 </div>
 
@@ -71,6 +64,7 @@
   let selectedAnswer = null;
 
   popup.style.display = 'none';
+  quizBox.style.display = 'none';
 
   window.onload = () => {
     fetch(`http://localhost:8082/api/game/game.php?id=${gameId}`, {
@@ -159,7 +153,10 @@
                 .then(res => res.json())
                 .then(data => {
                   alert("🎉 Joc terminat! Scor actualizat. Rank obținut: " + data.new_rank);
-                  showGameOverPopup(data.final_score || data.score || "0");
+                  document.getElementById('quiz').style.display = 'none';
+                  let score = data.added_score;
+                  console.log(score);
+                  showGameOverPopup(score);
                 })
                 .catch(err => {
                   console.error("Eroare la actualizare scor:", err);

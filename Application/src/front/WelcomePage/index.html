@@ -16,7 +16,7 @@
         <ul class="nav-menu">
             <i id="menu-close-button" class='bx bx-x-circle'></i>
 
-            <li class="nav-item">
+            <li class="nav-item" id="profile">
                 <a href="/profile" class="nav-link">Profile</a>
             </li>
             <li class="nav-item">
@@ -25,7 +25,7 @@
             <li class="nav-item">
                 <a href="/aboutus" class="nav-link">About</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" id="logout">
                 <a href="/home" class="nav-link" id="logout-btn">Logout</a>
             </li>
         </ul>
@@ -60,6 +60,12 @@
     })
 
     menuCloseButton.addEventListener("click", () => menuOpenButton.click());
+
+    const token = localStorage.getItem("token");
+    if(token==null){
+        document.getElementById("profile").style.display = "none";
+        document.getElementById("logout").style.display = "none";
+    }
 
     document.addEventListener("DOMContentLoaded", () => {
         const token = localStorage.getItem("token");

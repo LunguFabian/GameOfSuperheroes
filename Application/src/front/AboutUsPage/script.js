@@ -12,3 +12,9 @@ document.getElementById('logout-btn').addEventListener('click', function (event)
     localStorage.removeItem('token');
     window.location.href = '/home';
 });
+
+const token = localStorage.getItem("token");
+if(token==null){
+    document.getElementById("profile").style.display = "none";
+    document.getElementById("logout").style.display = "none";
+}
