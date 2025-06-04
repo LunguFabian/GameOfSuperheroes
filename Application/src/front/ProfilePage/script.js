@@ -1,3 +1,9 @@
+const token = localStorage.getItem("token");
+if(token==null){
+    document.getElementById("profile").style.display = "none";
+    document.getElementById("logout").style.display = "none";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("token");
 

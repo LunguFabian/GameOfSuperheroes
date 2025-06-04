@@ -1,117 +1,87 @@
+/* General styles */
 body {
-    font-family: sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f3f3f3;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-}
-
-.container {
-    width: 80%;
-    margin: 0 auto;
-    margin-top: 50px;
-}
-
-h1 {
-    font-size: 32px;
-}
-
-.grey-box {
-    background-color: #ccc;
-    padding: 30px;
-    border-radius: 10px;
-    min-height: 200px;
-    position: relative;
-}
-
-#storyText {
-    white-space: pre-wrap;
-    font-family: 'Courier New', monospace;
-    line-height: 1.5;
-}
-
-.btn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: black;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-#quiz {
-    display: none;
-}
-
-.quiz-option {
-    background: #f9f9f9;
-    margin-top: 10px;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.quiz-option.selected {
-    background-color: #b3d4fc;
-    border: 2px solid #4285f4;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background: #f5f5f5;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f5f7fa;
     margin: 0;
     padding: 0;
 }
 
+/* Header styles */
 header {
     background: #283593;
     color: #fff;
-    padding: 16px 0;
+    padding: 20px 0 10px 0;
     text-align: center;
-    font-size: 1.4em;
+    font-size: 1.5em;
     letter-spacing: 2px;
+    box-shadow: 0 2px 8px #2222;
 }
 
-nav a {
-    color: #fff;
-    margin: 0 8px;
-    text-decoration: none;
+header > div {
     font-weight: bold;
+    font-size: 2.2em;
+    margin-bottom: 6px;
+}
+
+header nav {
+    margin-top: 8px;
+}
+
+header nav a {
+    color: #fff;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+header nav a:hover {
+    color: #ffb300;
 }
 
 .container {
-    max-width: 450px;
-    margin: 60px auto 0 auto;
+    max-width: 480px;
+    margin: 50px auto 0 auto;
     background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 16px #8882;
-    padding: 32px 24px 40px 24px;
+    border-radius: 14px;
+    box-shadow: 0 3px 20px #bbb6;
+    padding: 36px 26px 44px 26px;
     text-align: center;
+    position: relative; /* Pentru popup absolut */
 }
 
 h1 {
-    margin-bottom: 20px;
+    margin-bottom: 22px;
     color: #283593;
-    font-size: 2em;
+    font-size: 2.2em;
+    text-shadow: 0 1px 2px #ddd;
 }
 
 #difficultyDisplay {
-    font-size: 1.1em;
+    font-size: 1.13em;
     color: #616161;
-    margin-bottom: 10px;
+    margin-bottom: 13px;
 }
 
 .grey-box {
-    background: #f0f0f0;
-    border-radius: 8px;
-    box-shadow: 0 1px 8px #bbb4;
-    padding: 22px 16px;
-    margin-bottom: 20px;
+    background: #f1f3f6;
+    border-radius: 10px;
+    box-shadow: 0 1px 8px #bbb3;
+    padding: 28px 16px 22px 16px;
+    margin-bottom: 18px;
+    min-height: 200px;
+    position: relative;
+    z-index: 1;
+}
+
+#storyText {
+    min-height: 32px;
+    margin-bottom: 14px;
+    color: #263238;
+    font-size: 1.12em;
+    line-height: 1.5;
+    letter-spacing: .02em;
+    text-align: left;
 }
 
 .btn {
@@ -119,25 +89,39 @@ h1 {
     color: white;
     border: none;
     border-radius: 5px;
-    padding: 10px 28px;
+    padding: 11px 34px;
     font-size: 1.1em;
     cursor: pointer;
-    margin-top: 12px;
-    margin-bottom: 8px;
-    transition: background 0.2s;
+    margin-top: 14px;
+    margin-bottom: 10px;
+    transition: background 0.22s;
+    font-weight: 500;
+    box-shadow: 0 2px 10px #1976d22a;
 }
 .btn:hover {
     background: #0d47a1;
 }
 
+#quiz p {
+    text-align: left;
+    margin: 0 0 14px 0;
+    font-size: 1.08em;
+    color: #222b;
+}
+
+#multiple-options {
+    margin-bottom: 12px;
+}
+
 .quiz-option {
     background: #e3eafc;
     border-radius: 5px;
-    padding: 8px 0;
-    margin: 7px 0;
+    padding: 9px 0;
+    margin: 8px 0;
     cursor: pointer;
     border: 2px solid transparent;
-    transition: background 0.2s, border 0.2s;
+    transition: background 0.18s, border 0.18s;
+    font-size: 1.04em;
 }
 .quiz-option.selected {
     background: #bbdefb;
@@ -146,60 +130,121 @@ h1 {
 
 #input-answer input[type="text"] {
     padding: 8px;
-    width: 85%;
+    width: 90%;
     border-radius: 4px;
     border: 1px solid #bdbdbd;
     font-size: 1em;
-    margin-top: 12px;
+    margin-top: 13px;
+    margin-bottom: 12px;
+    outline: none;
+    transition: border 0.2s;
+}
+#input-answer input[type="text"]:focus {
+    border: 1.5px solid #1976d2;
 }
 
+/* === Game Over Popup Styling === */
 #gameOverPopup {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    background: rgba(0,0,0,0.5);
-    z-index: 1000;
-    align-items: center;
+    display: none; /* inițial ascuns */
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 220px;
+    z-index: 20;
+    background: rgba(245, 247, 250, 0.98);
+    /* Centrare verticală și orizontală în grey-box */
+    display: flex;
     justify-content: center;
+    align-items: center;
+    transition: background 0.18s;
+}
+
+#gameOverPopup.active {
+    display: flex;
 }
 
 #gameOverPopup .popup-content {
     background: #fff;
-    padding: 40px 30px;
-    border-radius: 13px;
-    box-shadow: 0 2px 18px #2227;
-    text-align: center;
-    width: 320px;
+    padding: 36px 32px 29px 32px;
+    border-radius: 26px;
+    box-shadow: 0 6px 32px #1976d230, 0 2px 20px #0001;
+    border: 2.5px solid #1976d2;
+    width: 98%;
+    max-width: 340px;
+    min-width: 220px;
     margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    animation: popupFadeIn 0.5s;
+}
+
+@keyframes popupFadeIn {
+    from { opacity: 0; transform: translateY(30px);}
+    to   { opacity: 1; transform: translateY(0);}
 }
 
 #gameOverPopup h2 {
     color: #d32f2f;
-    margin-bottom: 14px;
+    margin-bottom: 18px;
+    font-size: 2.1em;
+    font-weight: 800;
+    letter-spacing: .02em;
 }
 
 #finalScore {
     font-weight: bold;
     color: #1976d2;
-    font-size: 1.4em;
+    font-size: 1.7em;
+    margin-left: 8px;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+#gameOverPopup .popup-content > div {
+    font-size: 1.09em;
+    margin-bottom: 6px;
 }
 
 #popupCountdown {
     color: #d32f2f;
-    margin-bottom: 15px;
-    font-size: 1.1em;
+    margin: 13px 0 17px 0;
+    font-size: 1.08em;
+    font-weight: 500;
 }
 
 #playAgainBtn {
-    padding: 10px 25px;
-    background: #1976d2;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1em;
+    padding: 13px 44px;
+    background: #fff;
+    color: #1976d2;
+    border: 2px solid #1976d2;
+    border-radius: 30px;
+    font-size: 1.18em;
+    font-weight: 700;
+    margin-top: 14px;
     cursor: pointer;
-    transition: background 0.2s;
+    box-shadow: 0 1.5px 6px #1976d22e;
+    transition: background 0.18s, color 0.18s, border 0.18s, box-shadow 0.18s;
+    outline: none;
 }
-#playAgainBtn:hover {
-    background: #0d47a1;
+#playAgainBtn:hover, #playAgainBtn:focus {
+    background: #1976d2;
+    color: #fff;
+    border: 2px solid #1976d2;
+    box-shadow: 0 3px 16px #1976d250;
+}
+
+@media (max-width: 650px) {
+    .container {
+        max-width: 99vw;
+        padding: 18px 3vw 28px 3vw;
+    }
+    #gameOverPopup .popup-content {
+        width: 96vw;
+        min-width: 0;
+        padding: 18px 4vw 10px 4vw;
+    }
 }

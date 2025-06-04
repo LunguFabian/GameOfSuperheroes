@@ -147,12 +147,12 @@ main{
     flex: 1;
     flex-direction: column;
 
-    height: 350px;
+    height: 150px;
     width: 250px;
     margin-left: 20px;
     margin-right: 20px;
 
-    gap:60px;
+    gap:40px;
 
     background: var(--second-color);
     border-radius: 10px;
@@ -183,20 +183,6 @@ main{
     align-items: center;
 }
 
-.content .game-content .game .game-description-play{
-    padding: 20px 20px 20px 20px;
-
-    display: flex;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-}
-
-.content .game-content .game .game-description{
-    padding: 20px 20px 20px 20px;
-    display: flex;
-    flex: 1;
-}
 
 .play-button {
     display: inline-block;
