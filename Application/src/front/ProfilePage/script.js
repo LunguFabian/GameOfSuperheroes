@@ -6,8 +6,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    fetchProfileData(token);
-    fetchGameHistory(token);
+
+menuCloseButton.addEventListener("click", () => menuOpenButton.click());
+
+document.getElementById('logout-btn').addEventListener('click', function (event) {
+    event.preventDefault();
+    localStorage.removeItem('token');
+    window.location.href = '/home';
 });
 
 function fetchProfileData(token) {

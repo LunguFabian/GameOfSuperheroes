@@ -39,6 +39,15 @@
   </div>
 </div>
 
+<div id="gameOverPopup">
+  <div class="popup-content">
+    <h2>Game Over!</h2>
+    <div>Scorul tău: <span id="finalScore">0</span></div>
+    <div id="popupCountdown">Veți fi redirecționat în <span id="popupTimer">15</span> secunde</div>
+    <button id="playAgainBtn">Play Again</button>
+  </div>
+</div>
+
 <script>
   const textBox = document.getElementById('storyText');
   const continueBtn = document.getElementById('continueBtn');
@@ -47,6 +56,7 @@
   const inputAnswer = document.getElementById('input-answer');
   const multipleOptions = document.getElementById('multiple-options');
   const answerOptions = document.querySelectorAll('.quiz-option');
+  const popup = document.getElementById('gameOverPopup');
 
   let difficultyGame;
   let i = 0;
@@ -59,6 +69,8 @@
   let currentQuestionIndex = 0;
   let questions = [];
   let selectedAnswer = null;
+
+  popup.style.display = 'none';
 
   window.onload = () => {
     fetch(`http://localhost:8082/api/game/game.php?id=${gameId}`, {
@@ -147,7 +159,7 @@
                 .then(res => res.json())
                 .then(data => {
                   alert("🎉 Joc terminat! Scor actualizat. Rank obținut: " + data.new_rank);
-                  window.location.href = "/home";
+                  showGameOverPopup(data.final_score || data.score || "0");
                 })
                 .catch(err => {
                   console.error("Eroare la actualizare scor:", err);
@@ -233,6 +245,31 @@
               alert("A apărut o eroare la verificarea răspunsului.");
             });
   });
+
+  function showGameOverPopup(finalScore) {
+    const scoreElem = document.getElementById('finalScore');
+    const timerElem = document.getElementById('popupTimer');
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    let timeLeft = 15;
+
+    scoreElem.textContent = finalScore;
+    popup.style.display = 'flex';
+
+    timerElem.textContent = timeLeft;
+    const interval = setInterval(() => {
+      timeLeft--;
+      timerElem.textContent = timeLeft;
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        window.location.href = "/home";
+      }
+    }, 1000);
+
+    playAgainBtn.onclick = () => {
+      clearInterval(interval);
+      window.location.href = "/game";
+    };
+  }
 </script>
 </body>
 </html>

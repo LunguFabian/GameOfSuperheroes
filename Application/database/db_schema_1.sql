@@ -211,10 +211,12 @@ VALUES ('Într-o noapte haotică, un portal interdimensional se deschide în mij
 ALTER TABLE villains
     ADD COLUMN image_url VARCHAR(255);
 
+
 update users set hero_id = 3 where id=3;
 
 Update heroes set image_url='front/images/iron-man.png' where id=1;
 
 UPDATE users set score=229 where id=1;
+
 
 
