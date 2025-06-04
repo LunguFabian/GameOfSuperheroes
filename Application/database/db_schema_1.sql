@@ -13,6 +13,12 @@ CREATE table users
 ALTER TABLE users
     ADD COLUMN userRank VARCHAR(50);
 
+ALTER TABLE users
+    MODIFY userRank VARCHAR(50) DEFAULT 'Unranked';
+
+DELETE FROM users
+WHERE id = 2;
+
 CREATE TABLE heroes
 (
     id        INT AUTO_INCREMENT PRIMARY KEY,
@@ -25,6 +31,9 @@ CREATE TABLE villains
     id   INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50)
 );
+
+ALTER TABLE villains
+    ADD COLUMN image_url VARCHAR(255);
 
 CREATE TABLE nemesis
 (
@@ -170,6 +179,25 @@ VALUES ('Care este capitala Franței?', 'Paris', 'Londra', NULL, NULL, 1, 'easy'
        ('În ce an a ajuns omul pentru prima dată pe Lună?', '1965', '1969', NULL, NULL, 2, 'easy', 5),
        ('Ce limbă se vorbește în Brazilia?', 'Spaniolă', 'Portugheză', NULL, NULL, 2, 'easy', 5);
 
+INSERT INTO questions (question_text, option1, option2, option3, option4, correct_option, difficulty, score)
+VALUES
+    ('Care este cea mai lungă râu din lume?', 'Amazon', 'Nil', 'Yangtze', 'Mississippi', 2, 'medium', 15),
+    ('Cine a pictat „Cina cea de Taină”?', 'Michelangelo', 'Leonardo da Vinci', 'Rafael', 'Donatello', 2, 'medium', 15),
+    ('Ce element chimic are simbolul „Na”?', 'Sodiu', 'Azot', 'Neon', 'Argint', 1, 'medium', 15),
+    ('Câte planete sunt în sistemul solar?', '8', '9', '7', '10', 1, 'medium', 15),
+    ('Cine a descoperit penicilina?', 'Alexander Fleming', 'Louis Pasteur', 'Marie Curie', 'Isaac Newton', 1, 'medium', 15),
+    ('Ce țară are cel mai mare număr de locutori?', 'SUA', 'China', 'India', 'Indonezia', 2, 'medium', 15);
+
+INSERT INTO questions (question_text, option1, option2, option3, option4, correct_option, difficulty, score)
+VALUES
+    ('Cine a fost primul om care a pășit pe Lună?', 'Neil Armstrong', NULL, NULL, NULL, 1, 'hard', 25),
+    ('Ce imperiu a construit Colosseumul din Roma?', 'Imperiul Roman', NULL, NULL, NULL, 1, 'hard', 25),
+    ('Ce țară are cea mai veche monarhie din lume?', 'Japonia', NULL, NULL, NULL, 1, 'hard', 25),
+    ('Care este limba oficială în Elveția care nu este vorbită în alte țări?', 'Retoromana', NULL, NULL, NULL, 1, 'hard', 25),
+    ('Câte continente există pe glob?', '7', NULL, NULL, NULL, 1, 'hard', 25),
+    ('Ce savant român a inventat stiloul?', 'Petrache Poenaru', NULL, NULL, NULL, 1, 'hard', 25);
+
+
 INSERT INTO scenarios (part1, part2, part3, part4)
 VALUES ('Într-o noapte haotică, un portal interdimensional se deschide în mijlocul orașului. O versiune distorsionată a lumii tale apare prin el. Din oglindă te privește un oraș rupt, inversat… și condus de [ENEMY_NAME].',
         'Traversezi portalul. În această lume, eroii sunt venerați ca zei, iar cetățenii trăiesc în frică. În această lume, tu ești o legendă… dar și un dictator. [ENEMY_NAME] a deturnat imaginea ta și a construit o întreagă societate în jurul fricii.',
@@ -180,5 +208,11 @@ VALUES ('Într-o noapte haotică, un portal interdimensional se deschide în mij
         'Reușești să pătrunzi în sistem. Dar ai de rezolvat o serie de ecuații și coduri logice rămase din vremea Războiului Rece. [ENEMY_NAME] ți-a lăsat capcane. Greșești? Se accelerează timer-ul. Te concentrezi.',
         'Cu 7 secunde rămase, tastezi ultimele caractere. Sirena se oprește. Ecranul devine negru. Aerul devine din nou respirabil. Pe camera de supraveghere, [ENEMY_NAME] îți face o reverență sarcastică. „Ai câștigat azi. Dar mâine… voi rescrie Codul.”');
 
+ALTER TABLE villains
+    ADD COLUMN image_url VARCHAR(255);
 
-update users set hero_id = 1 where id=1;
+update users set hero_id = 3 where id=1;
+
+
+
+

@@ -6,3 +6,9 @@ menuOpenButton.addEventListener("click", () => {
 })
 
 menuCloseButton.addEventListener("click", () => menuOpenButton.click());
+
+document.getElementById('logout-btn').addEventListener('click', function (event) {
+    event.preventDefault();
+    localStorage.removeItem('token');
+    window.location.href = '/home';
+});

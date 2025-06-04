@@ -23,10 +23,15 @@ players
         playerList.appendChild(li);
     });
 
-// Responsive menu toggle
 const menuOpen = document.getElementById("menu-open-button");
 const menuClose = document.getElementById("menu-close-button");
 const navMenu = document.querySelector(".nav-menu");
 
 menuOpen.addEventListener("click", () => navMenu.classList.add("show"));
 menuClose.addEventListener("click", () => navMenu.classList.remove("show"));
+
+document.getElementById('logout-btn').addEventListener('click', function (event) {
+    event.preventDefault();
+    localStorage.removeItem('token');
+    window.location.href = '/home';
+});

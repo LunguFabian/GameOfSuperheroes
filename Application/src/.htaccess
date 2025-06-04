@@ -24,3 +24,5 @@ RewriteRule ^aboutus$ front/AboutUsPage/AboutUs.html [L]
 RewriteRule ^profile$ front/ProfilePage/ProfilePage.html [L]
 
 RewriteRule ^game$ front/MainGamePage/MainGamePage.html [L]
+
+RewriteRule ^finish$ /front/FinishGamePage/FinishGamePage.html [L]
