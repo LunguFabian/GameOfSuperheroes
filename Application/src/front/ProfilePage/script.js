@@ -6,13 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-
-menuCloseButton.addEventListener("click", () => menuOpenButton.click());
-
-document.getElementById('logout-btn').addEventListener('click', function (event) {
-    event.preventDefault();
-    localStorage.removeItem('token');
-    window.location.href = '/home';
+    fetchProfileData(token);
+    fetchGameHistory(token);
 });
 
 function fetchProfileData(token) {
