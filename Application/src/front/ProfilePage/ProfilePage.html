@@ -41,6 +41,7 @@
                 <button type="button" class="profile-button">Edit Profile</button>
             </div>
             <div class="hero">
+                <button id="change-hero-btn" type="button">Change Hero</button>
                 <img id="hero-img" src="" alt="Hero Image">
             </div>
         </div>
@@ -54,13 +55,16 @@
                     <span class="col col-points">Points</span>
                 </div>
                 <ul class="list-games">
-                    <li class="game-info">game info</li>
-                    <li class="game-info">game info</li>
-                    <li class="game-info">game info</li>
-                    <li class="game-info">game info</li>
-                    <li class="game-info">game info</li>
-                    <li class="game-info">game info</li>
+
                 </ul>
+            </div>
+        </div>
+        <div id="heroModal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2>Select a Hero</h2>
+                <div id="heroList" class="hero-list">
+                </div>
             </div>
         </div>
     </div>
