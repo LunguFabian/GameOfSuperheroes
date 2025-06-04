@@ -13,6 +13,12 @@ CREATE table users
 ALTER TABLE users
     ADD COLUMN userRank VARCHAR(50);
 
+ALTER TABLE users
+    MODIFY userRank VARCHAR(50) DEFAULT 'Unranked';
+
+DELETE FROM users
+WHERE id = 2;
+
 CREATE TABLE heroes
 (
     id        INT AUTO_INCREMENT PRIMARY KEY,
@@ -205,6 +211,6 @@ VALUES ('Într-o noapte haotică, un portal interdimensional se deschide în mij
 ALTER TABLE villains
     ADD COLUMN image_url VARCHAR(255);
 
-update users set hero_id = 1 where id=1;
+update users set hero_id = 3 where id=3;
 
 
