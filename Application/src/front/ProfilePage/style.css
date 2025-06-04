@@ -190,7 +190,7 @@ header .navbar {
     text-align: center;
     gap: 10px;
 
-    height: 280px;
+    height: 310px;
     width: 180px;
 
     padding: 20px;
@@ -201,18 +201,37 @@ header .navbar {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-
-
 .hero img {
     width: 180px;
     height: auto;
     border-radius: 12px;
 }
 
+#change-hero-btn {
+    margin-top: auto;
+    padding: 8px 15px;
+    background-color: var(--primary-color);
+    color: var(--black-color);
+    border: none;
+    border-radius: var(--border-radius-button);
+    font-size: var(--font-size-s);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 140px;
+    display: block;
+}
+
+#change-hero-btn:hover {
+    background-color: var(--medium-gray-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
 .right-side{
     height: 750px;
     width: 700px;
     padding-left: 20px;
+    padding-right: 20px;
 
     text-align: center;
 
@@ -220,12 +239,14 @@ header .navbar {
     border: 2px solid  #f6f6f6;
     border-radius: var(--border-radius-button);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    
+
 }
 
 .right-side .game-history{
     text-align: left;
     padding: 20px;
+
+
 }
 
 .game-history .title {
@@ -241,6 +262,9 @@ header .navbar {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    max-height: 570px;   /* limitează înălțimea */
+    overflow-y: auto;
+    scrollbar-width: thin;
 }
 
 .game-info {
@@ -390,4 +414,73 @@ header .navbar {
         gap:20px;
     }
 }
+
+.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-height: 80%;
+    overflow-y: auto;
+    width: 400px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.hero-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.hero-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #f2f2f2;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.hero-option:hover {
+    background-color: #ddd;
+}
+
+.hero-little-img {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+.hero-name {
+    font-weight: bold;
+    font-size: 16px;
+}
+
 
