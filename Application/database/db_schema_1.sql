@@ -7,8 +7,12 @@ CREATE table users
     username VARCHAR(25),
     email    VARCHAR(100),
     password VARCHAR(255),
-    score    INT DEFAULT 0
+    score    INT DEFAULT 0,
+    is_admin BOOLEAN DEFAULT FALSE
 );
+
+ALTER TAble users
+    ADD COLUMN is_admin BOOLEAN DEFAULT FALSE;
 
 ALTER TABLE users
     ADD COLUMN userRank VARCHAR(50);

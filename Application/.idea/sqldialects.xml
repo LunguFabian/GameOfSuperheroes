@@ -2,6 +2,9 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/database/db_schema_1.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/api/admin/questions.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/api/admin/scenarios.php" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/api/auth/login.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/api/game/game.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/api/user/hero.php" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/src/api/user/profile.php" dialect="GenericSQL" />
