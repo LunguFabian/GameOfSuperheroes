@@ -294,3 +294,23 @@ VALUES ('Care este formula chimică a apei?', 'H2O', NULL, NULL, NULL, 1, 'hard'
 
 Update users
 Set is_admin=TRUE Where id=5;
+
+INSERT INTO heroes(name, image_url)
+VALUES
+    ('Thor', 'front/images/thor.png'),
+    ('Black Widow', 'front/images/black-widow.png'),
+    ('Hulk', 'front/images/hulk.png');
+
+INSERT INTO villains(name, image_url)
+VALUES
+    ('Loki', 'front/images/loki.png'),
+    ('Red Skull', 'front/images/red-skull.png'),
+    ('Abomination', 'front/images/abomination.png');
+
+INSERT INTO nemesis(hero_id, villain_id)
+VALUES
+    ((SELECT id FROM heroes WHERE name='Thor'), (SELECT id FROM villains WHERE name='Loki')),
+    ((SELECT id FROM heroes WHERE name='Black Widow'), (SELECT id FROM villains WHERE name='Red Skull')),
+    ((SELECT id FROM heroes WHERE name='Hulk'), (SELECT id FROM villains WHERE name='Abomination')),
+    ((SELECT id FROM heroes WHERE name='Thor'), 1),
+    ((SELECT id FROM heroes WHERE name='Hulk'), 1);

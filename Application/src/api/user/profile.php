@@ -39,11 +39,12 @@ if(!$user_id){
     exit();
 }
 
-$stmt = $conn->prepare("SELECT username,score,userRank,image_url AS hero_img 
-                                FROM users u JOIN heroes h 
-                                ON u.hero_id=h.id 
-                                WHERE u.id=?");
-$stmt->bind_param("i",$user_id);
+$stmt = $conn->prepare("SELECT u.username, u.score, u.userRank, 
+                               IFNULL(h.image_url, '') AS hero_img
+                        FROM users u 
+                        LEFT JOIN heroes h ON u.hero_id = h.id 
+                        WHERE u.id = ?");
+$stmt->bind_param("i", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
@@ -53,7 +54,6 @@ if(!$user){
     echo json_encode(["message"=>"User not found!"]);
     exit();
 }
-
 
 echo json_encode($user);
 
