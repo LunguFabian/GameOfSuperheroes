@@ -56,5 +56,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
     exit();
 }
 
+if ($_SERVER['REQUEST_METHOD'] == 'PUT') {
+    $data = json_decode(file_get_contents("php://input"), true);
+    if (!isset($data['id'])) {
+        http_response_code(400);
+        echo json_encode(["message" => "User id required"]);
+        exit();
+    }
+
+    $user_id = (int)$data['id'];
+
+    if ($user_id == $payload['id']) {
+        http_response_code(400);
+        echo json_encode(["message" => "Cannot promote yourself"]);
+        exit();
+    }
+
+    $stmt = $conn->prepare("UPDATE users SET is_admin = 1 WHERE id = ?");
+    $stmt->bind_param("i", $user_id);
+
+    if ($stmt->execute()) {
+        if ($stmt->affected_rows === 0) {
+            http_response_code(404);
+            echo json_encode(["message" => "User not found or already admin"]);
+        } else {
+            echo json_encode(["message" => "User promoted to admin successfully!"]);
+        }
+    } else {
+        http_response_code(500);
+        echo json_encode(["message" => "Failed to promote user"]);
+    }
+    $stmt->close();
+    exit();
+}
+
 http_response_code(405);
 echo json_encode(["message" => "Method not allowed"]);

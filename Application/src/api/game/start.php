@@ -61,6 +61,7 @@ if ($user['hero_id'] === null) {
 }
 
 $difficulty = $data['difficulty']??null;
+$language = $data['language']??'ro';
 
 if(!in_array($difficulty, ['easy', 'medium', 'hard'])){
     http_response_code(400);
@@ -68,8 +69,8 @@ if(!in_array($difficulty, ['easy', 'medium', 'hard'])){
     exit();
 }
 
-$stmt = $conn->prepare("INSERT INTO games (user_id,hero_id, difficulty) VALUES (?, ?, ?)");
-$stmt->bind_param("iis", $user_id,$user['hero_id'], $difficulty);
+$stmt = $conn->prepare("INSERT INTO games (user_id,hero_id, difficulty,language) VALUES (?, ?, ?,?)");
+$stmt->bind_param("iis", $user_id,$user['hero_id'], $difficulty,$language);
 $stmt->execute();
 $game_id = $stmt->insert_id;
 $stmt->close();
