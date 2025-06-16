@@ -1,119 +1,183 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+:root {
+    --yellow: #ffe16a;
+    --dark-yellow: #f2cb00;
+    --navy-blue: #182748;
+    --blue: #25395a;
+    --light-blue: #41a7f5;
+    --white: #fff;
+    --grey: #f5f7fa;
+    --error: #d32f2f;
 }
 
-body{
+body {
+    font-family: 'Bangers', Arial, sans-serif;
+    background: radial-gradient(circle, rgb(37, 57, 90) 0%, rgb(24, 39, 72) 100%);
+    color: var(--navy-blue);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    min-width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.main {
+    width: 100vw;
     min-height: 100vh;
-    background: #E9DB94FF;
-    background: radial-gradient(circle, rgba(233, 219, 148, 1) 0%, rgba(234, 53, 88, 1) 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .wrapper {
-    width: 450px;
-    background: #ffffff;
-    opacity: 0.80;
-    border: 2px solid rgba(255,255,255,.2);
-    box-shadow: 0 0 10px rgba(0,0,0,.2);
-    color: #000000;
-    border-radius: 10px;
-    padding: 30px 40px;
+    background: var(--white);
+    border-radius: 28px;
+    box-shadow: 0 8px 0 var(--dark-yellow), 0 15px 0 var(--navy-blue);
+    padding: 40px 44px 36px 44px;
+    min-width: 330px;
+    max-width: 370px;
+    width: 100%;
+    margin: 0 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.wrapper h1{
-    font-size: 36px;
-    height: 50px;
-    text-align: center;
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.wrapper .input-box{
+h1 {
+    font-size: 2.3em;
+    color: var(--navy-blue);
+    margin-bottom: 28px;
+    font-family: 'Bangers', cursive;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0 var(--white), 3px 3px 0 var(--light-blue);
+}
+
+.input-box {
+    width: 100%;
+    margin-bottom: 22px;
     position: relative;
-    width: 100%;
-    height: 50px;
-    margin: 30px 0;
+    display: flex;
+    align-items: center;
 }
 
-.input-box input{
+.input-box input {
     width: 100%;
-    height: 100%;
-    background: transparent;
+    padding: 13px 44px 13px 16px;
+    border-radius: 15px;
+    border: 2px solid var(--blue);
+    background: var(--grey);
+    font-size: 1.1em;
+    color: var(--navy-blue);
+    transition: border 0.2s;
     outline: none;
-    border: 2px solid rgb(154, 154, 154);
-    border-radius: 40px;
-    font-size: 16px;
-    color: #000000;
-    padding: 20px 45px 20px 20px;
+    box-shadow: 1px 1px 0 var(--light-blue);
+    letter-spacing: 1px;
+    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
-.input-box input::placeholder{
-    color: #000000;
+.input-box input:focus {
+    border: 2px solid var(--dark-yellow);
 }
 
-.input-box i{
+.input-box i.icon {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
+    right: 16px;
+    color: var(--light-blue);
+    font-size: 1.35em;
+    pointer-events: none;
 }
-
-.input-box .icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
+.input-box .bx-lock-alt.icon {
+    right: 44px;
+    font-size: 1.22em;
+    pointer-events: none;
 }
 
 .input-box .eye {
+    right: 16px;
+    font-size: 1.22em;
+    color: var(--navy-blue);
     position: absolute;
-    right: 15px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
+    cursor: pointer;
+    pointer-events: auto;
 }
 
-.wrapper .register-link{
-    font-size: 14.5px;
-    text-align: center;
-    margin: 20px 0 15px;
-}
-
-.register-link p a{
-    color: #000000;
-    text-decoration: none;
+.btn {
+    width: 100%;
+    padding: 13px 0;
+    background: var(--light-blue);
+    color: var(--white);
+    border: 2px solid var(--navy-blue);
+    border-radius: 21px;
+    font-size: 1.28em;
+    font-family: 'Bangers', cursive;
+    letter-spacing: 1.2px;
+    box-shadow: 2px 2px 0 var(--yellow), 4px 4px 0 var(--navy-blue);
+    cursor: pointer;
     font-weight: 600;
+    margin-top: 8px;
+    margin-bottom: 18px;
+    outline: none;
+    transition: background 0.17s, color 0.17s, box-shadow 0.17s, border 0.17s;
 }
 
-.register-link p a:hover {
-    text-decoration: underline;
+.btn:hover, .btn:focus {
+    background: var(--navy-blue);
+    color: var(--yellow);
+    border-color: var(--light-blue);
+    box-shadow: 2px 2px 0 var(--white), 4px 4px 0 var(--light-blue);
 }
 
 .register-link {
-    color: #000000;
+    font-size: 1.07em;
+    color: var(--blue);
+    font-family: 'Bangers', cursive;
+    text-align: center;
 }
 
-.wrapper .btn{
-    position: relative;
-    width: 100%;
-    height: 45px;
-    border-radius: 40px;
-    outline: none;
-    border:none;
-    box-shadow: 0 0 10px rgba(0,0,0,-1);
-    margin: 0 auto;
-    top: -15px;
-
+.register-link a {
+    color: var(--light-blue);
+    text-decoration: underline;
+    font-family: 'Bangers', cursive;
+    transition: color 0.17s;
 }
 
-.wrapper .btn:hover{
-    box-shadow: inset 0 0 10px 4px rgb(152, 134, 144);
+.register-link a:hover {
+    color: var(--dark-yellow);
+    text-decoration: underline;
 }
 
-.wrapper.btn:active{
-    box-shadow: inset 0 0 20px 4px rgb(152, 134, 144);
+@media (max-width: 600px) {
+    .wrapper {
+        padding: 21px 3vw 17px 3vw;
+        min-width: 0;
+        max-width: 97vw;
+        border-radius: 13px;
+    }
+    h1 {
+        font-size: 1.25em;
+        margin-bottom: 14px;
+    }
+    .input-box input {
+        font-size: 1em;
+        padding: 10px 38px 10px 11px;
+        border-radius: 8px;
+    }
+    .btn {
+        font-size: 1em;
+        padding: 8px 0;
+        border-radius: 12px;
+    }
+    .register-link {
+        font-size: 0.98em;
+    }
 }
-

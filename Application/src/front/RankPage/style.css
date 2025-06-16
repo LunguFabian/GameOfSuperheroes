@@ -1,156 +1,269 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
 
 :root {
-    --primary-color: #c8c8c8;
-    --second-color: #dadada;
-    --white-color: #ffffff;
-    --black-color: #000000;
-    --medium-gray-color: #cdcbcb;
-
-    --border-radius-button: 20px;
-
-    --font-size-s: 0.9rem;
-    --font-size-n: 1rem;
-    --font-size-m: 1.12rem;
-    --font-size-l: 1.5rem;
-    --font-size-xl: 2rem;
-    --font-size-xxl: 4rem;
+    --yellow: #ffe16a;
+    --dark-yellow: #f2cb00;
+    --navy-blue: #182748;
+    --blue: #25395a;
+    --light-blue: #41a7f5;
+    --white: #fff;
+    --grey: #f5f7fa;
+    --error: #d32f2f;
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background: #f4f4f4;
-    color: #333;
+    font-family: 'Bangers', Arial, sans-serif;
+    background: radial-gradient(circle, rgb(37, 57, 90) 0%, rgb(24, 39, 72) 100%);
+    margin: 0;
+    padding: 0;
+    color: var(--navy-blue);
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
 }
 
 header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 5;
-    background: var(--second-color );
+    background: var(--dark-yellow);
+    color: var(--navy-blue);
+    padding: 20px 0 10px 0;
+    text-align: center;
+    font-size: 1.5em;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 0 var(--yellow), 0 7px 0 var(--light-blue);
+    position: relative;
+    z-index: 2;
 }
 
-ul {
-    list-style: none;
-}
-
-a {
-    text-decoration: none;
-}
-
-header .navbar {
+.navbar {
     display: flex;
-    padding: 20px;
     align-items: center;
     justify-content: space-between;
-    background: var(--primary-color);
-    transition: left 0.5s ease;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
 }
 
-.navbar .nav-logo .logo-text {
-    color: var(--black-color);
-    font-size: var(--font-size-bar);
-    font-weight: var(--font-weight-semibold);
-    transition: 0.3s ease;
-}
-
-.navbar .nav-logo .logo-text:hover {
-    background: var(--second-color);
-    color: var(--white-color);
-    border-radius: var(--border-radius-button);
-    border: none;
-}
-
-.navbar .nav-menu {
-    display: flex;
-    gap: 10px;
-}
-
-.navbar .nav-menu .nav-link {
-    text-decoration: none;
-    padding: 10px 18px;
-    color: var(--black-color);
-    border-radius: var(--border-radius-button);
-    border: none;
-    transition: 0.3s ease;
-}
-
-.navbar .nav-menu .nav-link:hover {
-    padding: 10px 18px;
-    background: var(--second-color);
-    color: var(--white-color);
-    border-radius: var(--border-radius-button);
-    border: none;
+.logo-text {
+    color:  var(--navy-blue);
+    font-size: 2.1em;
+    font-family: 'Bangers', cursive;
+    letter-spacing: 2px;
+    margin: 0;
+    text-shadow: 2px 2px 0  var(--white), 4px 4px 0  var(--light-blue);
+    background: var(--dark-yellow);
+    display: inline-block;
+    border-radius: 8px;
+    box-shadow: none;
+    padding: 0 10px 2px 10px;
 }
 
 #menu-close-button, #menu-open-button {
     display: none;
+    font-size: 2em;
+    color: var(--navy-blue);
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: 12px;
+    z-index: 5;
 }
 
-.bx {
-    font-size: 24px;
-    cursor: pointer;
-    display: none;
+ul.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 18px;
+    margin-left: auto;
+    align-items: center;
+    padding-left: 0;
+}
+
+.nav-item {
+    display: inline-block;
+}
+
+.nav-link {
+    display: block;
+    text-decoration: none;
+    background: var(--yellow);
+    color: var(--navy-blue);
+    font-family: 'Bangers', cursive;
+    font-size: 1.08em;
+    letter-spacing: 1px;
+    padding: 10px 24px 8px 24px;
+    border: 2px solid var(--navy-blue);
+    border-radius: 16px;
+    box-shadow: 2px 2px 0 var(--navy-blue), 4px 4px 0 var(--light-blue);
+    transition: background 0.22s, color 0.22s, box-shadow 0.22s;
+    text-shadow: 1px 1px 0 var(--white);
+}
+.nav-link:hover,
+.nav-link:focus {
+    background: var(--dark-yellow);
+    color: var(--navy-blue);
+    box-shadow: 2px 2px 0 var(--navy-blue), 4px 4px 0 var(--light-blue);
+    border-color: var(--navy-blue);
+    outline: none;
 }
 
 .rank-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding-top: 100px;
+    max-width: 620px;
+    margin: 56px auto 0 auto;
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: 0 8px 0 var(--dark-yellow), 0 15px 0 var(--navy-blue);
+    padding: 36px 24px 44px 24px;
+    text-align: center;
+    position: relative;
+    min-height: 400px;
 }
 
 .title {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #20232a;
-}
-
-.game-header,
-.game-info {
-    display: grid;
-    grid-template-columns: 10% 40% 25% 25%;
-    padding: 10px 15px;
-    border-bottom: 1px solid #ccc;
-    background: #fff;
+    color: var(--navy-blue);
+    font-size: 2.3em;
+    font-family: 'Bangers', cursive;
+    text-shadow: 2px 2px 0 var(--white), 3px 3px 0 var(--light-blue);
+    letter-spacing: 2px;
+    margin-bottom: 28px;
 }
 
 .game-header {
-    font-weight: bold;
-    background-color: #e2e2e2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--grey);
+    border-radius: 13px;
+    box-shadow: 0 4px 0 var(--yellow), 0 9px 0 var(--navy-blue);
+    font-size: 1.15em;
+    font-family: 'Bangers', cursive;
+    color: var(--blue);
+    padding: 12px 16px;
+    margin-bottom: 14px;
 }
 
-.game-info:nth-child(even) {
-    background-color: #f9f9f9;
+.col {
+    flex: 1;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.col-number { max-width: 32px; }
+.col-name { flex: 2; }
+.col-difficulty, .col-points { max-width: 90px; }
+
+.list-players {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.list-players li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--yellow);
+    border-radius: 10px;
+    box-shadow: 2px 2px 0 var(--navy-blue), 4px 4px 0 var(--light-blue);
+    font-family: 'Bangers', cursive;
+    font-size: 1.12em;
+    color: var(--navy-blue);
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    transition: background 0.18s, box-shadow 0.18s;
+    border: 2px solid var(--navy-blue);
+    letter-spacing: 1px;
+}
+.list-players li:hover {
+    background: var(--dark-yellow);
+    box-shadow: 2px 2px 0 var(--white), 4px 4px 0 var(--light-blue);
+}
+
+.list-players .col {
+    flex: 1;
+    text-align: center;
+}
+.list-players .col-name { flex: 2; }
+
+@media (max-width: 900px) {
+    .rank-container {
+        max-width: 98vw;
+        padding: 24px 3vw 30px 3vw;
+        border-radius: 18px;
+    }
+    .title {
+        font-size: 1.5em;
+    }
+    .game-header {
+        font-size: 1em;
+        padding: 7px 6px;
+        border-radius: 9px;
+    }
+    .list-players li {
+        font-size: 0.98em;
+        padding: 8px 9px;
+        border-radius: 8px;
+    }
 }
 
 @media (max-width: 600px) {
-    .game-header, .game-info {
-        grid-template-columns: 20% 30% 25% 25%;
-        font-size: 14px;
+    .navbar {
+        flex-direction: row;
+        padding: 0 7px;
     }
-
-    .bx {
+    .logo-text {
+        font-size: 1.08em;
+        padding: 0 3px 2px 3px;
+        border-radius: 4px;
+    }
+    ul.nav-menu {
+        flex-direction: column;
+        gap: 16px;
+        margin-left: 0;
+        position:fixed;
+        top: 0;
+        left: -300px;
+        width: 180px;
+        height: 100vh;
+        background: var(--dark-yellow);
+        box-shadow: 2px 0 12px 0 var(--navy-blue);
+        padding-top: 70px;
+        transition: left 0.35s;
+        z-index: 10;
+        overflow: auto;
+    }
+    body.show-mobile-menu ul.nav-menu {
+        left: 0;
+    }
+    #menu-open-button, #menu-close-button {
         display: block;
     }
-
-    .nav-menu {
-        position: absolute;
-        top: 70px;
-        right: 0;
-        background: #20232a;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1rem;
-        width: 200px;
-        display: none;
+    .nav-link {
+        width: 90px;
+        font-size: 0.99em;
+        padding: 13px 0;
+        margin: 0;
+        border-radius: 13px;
     }
-
-    .nav-menu.show {
-        display: flex;
+    .rank-container {
+        max-width: 99vw;
+        padding: 13px 2vw 14px 2vw;
+        border-radius: 9px;
+        min-width: 0;
+    }
+    .title {
+        font-size: 1.1em;
+    }
+    .game-header {
+        font-size: 0.91em;
+        padding: 4px 2px;
+        border-radius: 7px;
+    }
+    .list-players li {
+        font-size: 0.9em;
+        padding: 6px 4px;
+        border-radius: 6px;
     }
 }

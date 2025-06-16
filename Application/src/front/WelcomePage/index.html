@@ -15,13 +15,12 @@
             <h2 class="logo-text">SuperHeroes</h2>
         </a>
 
-        <i id="menu-close-button" class='bx bx-x-circle'></i>
         <ul class="nav-menu">
             <li class="nav-item" id="profile">
                 <a href="/profile" class="nav-link">Profile</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">vedem</a>
+                <a href="/rank" class="nav-link">Rank</a>
             </li>
             <li class="nav-item">
                 <a href="/aboutus" class="nav-link">About</a>
@@ -53,13 +52,10 @@
 </main>
 <script>
     const menuOpenButton = document.querySelector("#menu-open-button");
-    const menuCloseButton = document.querySelector("#menu-close-button");
     console.log("aici");
     menuOpenButton.addEventListener("click", () => {
         document.body.classList.toggle("show-mobile-menu");
     })
-
-    menuCloseButton.addEventListener("click", () => menuOpenButton.click());
 
     const token = localStorage.getItem("token");
     if(token==null){
