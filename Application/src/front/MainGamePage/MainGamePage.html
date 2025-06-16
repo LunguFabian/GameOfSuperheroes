@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title> Difficulty</title>
     <link rel="stylesheet" href="front/MainGamePage/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
@@ -35,7 +35,6 @@
     </div>
 </main>
 <script>
-console.log("1");
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -43,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    console.log("2");
 
     function sendGameRequest(difficulty) {
         fetch("http://localhost:8082/api/game/start.php", {

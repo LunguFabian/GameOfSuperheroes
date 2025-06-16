@@ -1,8 +1,6 @@
 const menuOpenButton = document.querySelector("#menu-open-button");
 const menuCloseButton = document.querySelector("#menu-close-button");
 
-console.log("1");
-
 menuOpenButton.addEventListener("click", () => {
     document.body.classList.toggle("show-mobile-menu");
 })
@@ -15,8 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = '../NotAuthorizedPage/NotAuthorized.html'
         return;
     }
-
-    console.log("2");
 
     function sendGameRequest(difficulty) {
         fetch("http://localhost:8082/backend/path/to/start.php", {
