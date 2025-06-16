@@ -152,7 +152,7 @@
         })
                 .then(res => res.json())
                 .then(data => {
-                  alert("🎉 Joc terminat! Scor actualizat. Rank obținut: " + data.new_rank);
+                  console.log("🎉 Joc terminat! Scor actualizat. Rank obținut: " + data.new_rank);
                   document.getElementById('quiz').style.display = 'none';
                   let score = data.added_score;
                   console.log(score);

@@ -30,7 +30,7 @@ if (empty($username)|| empty($password)) {
     exit();
 }
 
-$stmt=$conn->prepare("SELECT * FROM users WHERE username=?");
+$stmt=$conn->prepare("SELECT id,is_admin,password FROM users WHERE username=?");
 $stmt->bind_param("s", $username);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -51,6 +51,7 @@ if(!password_verify($password, $user['password'])) {
 
 $payload=[
     "id"=>$user['id'],
+    "is_admin"=>$user['is_admin'],
     "exp"=>time()+3600
 ];
 

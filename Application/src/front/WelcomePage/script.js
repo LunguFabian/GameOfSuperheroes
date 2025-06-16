@@ -7,6 +7,12 @@ menuOpenButton.addEventListener("click", () => {
 
 menuCloseButton.addEventListener("click", () => menuOpenButton.click());
 
+const token = localStorage.getItem("token");
+if(token==null){
+    document.getElementById("profile").style.display = "none";
+    document.getElementById("logout").style.display = "none";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("token");
     console.log("functie");
@@ -26,4 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (playBtn) playBtn.style.display = "none";
         if (profileNav) profileNav.style.display = "none";
     }
+});
+document.getElementById('logout-btn').addEventListener('click', function (event) {
+    event.preventDefault();
+    localStorage.removeItem('token');
+    window.location.href = '/home';
 });
