@@ -1,26 +1,44 @@
-/* General styles */
-body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: #f5f7fa;
-    margin: 0;
-    padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+:root {
+    --yellow: #ffe16a;
+    --dark-yellow: #f2cb00;
+    --navy-blue: #182748;
+    --blue: #25395a;
+    --light-blue: #41a7f5;
+    --white: #fff;
+    --grey: #f5f7fa;
+    --error: #d32f2f;
 }
 
-/* Header styles */
+body {
+    font-family: 'Bangers', Arial, sans-serif;
+    background: radial-gradient(circle, rgb(37, 57, 90) 0%, rgb(24, 39, 72) 100%);
+    margin: 0;
+    padding: 0;
+    color: var(--navy-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
 header {
-    background: #283593;
-    color: #fff;
+    background: var(--dark-yellow);
+    color: var(--navy-blue);
     padding: 20px 0 10px 0;
     text-align: center;
     font-size: 1.5em;
     letter-spacing: 2px;
-    box-shadow: 0 2px 8px #2222;
+    box-shadow: 0 4px 0 var(--yellow), 0 7px 0 var(--light-blue);
 }
 
 header > div {
     font-weight: bold;
     font-size: 2.2em;
     margin-bottom: 6px;
+    font-family: 'Bangers', cursive;
+    text-shadow: 2px 2px 0 var(--white), 4px 4px 0 var(--light-blue);
 }
 
 header nav {
@@ -28,45 +46,63 @@ header nav {
 }
 
 header nav a {
-    color: #fff;
+    color: var(--navy-blue);
     margin: 0 10px;
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s;
+    font-weight: 600;
+    font-family: 'Bangers', cursive;
+    font-size: 1.15em;
+    letter-spacing: 1.2px;
+    padding: 6px 14px 4px 14px;
+    border-radius: 18px;
+    background: var(--yellow);
+    border: 2px solid var(--navy-blue);
+    box-shadow: 2px 2px 0 var(--navy-blue), 4px 4px 0 var(--light-blue);
+    transition: background 0.22s, color 0.22s, box-shadow 0.22s;
+    text-shadow: 1px 1px 0 var(--white);
+    display: inline-block;
 }
 
 header nav a:hover {
-    color: #ffb300;
+    background: var(--dark-yellow);
+    color: var(--navy-blue);
+    box-shadow: 2px 2px 0 var(--navy-blue), 4px 4px 0 var(--light-blue);
+    border-color: var(--navy-blue);
+    outline: none;
 }
 
 .container {
-    max-width: 480px;
+    width: 480px;
     margin: 50px auto 0 auto;
-    background: #fff;
-    border-radius: 14px;
-    box-shadow: 0 3px 20px #bbb6;
+    background: var(--dark-yellow);
+    border-radius: 24px;
+    box-shadow: 0 8px 0 var(--light-blue), 0 15px 0 var(--navy-blue);
     padding: 36px 26px 44px 26px;
     text-align: center;
-    position: relative; /* Pentru popup absolut */
+    position: relative;
 }
 
 h1 {
     margin-bottom: 22px;
-    color: #283593;
+    color: var(--navy-blue);
     font-size: 2.2em;
-    text-shadow: 0 1px 2px #ddd;
+    text-shadow: 2px 2px 0 var(--white), 3px 3px 0 var(--light-blue);
+    font-family: 'Bangers', cursive;
+    letter-spacing: 2px;
 }
 
 #difficultyDisplay {
     font-size: 1.13em;
-    color: #616161;
+    color: var(--blue);
     margin-bottom: 13px;
+    font-family: 'Bangers', cursive;
+    letter-spacing: 1px;
 }
 
 .grey-box {
-    background: #f1f3f6;
-    border-radius: 10px;
-    box-shadow: 0 1px 8px #bbb3;
+    background: var(--grey);
+    border-radius: 18px;
+    box-shadow: 0 9px 0 var(--navy-blue);
     padding: 28px 16px 22px 16px;
     margin-bottom: 18px;
     min-height: 200px;
@@ -77,36 +113,44 @@ h1 {
 #storyText {
     min-height: 32px;
     margin-bottom: 14px;
-    color: #263238;
-    font-size: 1.12em;
+    color: var(--navy-blue);
+    font-size: 1.19em;
     line-height: 1.5;
     letter-spacing: .02em;
     text-align: left;
+    font-family: 'Bangers', cursive;
 }
 
 .btn {
-    background: #1976d2;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    background: var(--light-blue);
+    color: var(--white);
+    border: 2px solid var(--navy-blue);
+    border-radius: 20px;
     padding: 11px 34px;
     font-size: 1.1em;
     cursor: pointer;
     margin-top: 14px;
     margin-bottom: 10px;
-    transition: background 0.22s;
-    font-weight: 500;
-    box-shadow: 0 2px 10px #1976d22a;
+    transition: background 0.22s, color 0.22s, box-shadow 0.22s, border 0.22s;
+    font-family: 'Bangers', cursive;
+    font-weight: 600;
+    letter-spacing: 1px;
+    box-shadow: 2px 2px 0 var(--yellow), 4px 4px 0 var(--navy-blue);
+    outline: none;
 }
-.btn:hover {
-    background: #0d47a1;
+.btn:hover, .btn:focus {
+    background: var(--navy-blue);
+    color: var(--white);
+    border-color: var(--light-blue);
+    box-shadow: 2px 2px 0 var(--white), 4px 4px 0 var(--light-blue);
 }
 
 #quiz p {
     text-align: left;
     margin: 0 0 14px 0;
     font-size: 1.08em;
-    color: #222b;
+    color: var(--blue);
+    font-family: 'Bangers', cursive;
 }
 
 #multiple-options {
@@ -114,38 +158,48 @@ h1 {
 }
 
 .quiz-option {
-    background: #e3eafc;
-    border-radius: 5px;
-    padding: 9px 0;
+    background: var(--yellow);
+    border-radius: 14px;
+    padding: 12px 0;
     margin: 8px 0;
     cursor: pointer;
-    border: 2px solid transparent;
-    transition: background 0.18s, border 0.18s;
-    font-size: 1.04em;
+    border: 2px solid var(--navy-blue);
+    transition: background 0.18s, border 0.18s, color 0.18s;
+    font-size: 1.09em;
+    font-family: 'Bangers', cursive;
+    color: var(--navy-blue);
+    box-shadow: 2px 2px 0 var(--navy-blue), 4px 4px 0 var(--light-blue);
+    text-shadow: 1px 1px 0 var(--white);
+    outline: none;
 }
-.quiz-option.selected {
-    background: #bbdefb;
-    border: 2px solid #1976d2;
+
+.quiz-option.selected,
+.quiz-option:hover {
+    background: var(--dark-yellow);
+    border: 2px solid var(--light-blue);
+    color: var(--navy-blue);
 }
 
 #input-answer input[type="text"] {
-    padding: 8px;
+    padding: 10px;
     width: 90%;
-    border-radius: 4px;
-    border: 1px solid #bdbdbd;
-    font-size: 1em;
+    border-radius: 10px;
+    border: 2px solid var(--blue);
+    font-size: 1.03em;
     margin-top: 13px;
     margin-bottom: 12px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: var(--navy-blue);
+    box-shadow: 1px 1px 0 var(--light-blue);
     outline: none;
-    transition: border 0.2s;
+    transition: border 0.22s;
 }
 #input-answer input[type="text"]:focus {
-    border: 1.5px solid #1976d2;
+    border: 2px solid var(--dark-yellow);
 }
 
-/* === Game Over Popup Styling === */
 #gameOverPopup {
-    display: none; /* inițial ascuns */
+    display: none;
     position: absolute;
     top: 0; left: 0;
     width: 100%;
@@ -153,7 +207,6 @@ h1 {
     min-height: 220px;
     z-index: 20;
     background: rgba(245, 247, 250, 0.98);
-    /* Centrare verticală și orizontală în grey-box */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -165,11 +218,11 @@ h1 {
 }
 
 #gameOverPopup .popup-content {
-    background: #fff;
+    background: var(--white);
     padding: 36px 32px 29px 32px;
     border-radius: 26px;
-    box-shadow: 0 6px 32px #1976d230, 0 2px 20px #0001;
-    border: 2.5px solid #1976d2;
+    box-shadow: 0 8px 0 var(--dark-yellow), 0 15px 0 var(--navy-blue);
+    border: 2.5px solid var(--light-blue);
     width: 98%;
     max-width: 340px;
     min-width: 220px;
@@ -188,16 +241,18 @@ h1 {
 }
 
 #gameOverPopup h2 {
-    color: #d32f2f;
+    color: var(--error);
     margin-bottom: 18px;
     font-size: 2.1em;
     font-weight: 800;
     letter-spacing: .02em;
+    font-family: 'Bangers', cursive;
+    text-shadow: 2px 2px 0 var(--white), 3px 3px 0 var(--light-blue);
 }
 
 #finalScore {
     font-weight: bold;
-    color: #1976d2;
+    color: var(--navy-blue);
     font-size: 1.7em;
     margin-left: 8px;
     display: inline-block;
@@ -207,44 +262,117 @@ h1 {
 #gameOverPopup .popup-content > div {
     font-size: 1.09em;
     margin-bottom: 6px;
+    font-family: 'Bangers', cursive;
 }
 
 #popupCountdown {
-    color: #d32f2f;
+    color: var(--error);
     margin: 13px 0 17px 0;
     font-size: 1.08em;
     font-weight: 500;
+    font-family: 'Bangers', cursive;
 }
 
 #playAgainBtn {
     padding: 13px 44px;
-    background: #fff;
-    color: #1976d2;
-    border: 2px solid #1976d2;
+    background: var(--yellow);
+    color: var(--navy-blue);
+    border: 2px solid var(--navy-blue);
     border-radius: 30px;
     font-size: 1.18em;
+    font-family: 'Bangers', cursive;
     font-weight: 700;
     margin-top: 14px;
     cursor: pointer;
-    box-shadow: 0 1.5px 6px #1976d22e;
+    box-shadow: 2px 2px 0 var(--light-blue), 4px 4px 0 var(--dark-yellow);
     transition: background 0.18s, color 0.18s, border 0.18s, box-shadow 0.18s;
     outline: none;
 }
 #playAgainBtn:hover, #playAgainBtn:focus {
-    background: #1976d2;
-    color: #fff;
-    border: 2px solid #1976d2;
-    box-shadow: 0 3px 16px #1976d250;
+    background: var(--navy-blue);
+    color: var(--white);
+    border: 2px solid var(--light-blue);
+    box-shadow: 2px 2px 0 var(--white), 4px 4px 0 var(--light-blue);
 }
 
-@media (max-width: 650px) {
+@media (max-width: 900px) {
     .container {
-        max-width: 99vw;
-        padding: 18px 3vw 28px 3vw;
+        max-width: 97vw;
+        padding: 28px 4vw 30px 4vw;
+        border-radius: 18px;
+    }
+    .grey-box {
+        padding: 18px 7px 13px 7px;
+        border-radius: 12px;
+    }
+    h1 {
+        font-size: 1.6em;
+    }
+    .btn {
+        font-size: 1em;
+        padding: 10px 20px;
+        border-radius: 14px;
+    }
+    .quiz-option {
+        font-size: 1em;
+        padding: 8px 0;
+    }
+    #input-answer input[type="text"] {
+        font-size: 0.99em;
+        padding: 7px;
+        border-radius: 7px;
     }
     #gameOverPopup .popup-content {
-        width: 96vw;
+        max-width: 92vw;
         min-width: 0;
-        padding: 18px 4vw 10px 4vw;
+        padding: 17px 3vw 10px 3vw;
+        border-radius: 16px;
+    }
+}
+
+@media (max-width: 600px) {
+    header > div {
+        font-size: 1.25em;
+        padding: 0 2vw;
+    }
+    header nav a {
+        font-size: 0.9em;
+        padding: 4px 7px 3px 7px;
+        border-radius: 10px;
+    }
+    .container {
+        margin: 20px auto 0 auto;
+        max-width: 99vw;
+        padding: 16px 2vw 20px 2vw;
+        border-radius: 9px;
+    }
+    h1 {
+        font-size: 1.17em;
+    }
+    .grey-box {
+        min-height: 90px;
+        padding: 8px 2vw 5px 2vw;
+        border-radius: 7px;
+    }
+    .btn {
+        padding: 8px 12px;
+        font-size: 0.9em;
+        border-radius: 9px;
+    }
+    .quiz-option {
+        font-size: 0.97em;
+        padding: 7px 0;
+        border-radius: 8px;
+    }
+    #input-answer input[type="text"] {
+        font-size: 0.93em;
+        padding: 6px;
+        border-radius: 5px;
+    }
+    #gameOverPopup .popup-content {
+        width: 95vw;
+        min-width: 0;
+        padding: 10px 2vw 7px 2vw;
+        border-radius: 8px;
     }
 }

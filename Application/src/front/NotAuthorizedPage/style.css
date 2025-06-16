@@ -1,49 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+
+:root {
+    --yellow: #ffe16a;
+    --dark-yellow: #f2cb00;
+    --navy-blue: #182748;
+    --blue: #25395a;
+    --light-blue: #41a7f5;
+    --white: #fff;
+    --grey: #f5f7fa;
+    --error: #d32f2f;
+}
+
 body {
+    font-family: 'Bangers', Arial, sans-serif;
+    background: radial-gradient(circle, rgb(37, 57, 90) 0%, rgb(24, 39, 72) 100%);
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #f7f8fa;
+    padding: 0;
+    color: var(--navy-blue);
+    min-height: 100vh;
+    min-width: 100vw;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    box-sizing: border-box;
 }
 
 .container {
-    text-align: center;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    padding: 40px 30px;
-    max-width: 400px;
-    margin: auto;
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: 0 8px 0 var(--dark-yellow), 0 15px 0 var(--navy-blue);
+    padding: 40px 42px 32px 42px;
+    text-align: center;
+    min-width: 270px;
+    min-height: 160px;
+    max-width: 95vw;
+    margin: 0 12px;
 }
 
-.user-img {
-    width: 100px;
-    margin-bottom: 20px;
+.card h2 {
+    color: var(--error);
+    font-size: 2.4em;
+    font-family: 'Bangers', cursive;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+    text-shadow: 2px 2px 0 var(--white), 3px 3px 0 var(--light-blue);
 }
 
-h2 {
-    color: #d9534f;
-    margin: 10px 0;
+.card p {
+    color: var(--navy-blue);
+    font-size: 1.25em;
+    font-family: 'Bangers', cursive;
+    margin-bottom: 0;
 }
 
-p {
-    color: #555;
-    font-size: 16px;
-}
-
-.logout-link {
-    display: inline-block;
-    margin-top: 15px;
-    color: #337ab7;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.logout-link:hover {
-    text-decoration: underline;
+@media (max-width: 600px) {
+    .card {
+        padding: 22px 7vw 18px 7vw;
+        border-radius: 13px;
+        min-width: 0;
+    }
+    .card h2 {
+        font-size: 1.35em;
+        margin-bottom: 12px;
+    }
+    .card p {
+        font-size: 1em;
+    }
 }
