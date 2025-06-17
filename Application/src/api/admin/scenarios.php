@@ -44,13 +44,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = json_decode(file_get_contents("php://input"), true);
-    if (!isset($data['part1'], $data['part2'], $data['part3'], $data['part4'])) {
+    if (!isset($data['part1'], $data['part2'], $data['part3'], $data['part4'],$data['language'])) {
         http_response_code(400);
         echo json_encode(["message" => "All scenario parts required"]);
         exit();
     }
-    $stmt = $conn->prepare("INSERT INTO scenarios (part1, part2, part3, part4) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $data['part1'], $data['part2'], $data['part3'], $data['part4']);
+    $stmt = $conn->prepare("INSERT INTO scenarios (part1, part2, part3, part4,language) VALUES (?, ?, ?, ?,?)");
+    $stmt->bind_param("sssss", $data['part1'], $data['part2'], $data['part3'], $data['part4'],$data['language']);
     $stmt->execute();
     echo json_encode(["message" => "Scenario added!", "id" => $stmt->insert_id]);
     exit();

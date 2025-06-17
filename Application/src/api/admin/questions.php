@@ -92,9 +92,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     $score = $data['score'] ?? 10;
-
-    $stmt = $conn->prepare("INSERT INTO questions (question_text, option1, option2, option3, option4, correct_option, difficulty, score) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssssi", $data['question_text'], $option1, $option2, $option3, $option4, $correct_option, $difficulty, $score);
+    $language=$data['language'] ?? 'ro';
+    $stmt = $conn->prepare("INSERT INTO questions (question_text, option1, option2, option3, option4, correct_option, difficulty, score,language) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?)");
+    $stmt->bind_param("sssssssis", $data['question_text'], $option1, $option2, $option3, $option4, $correct_option, $difficulty,$score, $language);
     $stmt->execute();
     echo json_encode(["message" => "Question added!", "id" => $stmt->insert_id]);
     exit();
