@@ -70,7 +70,7 @@ if(!in_array($difficulty, ['easy', 'medium', 'hard'])){
 }
 
 $stmt = $conn->prepare("INSERT INTO games (user_id,hero_id, difficulty,language) VALUES (?, ?, ?,?)");
-$stmt->bind_param("iis", $user_id,$user['hero_id'], $difficulty,$language);
+$stmt->bind_param("iiss", $user_id,$user['hero_id'], $difficulty,$language);
 $stmt->execute();
 $game_id = $stmt->insert_id;
 $stmt->close();
