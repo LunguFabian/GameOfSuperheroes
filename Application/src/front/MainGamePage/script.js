@@ -29,12 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.log("Game started:", body);
                     window.location.href = `../GamePage/GamePage.html?difficulty=${difficulty}&game_id=${body.game_id}`;
                 } else {
-                    alert(body.message || "Eroare necunoscută.");
+                    alert(body.message || "Eroare necunoscuta.");
                 }
             })
             .catch(err => {
                 console.error("Eroare:", err);
-                alert("A apărut o eroare la trimiterea cererii.");
+                alert("A aparut o eroare la trimiterea cererii.");
             });
     }
     document.getElementById("easyButton").addEventListener("click", function(e) {

@@ -187,11 +187,11 @@ VALUES (1, 1),
 
 INSERT INTO questions (question_text, option1, option2, option3, option4, correct_option, difficulty, score)
 VALUES ('Care este capitala Franței?', 'Paris', 'Londra', NULL, NULL, 1, 'easy', 10),
-       ('Cine a scris "Romeo și Julieta"?', 'William Shakespeare', 'Mark Twain', NULL, NULL, 1, 'easy', 12),
-       ('Ce planetă este cunoscută ca „Planeta Roșie”?', 'Venus', 'Marte', NULL, NULL, 2, 'easy', 10),
+       ('Cine a scris "Romeo si Julieta"?', 'William Shakespeare', 'Mark Twain', NULL, NULL, 1, 'easy', 12),
+       ('Ce planetă este cunoscută ca „Planeta Rosie”?', 'Venus', 'Marte', NULL, NULL, 2, 'easy', 10),
        ('Care este simbolul chimic pentru aur?', 'Au', 'Ag', NULL, NULL, 1, 'easy', 5),
        ('În ce an a ajuns omul pentru prima dată pe Lună?', '1965', '1969', NULL, NULL, 2, 'easy', 5),
-       ('Ce limbă se vorbește în Brazilia?', 'Spaniolă', 'Portugheză', NULL, NULL, 2, 'easy', 5);
+       ('Ce limbă se vorbeste în Brazilia?', 'Spaniolă', 'Portugheză', NULL, NULL, 2, 'easy', 5);
 
 INSERT INTO questions (question_text, option1, option2, option3, option4, correct_option, difficulty, score)
 VALUES ('Care este cea mai lungă râu din lume?', 'Amazon', 'Nil', 'Yangtze', 'Mississippi', 2, 'medium', 15),
@@ -204,7 +204,7 @@ VALUES ('Care este cea mai lungă râu din lume?', 'Amazon', 'Nil', 'Yangtze', '
        ('Ce țară are cel mai mare număr de locutori?', 'SUA', 'China', 'India', 'Indonezia', 2, 'medium', 15);
 
 INSERT INTO questions (question_text, option1, option2, option3, option4, correct_option, difficulty, score)
-VALUES ('Cine a fost primul om care a pășit pe Lună?', 'Neil Armstrong', NULL, NULL, NULL, 1, 'hard', 25),
+VALUES ('Cine a fost primul om care a păsit pe Lună?', 'Neil Armstrong', NULL, NULL, NULL, 1, 'hard', 25),
        ('Ce imperiu a construit Colosseumul din Roma?', 'Imperiul Roman', NULL, NULL, NULL, 1, 'hard', 25),
        ('Ce țară are cea mai veche monarhie din lume?', 'Japonia', NULL, NULL, NULL, 1, 'hard', 25),
        ('Care este limba oficială în Elveția care nu este vorbită în alte țări?', 'Retoromana', NULL, NULL, NULL, 1,
@@ -214,7 +214,7 @@ VALUES ('Cine a fost primul om care a pășit pe Lună?', 'Neil Armstrong', NULL
 
 
 INSERT INTO scenarios (part1, part2, part3, part4)
-VALUES ('Într-o noapte haotică, un portal interdimensional se deschide în mijlocul orașului. O versiune distorsionată a lumii tale apare prin el. Din oglindă te privește un oraș rupt, inversat… și condus de [ENEMY_NAME].',
+VALUES ('Într-o noapte haotică, un portal interdimensional se deschide în mijlocul orasului. O versiune distorsionată a lumii tale apare prin el. Din oglindă te priveste un oraș rupt, inversat… și condus de [ENEMY_NAME].',
         'Traversezi portalul. În această lume, eroii sunt venerați ca zei, iar cetățenii trăiesc în frică. În această lume, tu ești o legendă… dar și un dictator. [ENEMY_NAME] a deturnat imaginea ta și a construit o întreagă societate în jurul fricii.',
         'Ajungi în centrul capitalei. Totul e tăcut. Roboții de patrulare te confundă cu „varianta ta malefică” și te conduc direct în palatul central. Acolo, [ENEMY_NAME] te așteaptă, cu un zâmbet rece: „Acum înțelegi cât de ușor e să controlezi lumea…”',
         'Într-o confruntare de voințe, distrugi mecanismul care menținea deschis portalul și eliberezi populația din hipnoză. În haosul prăbușirii dimensiunii oglindă, te întorci în lumea ta. În urma ta, oglinda se sparge în mii de cioburi. Răul a fost închis. Pentru acum.'),

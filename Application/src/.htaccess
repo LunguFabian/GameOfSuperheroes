@@ -30,3 +30,5 @@ RewriteRule ^finish$ /front/FinishGamePage/FinishGamePage.html [L]
 RewriteRule ^admin$ /front/AdminPage/admin.html [L]
 
 RewriteRule ^rank$ /front/RankPage/RankPage.html [L]
+
+RewriteRule ^unauthorized$ /front/NotAuthorizedPage/NotAuthorized.html [L]

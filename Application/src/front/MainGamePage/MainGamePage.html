@@ -62,12 +62,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         localStorage.removeItem("token");
                         window.location.href='/home';
                     }
-                    alert(body.message || "Eroare necunoscută.");
+                    alert(body.message || "Eroare necunoscuta.");
                 }
             })
             .catch(err => {
                 console.error("Eroare:", err);
-                alert("A apărut o eroare la trimiterea cererii.");
+                alert("A aparut o eroare la trimiterea cererii.");
             });
     }
     document.getElementById("easyButton").addEventListener("click", function(e) {

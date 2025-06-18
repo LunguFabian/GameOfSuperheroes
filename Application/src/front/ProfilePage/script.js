@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         location.reload();
                     } catch (error) {
                         console.error("Eroare la update:", error);
-                        alert("A apărut o eroare la schimbarea eroului.");
+                        alert("A aparut o eroare la schimbarea eroului.");
                     }
                 });
 
@@ -199,7 +199,7 @@ document.getElementById('save-username-btn').addEventListener('click', async fun
     }
 
     if (!newUsername || !password) {
-        showEditProfileMessage("Completează noul username și parola curentă!");
+        showEditProfileMessage("Completeaza noul username si parola curenta!");
         return;
     }
 
@@ -240,7 +240,7 @@ document.getElementById('save-email-btn').addEventListener('click', async functi
     }
 
     if (!newEmail || !password) {
-        showEditProfileMessage("Completeaza noul email și parola curenta!");
+        showEditProfileMessage("Completeaza noul email si parola curenta!");
         return;
     }
 
@@ -286,12 +286,12 @@ document.getElementById('save-password-btn').addEventListener('click', async fun
     }
 
     if (!newPassword || !oldPassword) {
-        showEditProfileMessage("Completează noua parolă și parola curentă!");
+        showEditProfileMessage("Completeaza noua parola si parola curenta!");
         return;
     }
 
     if (newPassword.length < 8) {
-        showEditProfileMessage("Parola nouă trebuie să aibă cel puțin 8 caractere!");
+        showEditProfileMessage("Parola noua trebuie sa aiba cel puțin 8 caractere!");
         return;
     }
 

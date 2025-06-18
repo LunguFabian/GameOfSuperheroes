@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                 <li class="game-info">
                     <span class="col col-number">${idx + 1}</span>
                     <span class="col col-name">${player.username}</span>
-                    <span class="col col-difficulty">${player.nrGames}</span>
                     <span class="col col-points">${player.score}</span>
                 </li>
             `;

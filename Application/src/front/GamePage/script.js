@@ -119,7 +119,7 @@ window.onload = () => {
         })
         .catch(err => {
             console.error("Eroare la fetch:", err);
-            alert("Nu s-a putut încărca jocul.");
+            alert("Nu s-a putut incarca jocul.");
         });
 };
 
@@ -174,7 +174,7 @@ continueBtn.addEventListener('click', () => {
 
 function populateQuiz(index) {
     const question = questions[index];
-    document.querySelector('#quiz p strong').textContent = `Întrebare ${index + 1}:`;
+    document.querySelector('#quiz p strong').textContent = `intrebare ${index + 1}:`;
 
     if (question.options) {
         const options = question.options;
@@ -216,7 +216,7 @@ nextBtn.addEventListener('click', () => {
         : selectedAnswer;
 
     if (!answer) {
-        alert("Selectează sau introdu un răspuns!");
+        alert("Selecteaza sau introdu un raspuns!");
         return;
     }
 
@@ -237,10 +237,9 @@ nextBtn.addEventListener('click', () => {
             if (data.is_correct) {
                 alert("✔️ Corect! Scor curent: " + data.score);
             } else {
-                alert("❌ Greșit! Scor curent: " + data.score);
+                alert("❌ Gresit! Scor curent: " + data.score);
             }
 
-            // Avansăm la următoarea parte a poveștii
             currentPart++;
             if (currentPart >= storyParts.length) {
                 alert("Ai terminat jocul! Scor final: " + data.score);
@@ -258,7 +257,7 @@ nextBtn.addEventListener('click', () => {
         })
         .catch(err => {
             console.error("Eroare la verificare:", err);
-            alert("A apărut o eroare la verificarea răspunsului.");
+            alert("A aparut o eroare la verificarea raspunsului.");
         });
 });
 
