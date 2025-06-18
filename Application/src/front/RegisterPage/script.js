@@ -3,6 +3,9 @@ const usernameInput = document.getElementById('username');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const confirmPasswordInput = document.getElementById('confirmPassword');
+
+applyTranslations();
+
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -76,8 +79,6 @@ function applyTranslations() {
             });
         });
 }
-
-applyTranslations();
 
 document.getElementById("lang-select").addEventListener("change", function() {
     localStorage.setItem("lang", this.value);

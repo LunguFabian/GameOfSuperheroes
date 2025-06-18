@@ -10,6 +10,8 @@ if(token==null){
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+    applyTranslations();
+
     const token = localStorage.getItem("token");
     const loginBtn = document.querySelector(".button.login");
     const registerBtn = document.querySelector(".button.register");
@@ -26,11 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (playBtn) playBtn.style.display = "none";
         if (profileNav) profileNav.style.display = "none";
     }
-});
 
-document.addEventListener('DOMContentLoaded', function() {
     const langSelect = document.getElementById('lang-select');
-    const playBtn = document.getElementById('play-btn');
 
     playBtn.addEventListener('click', function(e) {
         e.preventDefault();
@@ -80,8 +79,6 @@ function applyTranslations() {
             });
         });
 }
-
-applyTranslations();
 
 document.getElementById("lang-select").addEventListener("change", function() {
     localStorage.setItem("lang", this.value);

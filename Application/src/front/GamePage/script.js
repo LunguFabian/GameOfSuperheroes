@@ -1,3 +1,4 @@
+
 const textBox = document.getElementById('storyText');
 const continueBtn = document.getElementById('continueBtn');
 const quizBox = document.getElementById('quiz');
@@ -22,60 +23,9 @@ let selectedAnswer = null;
 popup.style.display = 'none';
 quizBox.style.display = 'none';
 
-function getLangFromUrl() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get('lang') || 'en';
-}
-const lang = getLangFromUrl();
-let langMessages = {};
+window.onload = () => {
+    applyTranslations();
 
-function t(key) {
-    return langMessages[key] || key;
-}
-
-function loadLangMessages(cb) {
-    fetch(`/front/lang/${lang}.json`)
-        .then(res => res.json())
-        .then(msgs => {
-            langMessages = msgs;
-            if (cb) cb();
-        });
-}
-
-function applyTranslations() {
-    const elements = [
-        ["page-title", "game_page_title"],
-        ["game-title", "superheroes_game_title"],
-        ["continueBtn", "continue"],
-        ["question-label", "question"],
-        ["option-1", "answer_1"],
-        ["option-2", "answer_2"],
-        ["option-3", "answer_3"],
-        ["option-4", "answer_4"],
-        ["textAnswer", "input_placeholder", true],
-        ["nextBtn", "next"],
-        ["gameover-title", "game_over"],
-        ["score-label", "your_score"],
-        ["redirect-label", "redirect"],
-        ["seconds-label", "seconds"],
-        ["playAgainBtn", "play_again"]
-    ];
-
-    elements.forEach(([id, key, isPlaceholder]) => {
-        const el = document.getElementById(id);
-        if (id === "page-title" && langMessages[key]) {
-            document.title = langMessages[key];
-        } else if (el && langMessages[key]) {
-            if (isPlaceholder) {
-                el.placeholder = langMessages[key];
-            } else {
-                el.textContent = langMessages[key];
-            }
-        }
-    });
-}
-
-function initGameLogic() {
     fetch(`http://localhost:8082/api/game/game.php?id=${gameId}`, {
         method: 'GET',
         headers: {
@@ -85,7 +35,7 @@ function initGameLogic() {
         .then(res => res.json())
         .then(data => {
             if (!data || !data.scenario || !data.questions) {
-                alert(t("game_data_error") || "Eroare la primirea datelor jocului.");
+                alert("Eroare la primirea datelor jocului.");
                 return;
             }
 
@@ -97,37 +47,35 @@ function initGameLogic() {
         })
         .catch(err => {
             console.error("Eroare la fetch:", err);
-            alert(t("game_load_error") || "Nu s-a putut incarca jocul.");
+            alert("Nu s-a putut incarca jocul.");
         });
-}
+};
 
 function configureDifficultyUI(difficulty) {
-    const option3 = document.getElementById("option-3");
-    const option4 = document.getElementById("option-4");
-    const multipleOptions = document.getElementById("multiple-options");
-    const inputAnswer = document.getElementById("input-answer");
+    const thirdOption = document.getElementById("third-option");
+    const fourthOption = document.getElementById("fourth-option");
 
     document.getElementById("difficultyDisplay").textContent = "Dificultate: " + difficulty;
 
     if (difficulty === "easy") {
-        if (option3) option3.style.display = "none";
-        if (option4) option4.style.display = "none";
-        if (multipleOptions) multipleOptions.style.display = "block";
-        if (inputAnswer) inputAnswer.style.display = "none";
+        if (thirdOption) thirdOption.style.display = "none";
+        if (fourthOption) fourthOption.style.display = "none";
+        multipleOptions.style.display = "block";
+        inputAnswer.style.display = "none";
     } else if (difficulty === "medium") {
-        if (option3) option3.style.display = "block";
-        if (option4) option4.style.display = "block";
-        if (multipleOptions) multipleOptions.style.display = "block";
-        if (inputAnswer) inputAnswer.style.display = "none";
+        if (thirdOption) thirdOption.style.display = "block";
+        if (fourthOption) fourthOption.style.display = "block";
+        multipleOptions.style.display = "block";
+        inputAnswer.style.display = "none";
     } else if (difficulty === "hard") {
-        if (multipleOptions) multipleOptions.style.display = "none";
-        if (inputAnswer) inputAnswer.style.display = "block";
+        multipleOptions.style.display = "none";
+        inputAnswer.style.display = "block";
     }
 }
 
 function typeStory(text) {
-    let i = 0;
-    textBox.textContent = '';
+    let i = -1;
+    textBox.textContent = ' ';
     function typeChar() {
         if (i < text.length) {
             textBox.textContent += text.charAt(i);
@@ -151,7 +99,7 @@ continueBtn.addEventListener('click', () => {
         currentPart++;
 
         if (currentPart === 3) {
-            continueBtn.textContent = t("finish") || "Finish";
+            continueBtn.textContent = "Finish";
         }
 
         if (currentPart < storyParts.length) {
@@ -166,12 +114,15 @@ continueBtn.addEventListener('click', () => {
             })
                 .then(res => res.json())
                 .then(data => {
+                    console.log("🎉 Joc terminat! Scor actualizat. Rank obținut: " + data.new_rank);
                     document.getElementById('quiz').style.display = 'none';
                     let score = data.added_score;
+                    console.log(score);
                     showGameOverPopup(score);
                 })
                 .catch(err => {
-                    alert(t("score_update_error") || "A aparut o eroare la actualizarea scorului.");
+                    console.error("Eroare la actualizare scor:", err);
+                    alert("A aparut o eroare la actualizarea scorului.");
                 });
         }
     }
@@ -180,7 +131,7 @@ continueBtn.addEventListener('click', () => {
 function populateQuiz(index) {
     const question = questions[index];
     const questionParagraph = document.querySelector('#quiz p');
-    questionParagraph.innerHTML = `<strong>${t("question") || "Întrebare"} ${index + 1}:</strong> ${question.text}`;
+    questionParagraph.innerHTML = `<strong>Intrebare ${index + 1}:</strong> ${question.text}`;
 
     if (question.options) {
         const options = question.options;
@@ -210,7 +161,7 @@ nextBtn.addEventListener('click', () => {
     }
 
     if (!answer) {
-        alert(t("select_or_enter_answer") || "Selecteaza sau introdu un raspuns!");
+        alert("Selecteaza sau introdu un raspuns!");
         return;
     }
 
@@ -229,9 +180,9 @@ nextBtn.addEventListener('click', () => {
         .then(res => res.json())
         .then(data => {
             if (data.is_correct) {
-                alert(t("correct") + " " + (t("current_score") || "Scor curent:") + " " + data.score);
+                alert("✔️ Corect! Scor curent: " + data.score);
             } else {
-                alert(t("wrong") || "❌ Gresit!");
+                alert("❌ Gresit!");
             }
 
             currentPart++;
@@ -249,7 +200,8 @@ nextBtn.addEventListener('click', () => {
             answerOptions.forEach(opt => opt.classList.remove('selected'));
         })
         .catch(err => {
-            alert(t("answer_check_error") || "A aparut o eroare la verificarea raspunsului.");
+            console.error("Eroare la verificare:", err);
+            alert("A aparut o eroare la verificarea raspunsului.");
         });
 });
 
@@ -277,10 +229,47 @@ function showGameOverPopup(finalScore) {
         window.location.href = `/difficulty?lang=${lang}`;
     };
 }
+const TRANSLATABLE_IDS = [
+    ["page-title", "game_page_title"],
+    ["game-title", "superheroes_game_title"],
+    ["continueBtn", "continue"],
+    ["question-label", "question"],
+    ["option-1", "answer_1"],
+    ["option-2", "answer_2"],
+    ["option-3", "answer_3"],
+    ["option-4", "answer_4"],
+    ["textAnswer", "input_placeholder"],
+    ["nextBtn", "next"],
+    ["gameover-title", "game_over"],
+    ["score-label", "your_score"],
+    ["redirect-label", "redirect"],
+    ["seconds-label", "seconds"],
+    ["playAgainBtn", "play_again"]
+];
 
-document.addEventListener("DOMContentLoaded", function () {
-    loadLangMessages(() => {
-        applyTranslations();
-        initGameLogic();
-    });
-});
+function getLangFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('lang') || 'en';
+}
+
+let lang = getLangFromUrl();
+
+function applyTranslations() {
+    fetch(`/front/lang/${lang}.json`)
+        .then(res => res.json())
+        .then(messages => {
+            TRANSLATABLE_IDS.forEach(([elId, key]) => {
+                const el = document.getElementById(elId);
+                if (el && messages[key]) {
+                    if (el.tagName === "TITLE" || elId === "page-title") {
+                        el.textContent = messages[key];
+                        document.title = messages[key];
+                    } else if (elId === "textAnswer") {
+                        el.placeholder = messages[key];
+                    } else {
+                        el.textContent = messages[key];
+                    }
+                }
+            });
+        });
+}
