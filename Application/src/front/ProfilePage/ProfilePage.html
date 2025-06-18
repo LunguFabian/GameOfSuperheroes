@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="front/ProfilePage/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Title</title>
+    <title>Profile</title>
 </head>
 <body>
 <header>
@@ -12,12 +12,9 @@
         <a href="/home" class="nav-logo">
             <h2 class="logo-text">SuperHeroes</h2>
         </a>
-
-        <i id="menu-close-button" class='bx bx-x-circle'></i>
         <ul class="nav-menu">
-
-            <li class="nav-item" id="profile">
-                <a href="/profile" class="nav-link">Profile</a>
+            <li class="nav-item">
+                <a href="http://localhost:8082/api/rss/leaderboard_rss.php" target="_blank" class="nav-link">RSS</a>
             </li>
             <li class="nav-item">
                 <a href="/rank" class="nav-link">Rank</a>
@@ -25,55 +22,96 @@
             <li class="nav-item">
                 <a href="/aboutus" class="nav-link">About</a>
             </li>
+            <li class="nav-item" id="profile">
+                <a href="/profile" class="nav-link">Profile</a>
+            </li>
             <li class="nav-item" id="logout">
                 <a href="/home" class="nav-link" id="logout-btn">Logout</a>
             </li>
         </ul>
-
         <i id="menu-open-button" class='bx bx-menu'></i>
     </nav>
 </header>
-<main>
-    <div class="main-page">
-        <div class="left-side">
-            <div class="profile">
-                <img src="front/ProfilePage/profileImg.png" alt="profile" class="profile-img">
-                <h3 class="user-name">username</h3>
-                <div class="profile-info">
-                    <p class="rank">#rank</p>
-                    <p class="points">points</p>
-                </div>
-                <button type="button" class="profile-button">Edit Profile</button>
-            </div>
-            <div class="hero">
-                <button id="change-hero-btn" type="button">Change Hero</button>
-                <img id="hero-img" src="front/images/no-hero.png" alt="Hero Image">
-            </div>
-        </div>
-        <div class="right-side">
-            <div class="game-history">
-                <h1 class="title">Game History</h1>
-                <div class="game-header">
-                    <span class="col col-number">#</span>
-                    <span class="col col-name">Hero Name</span>
-                    <span class="col col-difficulty">Difficulty</span>
-                    <span class="col col-points">Points</span>
-                </div>
-                <ul class="list-games">
 
-                </ul>
+<div class="main-wrapper">
+    <main>
+        <div class="main-page">
+            <div class="left-side">
+                <div class="profile">
+                    <img src="front/ProfilePage/profileImg.png" alt="profile" class="profile-img">
+                    <h3 class="user-name">username</h3>
+                    <div class="profile-info">
+                        <p class="rank">#rank</p>
+                        <p class="points">points</p>
+                    </div>
+                    <button type="button" class="profile-button">Edit Profile</button>
+                </div>
+                <div class="hero">
+                    <button id="change-hero-btn" type="button">Change Hero</button>
+                    <img id="hero-img" src="front/images/no-hero.png" alt="Hero Image">
+                </div>
             </div>
-        </div>
-        <div id="heroModal" class="modal hidden">
-            <div class="modal-content">
-                <span class="close-btn">&times;</span>
-                <h2>Select a Hero</h2>
-                <div id="heroList" class="hero-list">
+            <div class="right-side">
+                <div class="game-history">
+                    <h1 class="title">Game History</h1>
+                    <div class="game-header">
+                        <span class="col col-number">#</span>
+                        <span class="col col-name">Hero Name</span>
+                        <span class="col col-difficulty">Difficulty</span>
+                        <span class="col col-points">Points</span>
+                    </div>
+                    <ul class="list-games">
+
+                    </ul>
+                </div>
+            </div>
+            <div id="heroModal" class="modal hidden">
+                <div class="modal-content-hero">
+                    <span class="close-btn">&times;</span>
+                    <h2>Select a Hero</h2>
+                    <div id="heroList" class="hero-list">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</main>
+
+        <div id="editProfileModal" class="modal hidden">
+            <div class="modal-content edit-profile-content">
+                <span class="close-btn" id="closeEditProfileModal">&times;</span>
+                <h2>Edit Profile</h2>
+                <div id="edit-profile-message" class="edit-profile-message"></div>
+                <div class="edit-section">
+                    <label for="new-username">Change Username</label>
+                    <div class="edit-row">
+                        <input type="text" id="new-username" name="new-username" placeholder="New username">
+                        <input type="password" id="current-password-username" name="current-password-username"
+                               placeholder="Current password">
+                        <button type="button" class="edit-action-btn" id="save-username-btn">Change Username</button>
+                    </div>
+                </div>
+                <div class="edit-section">
+                    <label for="new-email">Change Email</label>
+                    <div class="edit-row">
+                        <input type="email" id="new-email" name="new-email" placeholder="New email">
+                        <input type="password" id="current-password-email" name="current-password-email"
+                               placeholder="Current password">
+                        <button type="button" class="edit-action-btn" id="save-email-btn">Change Email</button>
+                    </div>
+                </div>
+                <div class="edit-section">
+                    <label for="new-password">Change Password</label>
+                    <div class="edit-row">
+                        <input type="password" id="new-password" name="new-password" placeholder="New password">
+                        <input type="password" id="current-password-password" name="current-password-password"
+                               placeholder="Current password">
+                        <button type="button" class="edit-action-btn" id="save-password-btn">Change Password</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+</div>
 <script src="front/ProfilePage/script.js"></script>
 </body>
 </html>

@@ -66,7 +66,7 @@ ALTER TABLE games ADD COLUMN language VARCHAR(10) DEFAULT 'ro';
 
 SHOW CREATE TABLE games;
 
--- ALTER TABLE games DROP FOREIGN KEY games_ibfk_1;
+ALTER TABLE games DROP FOREIGN KEY games_ibfk_1;
 
 ALTER TABLE games
     ADD CONSTRAINT fk_games_user
@@ -298,7 +298,7 @@ VALUES ('Care este formula chimică a apei?', 'H2O', NULL, NULL, NULL, 1, 'hard'
 
 Update users
 Set is_admin= TRUE
-Where id = 5;
+Where id = 4;
 
 INSERT INTO heroes(name, image_url)
 VALUES ('Thor', 'front/images/thor.png'),

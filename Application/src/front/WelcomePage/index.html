@@ -16,14 +16,17 @@
         </a>
 
         <ul class="nav-menu">
-            <li class="nav-item" id="profile">
-                <a href="/profile" class="nav-link">Profile</a>
+            <li class="nav-item">
+                <a href="http://localhost:8082/api/rss/leaderboard_rss.php" target="_blank" class="nav-link">RSS</a>
             </li>
             <li class="nav-item">
                 <a href="/rank" class="nav-link">Rank</a>
             </li>
             <li class="nav-item">
                 <a href="/aboutus" class="nav-link">About</a>
+            </li>
+            <li class="nav-item" id="profile">
+                <a href="/profile" class="nav-link">Profile</a>
             </li>
             <li class="nav-item" id="logout">
                 <a href="/home" class="nav-link" id="logout-btn">Logout</a>
@@ -53,7 +56,6 @@
 
 <script>
     const menuOpenButton = document.querySelector("#menu-open-button");
-    console.log("aici");
     menuOpenButton.addEventListener("click", () => {
         document.body.classList.toggle("show-mobile-menu");
     })
@@ -66,8 +68,6 @@
 
     document.addEventListener("DOMContentLoaded", () => {
         const token = localStorage.getItem("token");
-        console.log("functie");
-        console.log(token);
         const loginBtn = document.querySelector(".button.login");
         const registerBtn = document.querySelector(".button.register");
         const playBtn = document.querySelector(".button.play");

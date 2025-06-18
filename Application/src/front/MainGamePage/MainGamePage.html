@@ -58,6 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.log("Game started:", body);
                     window.location.href = `front/GamePage/GamePage.html?game_id=${body.game_id}`;
                 } else {
+                    if(status===401){
+                        localStorage.removeItem("token");
+                        window.location.href='/home';
+                    }
                     alert(body.message || "Eroare necunoscută.");
                 }
             })

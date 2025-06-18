@@ -116,7 +116,6 @@ document.addEventListener("DOMContentLoaded", () => {
         <span class="hero-name">${hero.name}</span>
     `;
 
-                // Click pe un erou => trimite PUT către backend
                 heroDiv.addEventListener("click", async () => {
                     try {
                         const updateResponse = await fetch("http://localhost:8082/api/user/hero.php", {
@@ -139,7 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         alert("Erou actualizat cu succes: " + hero.name);
 
-                        // Dacă ai un element cu eroul actual, îl actualizezi aici
                         const nameElem = document.getElementById("currentHeroName");
                         const imgElem = document.getElementById("currentHeroImg");
                         if (nameElem) nameElem.textContent = hero.name;
@@ -171,5 +169,193 @@ document.addEventListener("DOMContentLoaded", () => {
             heroModal.classList.add("hidden");
         }
     });
+});
+
+document.getElementById('editProfileModal').classList.add('hidden');
+document.addEventListener('DOMContentLoaded', function () {
+
+    const editProfileBtn = document.querySelector('.profile-button');
+    const editProfileModal = document.getElementById('editProfileModal');
+    const closeEditProfileModal = document.getElementById('closeEditProfileModal');
+
+    editProfileBtn.addEventListener('click', function () {
+        editProfileModal.classList.remove('hidden');
+    });
+
+    closeEditProfileModal.addEventListener('click', function () {
+        editProfileModal.classList.add('hidden');
+    });
+});
+
+
+document.getElementById('save-username-btn').addEventListener('click', async function () {
+    const newUsername = document.getElementById('new-username').value.trim();
+    const password = document.getElementById('current-password-username').value;
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        showEditProfileMessage("Nu esti autentificat(a)!");
+        return;
+    }
+
+    if (!newUsername || !password) {
+        showEditProfileMessage("Completează noul username și parola curentă!");
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:8082/api/user/username.php', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({
+                newUsername: newUsername,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            showEditProfileMessage(data.message, response.ok);
+            document.getElementById('editProfileModal').classList.add('hidden');
+        } else {
+            showEditProfileMessage(data.message);
+        }
+    } catch (error) {
+        showEditProfileMessage(error.message);
+    }
+});
+
+document.getElementById('save-email-btn').addEventListener('click', async function () {
+    const newEmail = document.getElementById('new-email').value.trim();
+    const password = document.getElementById('current-password-email').value;
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        showEditProfileMessage("Nu esti autentificat(a)!");
+        return;
+    }
+
+    if (!newEmail || !password) {
+        showEditProfileMessage("Completeaza noul email și parola curenta!");
+        return;
+    }
+
+    if (!isValidEmail(newEmail)) {
+        showEditProfileMessage("Emailul nu este valid!");
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:8082/api/user/email.php', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({
+                newEmail: newEmail,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        showEditProfileMessage(data.message, response.ok);
+        if (response.ok) {
+            setTimeout(() => {
+                document.getElementById('editProfileModal').classList.add('hidden');
+            }, 2000);
+        }
+    } catch (error) {
+        showEditProfileMessage("Eroare la conectarea cu serverul!");
+    }
+});
+
+document.getElementById('save-password-btn').addEventListener('click', async function () {
+    const newPassword = document.getElementById('new-password').value;
+    const oldPassword = document.getElementById('current-password-password').value;
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        showEditProfileMessage("Nu esti autentificat(a)!");
+        return;
+    }
+
+    if (!newPassword || !oldPassword) {
+        showEditProfileMessage("Completează noua parolă și parola curentă!");
+        return;
+    }
+
+    if (newPassword.length < 8) {
+        showEditProfileMessage("Parola nouă trebuie să aibă cel puțin 8 caractere!");
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:8082/api/user/password.php', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({
+                newPassword: newPassword,
+                oldPassword: oldPassword
+            })
+        });
+
+        const data = await response.json();
+
+        showEditProfileMessage(data.message, response.ok);
+        if (response.ok) {
+            setTimeout(() => {
+                document.getElementById('editProfileModal').classList.add('hidden');
+            }, 1200);
+        }
+    } catch (error) {
+        showEditProfileMessage("Eroare la conectarea cu serverul!");
+    }
+});
+
+function showEditProfileMessage(msg, isSuccess = false) {
+    const msgDiv = document.getElementById('edit-profile-message');
+    msgDiv.textContent = msg;
+    msgDiv.className = 'edit-profile-message' + (isSuccess ? ' success' : '');
+    msgDiv.style.display = 'block';
+    setTimeout(() => {
+        msgDiv.style.display = 'none';
+    }, 3500);
+}
+
+function isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+const menuOpenButton = document.querySelector("#menu-open-button");
+console.log("aici");
+menuOpenButton.addEventListener("click", () => {
+    document.body.classList.toggle("show-mobile-menu");
+})
+
+if(token==null) {
+    document.getElementById("profile").style.display = "none";
+    document.getElementById("logout").style.display = "none";
+}
+
+document.getElementById('logout-btn').addEventListener('click', function (event) {
+    event.preventDefault();
+    localStorage.removeItem('token');
+    window.location.href = '/home';
+});
+
+document.getElementById('logout-btn').addEventListener('click', function (event) {
+    event.preventDefault();
+    localStorage.removeItem('token');
+    window.location.href = '/home';
 });
 
