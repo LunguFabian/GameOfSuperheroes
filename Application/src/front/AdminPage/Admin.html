@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/front/AdminPage/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Users</h1>
+    <section id="users-section">
+        <div class="users-list">
+        <table id="usersTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Score</th>
+                <th>Rank</th>
+                <th>Admin</th>
+                <th>Acțiuni</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        </div>
+    </section>
+    <hr>
+    <h1>Scenarii</h1>
+    <section id="scenarios-section">
+        <form id="addScenarioForm">
+            <div class="form-row">
+                <label>Partea 1:<input type="text" name="part1" required></label>
+                <label>Partea 2:<input type="text" name="part2" required></label>
+            </div>
+            <div class="form-row">
+                <label>Partea 3:<input type="text" name="part3" required></label>
+                <label>Partea 4:<input type="text" name="part4" required></label>
+            </div>
+            <div class="form-row">
+                <label>Limba:
+                    <select name="language" required>
+                        <option value="">Alege limba</option>
+                        <option value="ro">ro</option>
+                        <option value="en">en</option>
+                    </select>
+                </label>
+            </div>
+            <button type="submit">Adauga scenariu</button>
+        </form>
+        <div class="scenarios-list">
+            <table id="scenariosTable">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Partea 1</th>
+                    <th>Partea 2</th>
+                    <th>Partea 3</th>
+                    <th>Partea 4</th>
+                    <th>Limba</th>
+                    <th>Acțiuni</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <h1>Intrebari</h1>
+    <section id="questions-section">
+        <form id="addQuestionForm">
+            <div class="form-row">
+                <label>Text întrebare:
+                    <input type="text" name="question_text" required>
+                </label>
+                <label>Dificultate:
+                    <select name="difficulty" id="difficultySelect" required>
+                        <option value="">Alege</option>
+                        <option value="easy">Usoara</option>
+                        <option value="medium">Medie</option>
+                        <option value="hard">Greu</option>
+                    </select>
+                </label>
+                <label>Limba:
+                    <select name="language" required>
+                        <option value="ro">ro</option>
+                        <option value="en">en</option>
+                    </select>
+                </label>
+            </div>
+            <div id="question-options">
+            </div>
+            <button type="submit">Adauga intrebare</button>
+        </form>
+        <div class="questions-list">
+            <table id="questionsTable">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Text</th>
+                    <th>Dificultate</th>
+                    <th>Opțiuni</th>
+                    <th>Corecta</th>
+                    <th>Limba</th>
+                    <th>Acțiuni</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </section>
+    <div id="message"></div>
+</div>
+<script src="/front/AdminPage/script.js"></script>
+</body>
+</html>
