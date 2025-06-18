@@ -2,29 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Player Rank</title>
+    <title id="page-title">Player Rank</title>
     <link rel="stylesheet" href="front/RankPage/style.css">
     <script src="front/RankPage/script.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
+
 <header>
     <nav class="navbar">
         <a href="/home" class="nav-logo">
-            <h2 class="logo-text">SuperHeroes</h2>
+            <h2 class="logo-text" id="site-title">SuperHeroes</h2>
         </a>
+        <label for="lang-select"></label>
+        <select id="lang-select">
+            <option value="en">En</option>
+            <option value="ro">Ro</option>
+        </select>
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="http://localhost:8082/api/rss/leaderboard_rss.php" target="_blank" class="nav-link">RSS</a>
+                <a href="http://localhost:8082/api/rss/leaderboard_rss.php" target="_blank" class="nav-link" id="rss-link">RSS</a>
             </li>
             <li class="nav-item">
-                <a href="/rank" class="nav-link">Rank</a>
+                <a href="/rank" class="nav-link" id="rank-link">Rank</a>
             </li>
             <li class="nav-item">
-                <a href="/aboutus" class="nav-link">About</a>
+                <a href="/aboutus" class="nav-link" id="about-link">About</a>
             </li>
             <li class="nav-item" id="profile">
-                <a href="/profile" class="nav-link">Profile</a>
+                <a href="/profile" class="nav-link" id="profile-link">Profile</a>
             </li>
             <li class="nav-item" id="logout">
                 <a href="/home" class="nav-link" id="logout-btn">Logout</a>
@@ -35,11 +41,11 @@
 </header>
 <div class="main-wrapper">
     <main class="rank-container">
-        <h1 class="title">Player Rank</h1>
+        <h1 class="title" id="player-rank-title">Player Rank</h1>
         <div class="game-header">
-            <span class="col col-number">#</span>
-            <span class="col col-name">UserName</span>
-            <span class="col col-points">Points</span>
+            <span class="col col-number" id="col-number">#</span>
+            <span class="col col-name" id="col-username">UserName</span>
+            <span class="col col-points" id="col-points">Points</span>
         </div>
         <ul class="list-players" id="player-list">
         </ul>

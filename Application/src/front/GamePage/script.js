@@ -1,93 +1,3 @@
-const storyText = `textextextextextextextextexttextextextextextextextextexttextextextextextextextextexttextextextextextextextextexttextextextextextextextextexttextextextextextextextextext`;
-
-let i = 0;
-const textBox = document.getElementById('storyText');
-const continueBtn = document.getElementById('continueBtn');
-const quizBox = document.getElementById('quiz');
-const nextBtn = document.getElementById('nextBtn');
-const answerOptions = document.querySelectorAll('.quiz-option');
-const params = new URLSearchParams(window.location.search);
-const difficulty = params.get("difficulty");
-
-document.getElementById("difficultyDisplay").textContent = "Dificultate: " + difficulty;
-
-window.onload = () => {
-    typeStory();
-
-    const inputAnswer = document.getElementById('input-answer');
-    const multipleOptions = document.getElementById('multiple-options');
-    const thirdOption = document.getElementById('third-option');
-
-    if (difficulty === "easy") {
-        thirdOption.style.display = "none";
-        multipleOptions.style.display = "block";
-        inputAnswer.style.display = "none";
-    } else if (difficulty === "normal") {
-        thirdOption.style.display = "block";
-        multipleOptions.style.display = "block";
-        inputAnswer.style.display = "none";
-    } else if (difficulty === "hard") {
-        multipleOptions.style.display = "none";
-        inputAnswer.style.display = "block";
-    }
-};
-
-function typeStory() {
-    if (i < storyText.length) {
-        textBox.textContent += storyText.charAt(i);
-        i++;
-        if(i%40===0) textBox.textContent += '\n';
-        setTimeout(typeStory, 40);
-    } else {
-        continueBtn.style.display = 'inline-block';
-    }
-}
-
-document.addEventListener('keydown', function(e) {
-    if (e.code === 'Space' && i < storyText.length) {
-        e.preventDefault();
-        textBox.textContent = storyText;
-        i = storyText.length;
-        continueBtn.style.display = 'inline-block';
-    }
-});
-
-continueBtn.addEventListener('click', () => {
-    textBox.style.display = 'none';
-    continueBtn.style.display = 'none';
-    quizBox.style.display = 'block';
-});
-
-answerOptions.forEach(option => {
-    option.addEventListener('click', () => {
-        answerOptions.forEach(opt => opt.classList.remove('selected'));
-        option.classList.add('selected');
-        selectedAnswer = option.textContent;
-    });
-});
-
-nextBtn.addEventListener('click', () => {
-    quizBox.style.display = 'none';
-    textBox.style.display = 'block';
-    textBox.textContent = '';
-    i = 0;
-    selectedAnswer = null;
-    answerOptions.forEach(opt => opt.classList.remove('selected'));
-    typeStory();
-});
-
-const params = new URLSearchParams(window.location.search);
-const gameId = params.get("game_id");
-const difficulty = params.get("difficulty");
-const token = localStorage.getItem("token");
-
-document.getElementById("difficultyDisplay").textContent = "Dificultate: " + difficulty;
-
-let storyParts = [];
-let currentPart = 0;
-let questions = [];
-let selectedAnswer = null;
-
 const textBox = document.getElementById('storyText');
 const continueBtn = document.getElementById('continueBtn');
 const quizBox = document.getElementById('quiz');
@@ -95,8 +5,77 @@ const nextBtn = document.getElementById('nextBtn');
 const inputAnswer = document.getElementById('input-answer');
 const multipleOptions = document.getElementById('multiple-options');
 const answerOptions = document.querySelectorAll('.quiz-option');
+const popup = document.getElementById('gameOverPopup');
 
-window.onload = () => {
+let difficultyGame;
+let i = 0;
+const params = new URLSearchParams(window.location.search);
+const gameId = params.get("game_id");
+const token = localStorage.getItem("token");
+
+let storyParts = [];
+let currentPart = 0;
+let currentQuestionIndex = 0;
+let questions = [];
+let selectedAnswer = null;
+
+popup.style.display = 'none';
+quizBox.style.display = 'none';
+
+function getLangFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('lang') || 'en';
+}
+const lang = getLangFromUrl();
+let langMessages = {};
+
+function t(key) {
+    return langMessages[key] || key;
+}
+
+function loadLangMessages(cb) {
+    fetch(`/front/lang/${lang}.json`)
+        .then(res => res.json())
+        .then(msgs => {
+            langMessages = msgs;
+            if (cb) cb();
+        });
+}
+
+function applyTranslations() {
+    const elements = [
+        ["page-title", "game_page_title"],
+        ["game-title", "superheroes_game_title"],
+        ["continueBtn", "continue"],
+        ["question-label", "question"],
+        ["option-1", "answer_1"],
+        ["option-2", "answer_2"],
+        ["option-3", "answer_3"],
+        ["option-4", "answer_4"],
+        ["textAnswer", "input_placeholder", true],
+        ["nextBtn", "next"],
+        ["gameover-title", "game_over"],
+        ["score-label", "your_score"],
+        ["redirect-label", "redirect"],
+        ["seconds-label", "seconds"],
+        ["playAgainBtn", "play_again"]
+    ];
+
+    elements.forEach(([id, key, isPlaceholder]) => {
+        const el = document.getElementById(id);
+        if (id === "page-title" && langMessages[key]) {
+            document.title = langMessages[key];
+        } else if (el && langMessages[key]) {
+            if (isPlaceholder) {
+                el.placeholder = langMessages[key];
+            } else {
+                el.textContent = langMessages[key];
+            }
+        }
+    });
+}
+
+function initGameLogic() {
     fetch(`http://localhost:8082/api/game/game.php?id=${gameId}`, {
         method: 'GET',
         headers: {
@@ -106,75 +85,102 @@ window.onload = () => {
         .then(res => res.json())
         .then(data => {
             if (!data || !data.scenario || !data.questions) {
-                alert("Eroare la primirea datelor jocului.");
+                alert(t("game_data_error") || "Eroare la primirea datelor jocului.");
                 return;
             }
 
             storyParts = Object.values(data.scenario);
             questions = data.questions;
-
             typeStory(storyParts[currentPart]);
-
             configureDifficultyUI(data.difficulty);
+            difficultyGame = data.difficulty;
         })
         .catch(err => {
             console.error("Eroare la fetch:", err);
-            alert("Nu s-a putut incarca jocul.");
+            alert(t("game_load_error") || "Nu s-a putut incarca jocul.");
         });
-};
+}
 
 function configureDifficultyUI(difficulty) {
+    const option3 = document.getElementById("option-3");
+    const option4 = document.getElementById("option-4");
+    const multipleOptions = document.getElementById("multiple-options");
+    const inputAnswer = document.getElementById("input-answer");
+
+    document.getElementById("difficultyDisplay").textContent = "Dificultate: " + difficulty;
+
     if (difficulty === "easy") {
-        document.getElementById("third-option").style.display = "none";
-        multipleOptions.style.display = "block";
-        inputAnswer.style.display = "none";
+        if (option3) option3.style.display = "none";
+        if (option4) option4.style.display = "none";
+        if (multipleOptions) multipleOptions.style.display = "block";
+        if (inputAnswer) inputAnswer.style.display = "none";
     } else if (difficulty === "medium") {
-        document.getElementById("third-option").style.display = "block";
-        multipleOptions.style.display = "block";
-        inputAnswer.style.display = "none";
+        if (option3) option3.style.display = "block";
+        if (option4) option4.style.display = "block";
+        if (multipleOptions) multipleOptions.style.display = "block";
+        if (inputAnswer) inputAnswer.style.display = "none";
     } else if (difficulty === "hard") {
-        multipleOptions.style.display = "none";
-        inputAnswer.style.display = "block";
+        if (multipleOptions) multipleOptions.style.display = "none";
+        if (inputAnswer) inputAnswer.style.display = "block";
     }
 }
 
 function typeStory(text) {
     let i = 0;
     textBox.textContent = '';
-
     function typeChar() {
         if (i < text.length) {
             textBox.textContent += text.charAt(i);
-            if (i % 40 === 0) textBox.textContent += '\n';
             i++;
-            setTimeout(typeChar, 40);
+            setTimeout(typeChar, 20);
         } else {
             continueBtn.style.display = 'inline-block';
         }
     }
-
     typeChar();
 }
-
-document.addEventListener('keydown', function (e) {
-    if (e.code === 'Space' && currentPart < storyParts.length) {
-        e.preventDefault();
-        textBox.textContent = storyParts[currentPart];
-        continueBtn.style.display = 'inline-block';
-    }
-});
 
 continueBtn.addEventListener('click', () => {
     continueBtn.style.display = 'none';
     textBox.style.display = 'none';
     quizBox.style.display = 'block';
 
-    populateQuiz(currentPart);
+    if (currentQuestionIndex < questions.length) {
+        populateQuiz(currentQuestionIndex);
+    } else {
+        currentPart++;
+
+        if (currentPart === 3) {
+            continueBtn.textContent = t("finish") || "Finish";
+        }
+
+        if (currentPart < storyParts.length) {
+            textBox.style.display = 'block';
+            typeStory(storyParts[currentPart]);
+        } else {
+            fetch(`http://localhost:8082/api/user/score_rank.php?id=${gameId}`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById('quiz').style.display = 'none';
+                    let score = data.added_score;
+                    showGameOverPopup(score);
+                })
+                .catch(err => {
+                    alert(t("score_update_error") || "A aparut o eroare la actualizarea scorului.");
+                });
+        }
+    }
 });
 
 function populateQuiz(index) {
     const question = questions[index];
-    document.querySelector('#quiz p strong').textContent = `intrebare ${index + 1}:`;
+    const questionParagraph = document.querySelector('#quiz p');
+    questionParagraph.innerHTML = `<strong>${t("question") || "Întrebare"} ${index + 1}:</strong> ${question.text}`;
 
     if (question.options) {
         const options = question.options;
@@ -194,36 +200,24 @@ answerOptions.forEach(option => {
 });
 
 nextBtn.addEventListener('click', () => {
-    currentPart++;
-    if (currentPart >= storyParts.length) {
-        alert("Joc terminat!");
-        return;
+    const question = questions[currentQuestionIndex];
+    let answer;
+
+    if (difficultyGame === 'hard') {
+        answer = document.getElementById("textAnswer").value;
+    } else {
+        answer = selectedAnswer;
     }
 
-    quizBox.style.display = 'none';
-    textBox.style.display = 'block';
-    textBox.textContent = '';
-    selectedAnswer = null;
-
-    answerOptions.forEach(opt => opt.classList.remove('selected'));
-    typeStory(storyParts[currentPart]);
-});
-
-nextBtn.addEventListener('click', () => {
-    const question = questions[currentPart];
-    const answer = difficulty === "hard"
-        ? document.getElementById("textAnswer").value
-        : selectedAnswer;
-
     if (!answer) {
-        alert("Selecteaza sau introdu un raspuns!");
+        alert(t("select_or_enter_answer") || "Selecteaza sau introdu un raspuns!");
         return;
     }
 
     fetch('http://localhost:8082/api/game/answer.php', {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${localStorage.getItem("token")}`,
+            'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
@@ -235,16 +229,16 @@ nextBtn.addEventListener('click', () => {
         .then(res => res.json())
         .then(data => {
             if (data.is_correct) {
-                alert("✔️ Corect! Scor curent: " + data.score);
+                alert(t("correct") + " " + (t("current_score") || "Scor curent:") + " " + data.score);
             } else {
-                alert("❌ Gresit! Scor curent: " + data.score);
+                alert(t("wrong") || "❌ Gresit!");
             }
 
             currentPart++;
-            if (currentPart >= storyParts.length) {
-                alert("Ai terminat jocul! Scor final: " + data.score);
-                // redirect? window.location.href = "FinalPage.html";
-                return;
+            currentQuestionIndex++;
+
+            if (currentPart < storyParts.length) {
+                typeStory(storyParts[currentPart]);
             }
 
             quizBox.style.display = 'none';
@@ -253,12 +247,40 @@ nextBtn.addEventListener('click', () => {
             selectedAnswer = null;
             document.getElementById("textAnswer").value = '';
             answerOptions.forEach(opt => opt.classList.remove('selected'));
-            typeStory(storyParts[currentPart]);
         })
         .catch(err => {
-            console.error("Eroare la verificare:", err);
-            alert("A aparut o eroare la verificarea raspunsului.");
+            alert(t("answer_check_error") || "A aparut o eroare la verificarea raspunsului.");
         });
 });
 
+function showGameOverPopup(finalScore) {
+    const scoreElem = document.getElementById('finalScore');
+    const timerElem = document.getElementById('popupTimer');
+    const playAgainBtn = document.getElementById('playAgainBtn');
+    let timeLeft = 15;
 
+    scoreElem.textContent = finalScore;
+    popup.style.display = 'flex';
+
+    timerElem.textContent = timeLeft;
+    const interval = setInterval(() => {
+        timeLeft--;
+        timerElem.textContent = timeLeft;
+        if (timeLeft <= 0) {
+            clearInterval(interval);
+            window.location.href = "/home";
+        }
+    }, 1000);
+
+    playAgainBtn.onclick = () => {
+        clearInterval(interval);
+        window.location.href = `/difficulty?lang=${lang}`;
+    };
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    loadLangMessages(() => {
+        applyTranslations();
+        initGameLogic();
+    });
+});

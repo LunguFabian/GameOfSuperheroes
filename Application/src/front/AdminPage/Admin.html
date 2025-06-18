@@ -6,61 +6,25 @@
     <link rel="stylesheet" href="/front/AdminPage/style.css">
 </head>
 <body>
+<select id="lang-select">
+    <option value="en">En</option>
+    <option value="ro">Ro</option>
+</select>
+
 <div class="container">
-    <h1>Users</h1>
+    <h1 id="users-title">Users</h1>
     <section id="users-section">
         <div class="users-list">
-        <table id="usersTable">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Score</th>
-                <th>Rank</th>
-                <th>Admin</th>
-                <th>Acțiuni</th>
-            </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-        </div>
-    </section>
-    <hr>
-    <h1>Scenarii</h1>
-    <section id="scenarios-section">
-        <form id="addScenarioForm">
-            <div class="form-row">
-                <label>Partea 1:<input type="text" name="part1" required></label>
-                <label>Partea 2:<input type="text" name="part2" required></label>
-            </div>
-            <div class="form-row">
-                <label>Partea 3:<input type="text" name="part3" required></label>
-                <label>Partea 4:<input type="text" name="part4" required></label>
-            </div>
-            <div class="form-row">
-                <label>Limba:
-                    <select name="language" required>
-                        <option value="">Alege limba</option>
-                        <option value="ro">ro</option>
-                        <option value="en">en</option>
-                    </select>
-                </label>
-            </div>
-            <button type="submit">Adauga scenariu</button>
-        </form>
-        <div class="scenarios-list">
-            <table id="scenariosTable">
+            <table id="usersTable">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Partea 1</th>
-                    <th>Partea 2</th>
-                    <th>Partea 3</th>
-                    <th>Partea 4</th>
-                    <th>Limba</th>
-                    <th>Acțiuni</th>
+                    <th id="th-id">ID</th>
+                    <th id="th-username">Username</th>
+                    <th id="th-email">Email</th>
+                    <th id="th-score">Score</th>
+                    <th id="th-rank">Rank</th>
+                    <th id="th-admin">Admin</th>
+                    <th id="th-actions-users">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -68,43 +32,83 @@
             </table>
         </div>
     </section>
-    <h1>Intrebari</h1>
+    <hr>
+    <h1 id="scenarios-title">Scenarios</h1>
+    <section id="scenarios-section">
+        <form id="addScenarioForm">
+            <div class="form-row">
+                <label id="label-part1">Part 1:<input type="text" name="part1" required></label>
+                <label id="label-part2">Part 2:<input type="text" name="part2" required></label>
+            </div>
+            <div class="form-row">
+                <label id="label-part3">Part 3:<input type="text" name="part3" required></label>
+                <label id="label-part4">Part 4:<input type="text" name="part4" required></label>
+            </div>
+            <div class="form-row">
+                <label id="label-language-scenarios">Language:
+                    <select name="language" required>
+                        <option value="" id="option-choose-language">Choose language</option>
+                        <option value="ro">ro</option>
+                        <option value="en">en</option>
+                    </select>
+                </label>
+            </div>
+            <button type="submit" id="add-scenario-btn">Add scenario</button>
+        </form>
+        <div class="scenarios-list">
+            <table id="scenariosTable">
+                <thead>
+                <tr>
+                    <th id="th-scenario-id">ID</th>
+                    <th id="th-part1">Part 1</th>
+                    <th id="th-part2">Part 2</th>
+                    <th id="th-part3">Part 3</th>
+                    <th id="th-part4">Part 4</th>
+                    <th id="th-scenario-language">Language</th>
+                    <th id="th-actions-scenarios">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <h1 id="questions-title">Questions</h1>
     <section id="questions-section">
         <form id="addQuestionForm">
             <div class="form-row">
-                <label>Text întrebare:
+                <label id="label-question-text">Question text:
                     <input type="text" name="question_text" required>
                 </label>
-                <label>Dificultate:
+                <label id="label-difficulty">Difficulty:
                     <select name="difficulty" id="difficultySelect" required>
-                        <option value="">Alege</option>
-                        <option value="easy">Usoara</option>
-                        <option value="medium">Medie</option>
-                        <option value="hard">Greu</option>
+                        <option value="" id="option-choose-difficulty">Choose</option>
+                        <option value="easy" id="option-easy">Easy</option>
+                        <option value="medium" id="option-medium">Medium</option>
+                        <option value="hard" id="option-hard">Hard</option>
                     </select>
                 </label>
-                <label>Limba:
+                <label id="label-language-questions">Language:
                     <select name="language" required>
                         <option value="ro">ro</option>
                         <option value="en">en</option>
                     </select>
                 </label>
             </div>
-            <div id="question-options">
-            </div>
-            <button type="submit">Adauga intrebare</button>
+            <div id="question-options"></div>
+            <button type="submit" id="add-question-btn">Add question</button>
         </form>
         <div class="questions-list">
             <table id="questionsTable">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Text</th>
-                    <th>Dificultate</th>
-                    <th>Opțiuni</th>
-                    <th>Corecta</th>
-                    <th>Limba</th>
-                    <th>Acțiuni</th>
+                    <th id="th-question-id">ID</th>
+                    <th id="th-question-text">Text</th>
+                    <th id="th-question-difficulty">Difficulty</th>
+                    <th id="th-question-options">Options</th>
+                    <th id="th-question-correct">Correct</th>
+                    <th id="th-question-language">Language</th>
+                    <th id="th-actions-questions">Actions</th>
                 </tr>
                 </thead>
                 <tbody></tbody>

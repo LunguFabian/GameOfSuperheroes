@@ -7,26 +7,30 @@
     <link rel="stylesheet" href="/front/WelcomePage/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-
 <body>
+
 <header>
     <nav class="navbar">
         <a href="/home" class="nav-logo">
-            <h2 class="logo-text">SuperHeroes</h2>
+            <h2 class="logo-text" id="page-title-text">SuperHeroes</h2>
         </a>
 
+        <label for="lang-select"></label><select id="lang-select">
+            <option value="en">en</option>
+            <option value="ro">ro</option>
+        </select>
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="http://localhost:8082/api/rss/leaderboard_rss.php" target="_blank" class="nav-link">RSS</a>
+                <a href="http://localhost:8082/api/rss/leaderboard_rss.php" target="_blank" class="nav-link" id="rss-link">RSS</a>
             </li>
             <li class="nav-item">
-                <a href="/rank" class="nav-link">Rank</a>
+                <a href="/rank" class="nav-link" id="rank-link">Rank</a>
             </li>
             <li class="nav-item">
-                <a href="/aboutus" class="nav-link">About</a>
+                <a href="/aboutus" class="nav-link" id="about-link">About</a>
             </li>
             <li class="nav-item" id="profile">
-                <a href="/profile" class="nav-link">Profile</a>
+                <a href="/profile" class="nav-link" id="profile-link">Profile</a>
             </li>
             <li class="nav-item" id="logout">
                 <a href="/home" class="nav-link" id="logout-btn">Logout</a>
@@ -39,12 +43,12 @@
     <section class="hero-section">
         <div class="section-content">
             <div class="hero-details">
-                <h2 class="title">Welcome!</h2>
-                <h3 class="subtitle">The game of SuperHeroes</h3>
+                <h2 class="title" id="welcome-title">Welcome!</h2>
+                <h3 class="subtitle" id="subtitle">The game of SuperHeroes</h3>
                 <div class="buttons">
-                    <a href="/login" class="button login">Login</a>
-                    <a href="/register" class="button register">Register</a>
-                    <a href="/game" class="button play" style="display: none;">Play</a>
+                    <a href="/login" class="button login" id="login-btn">Login</a>
+                    <a href="/register" class="button register" id="register-btn">Register</a>
+                    <a href="/difficulty" class="button play" style="display: none;" id="play-btn">Play</a>
                 </div>
             </div>
             <div class="hero-image-wrapper">
@@ -54,43 +58,7 @@
     </section>
 </main>
 
-<script>
-    const menuOpenButton = document.querySelector("#menu-open-button");
-    menuOpenButton.addEventListener("click", () => {
-        document.body.classList.toggle("show-mobile-menu");
-    })
-
-    const token = localStorage.getItem("token");
-    if(token==null){
-        document.getElementById("profile").style.display = "none";
-        document.getElementById("logout").style.display = "none";
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const token = localStorage.getItem("token");
-        const loginBtn = document.querySelector(".button.login");
-        const registerBtn = document.querySelector(".button.register");
-        const playBtn = document.querySelector(".button.play");
-        const profileNav = document.getElementById("profile-nav");
-
-        if (token) {
-            console.log("cu token");
-            if (loginBtn) loginBtn.style.display = "none";
-            if (registerBtn) registerBtn.style.display = "none";
-            if (playBtn) playBtn.style.display = "inline-block";
-        } else {
-            console.log("fara token");
-            if (playBtn) playBtn.style.display = "none";
-            if (profileNav) profileNav.style.display = "none";
-        }
-    });
-    document.getElementById('logout-btn').addEventListener('click', function (event) {
-        event.preventDefault();
-        localStorage.removeItem('token');
-        window.location.href = '/home';
-    });
-
- </script>
+<script src="front/WelcomePage/script.js"></script>
 </body>
 </html>
 

@@ -57,6 +57,16 @@ header {
     box-shadow: none;
 }
 
+#lang-select{
+    font-size: 15px;
+    font-family: 'Bangers', cursive;
+
+    margin-left: 10px;
+    border-radius: 18px;
+    height: 30px;
+    width: 40px;
+}
+
 #menu-close-button, #menu-open-button {
     display: none;
     font-size: 2em;

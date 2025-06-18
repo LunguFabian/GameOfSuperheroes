@@ -144,6 +144,16 @@ ul.nav-menu {
     margin-bottom: 28px;
 }
 
+#lang-select{
+    font-size: 15px;
+    font-family: 'Bangers', cursive;
+
+    margin-left: 10px;
+    border-radius: 18px;
+    height: 30px;
+    width: 40px;
+}
+
 .game-header {
     display: flex;
     justify-content: space-between;

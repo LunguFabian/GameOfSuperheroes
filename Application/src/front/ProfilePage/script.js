@@ -1,9 +1,3 @@
-const token = localStorage.getItem("token");
-if(token==null){
-    document.getElementById("profile").style.display = "none";
-    document.getElementById("logout").style.display = "none";
-}
-
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("token");
 
@@ -14,6 +8,66 @@ document.addEventListener("DOMContentLoaded", () => {
 
     fetchProfileData(token);
     fetchGameHistory(token);
+
+
+    const TRANSLATABLE_IDS = [
+        ["page-title", "profile_title"],
+        ["site-title", "title"],
+        ["rss-link", "rss"],
+        ["rank-link", "rank"],
+        ["about-link", "about"],
+        ["profile-link", "profile"],
+        ["logout-btn", "logout"],
+        ["edit-profile-btn", "edit_profile"],
+        ["change-hero-btn", "change_hero"],
+        ["profile-username-label", "username"],
+        ["user-rank-label", "user_rank"],
+        ["user-points-label", "user_points"],
+        ["game-history-title", "game_history"],
+        ["col-number", "number_sign"],
+        ["col-hero-name", "hero_name"],
+        ["col-difficulty", "difficulty"],
+        ["col-points", "points"],
+        ["select-hero-title", "select_hero"],
+        ["edit-profile-title", "edit_profile"],
+        ["change-username-label", "change_username"],
+        ["save-username-btn", "change_username"],
+        ["change-email-label", "change_email"],
+        ["save-email-btn", "change_email"],
+        ["change-password-label", "change_password"],
+        ["save-password-btn", "change_password"]
+    ];
+
+    let lang = localStorage.getItem("lang") || "en";
+    document.getElementById("lang-select").value = lang;
+
+    function applyTranslations() {
+        fetch(`/front/lang/${lang}.json`)
+            .then(res => res.json())
+            .then(messages => {
+                TRANSLATABLE_IDS.forEach(([elId, key]) => {
+                    const el = document.getElementById(elId);
+                    if (el && messages[key]) {
+                        if (el.tagName === "TITLE") {
+                            el.textContent = messages[key];
+                            document.title = messages[key];
+                        } else if (el.tagName === "INPUT") {
+                            el.placeholder = messages[key];
+                        } else {
+                            el.textContent = messages[key];
+                        }
+                    }
+                });
+            });
+    }
+
+    applyTranslations();
+
+    document.getElementById("lang-select").addEventListener("change", function () {
+        localStorage.setItem("lang", this.value);
+        location.reload();
+    });
+
 });
 
 function fetchProfileData(token) {
@@ -342,7 +396,7 @@ menuOpenButton.addEventListener("click", () => {
     document.body.classList.toggle("show-mobile-menu");
 })
 
-if(token==null) {
+if (token == null) {
     document.getElementById("profile").style.display = "none";
     document.getElementById("logout").style.display = "none";
 }

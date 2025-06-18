@@ -9,43 +9,45 @@
 <header>
     <nav class="navbar">
         <a href="/home" class="nav-logo">
-            <h2 class="logo-text">SuperHeroes</h2>
+            <h2 class="logo-text" id="site-title">SuperHeroes</h2>
         </a>
+        <label for="lang-select"></label><select id="lang-select" >
+        <option value="en">En</option>
+        <option value="ro">Ro</option>
+        </select>
         <ul class="nav-menu">
             <li class="nav-item">
-                <a href="http://localhost:8082/api/rss/leaderboard_rss.php" target="_blank" class="nav-link">RSS</a>
+                <a href="http://localhost:8082/api/rss/leaderboard_rss.php" target="_blank" class="nav-link" id="rss-link">RSS</a>
             </li>
             <li class="nav-item">
-                <a href="/rank" class="nav-link">Rank</a>
+                <a href="/rank" class="nav-link" id="rank-link">Rank</a>
             </li>
             <li class="nav-item">
-                <a href="/aboutus" class="nav-link">About</a>
+                <a href="/aboutus" class="nav-link" id="about-link">About</a>
             </li>
             <li class="nav-item" id="profile">
-                <a href="/profile" class="nav-link">Profile</a>
+                <a href="/profile" class="nav-link" id="profile-link">Profile</a>
             </li>
             <li class="nav-item" id="logout">
                 <a href="/home" class="nav-link" id="logout-btn">Logout</a>
             </li>
         </ul>
-
         <i id="menu-open-button" class='bx bx-menu'></i>
     </nav>
 </header>
-<body>
 <div class="main">
-    <h1 class="title-page">Meet the team</h1>
-    <p class="description-project">o descriere despre proiect</p>
+    <h1 class="title-page" id="meet-the-team-title">Meet the team</h1>
+    <p class="description-project" id="project-description">o descriere despre proiect</p>
     <div class="about">
         <div class="about-box">
             <img src="front/AboutUsPage/Fabian.png" alt="user" class="user-image">
             <h3 class="name">Lungu Fabian</h3>
-            <i class="description">?ce am lucrat?</i>
+            <i class="description" id="fabian-description">?ce am lucrat?</i>
         </div>
         <div class="about-box">
             <img src="front/AboutUsPage/Bianca.jpg" alt="user" class="user-image">
             <h3 class="name">Milea Bianca</h3>
-            <i class="description">?ce am lucrat?</i>
+            <i class="description" id="bianca-description">?ce am lucrat?</i>
         </div>
     </div>
 </div>
