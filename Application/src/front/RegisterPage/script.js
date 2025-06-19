@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
 
             try {
-                const response = await fetch('http://localhost:8082/api/auth/register.php', {
+                const response = await fetch('http://4.210.231.174:8082/api/auth/register.php', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
