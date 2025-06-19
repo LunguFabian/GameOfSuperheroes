@@ -12,16 +12,16 @@ CREATE table users
     is_admin BOOLEAN DEFAULT FALSE
 );
 
-ALTER TABLE users
-    ADD COLUMN hero_id INT DEFAULT NULL,
-    ADD CONSTRAINT fk_user_hero FOREIGN KEY (hero_id) REFERENCES heroes (id);
-
 CREATE TABLE heroes
 (
     id        INT AUTO_INCREMENT PRIMARY KEY,
     name      VARCHAR(50),
     image_url VARCHAR(255)
 );
+
+ALTER TABLE users
+    ADD COLUMN hero_id INT DEFAULT NULL,
+    ADD CONSTRAINT fk_user_hero FOREIGN KEY (hero_id) REFERENCES heroes (id);
 
 CREATE TABLE villains
 (
