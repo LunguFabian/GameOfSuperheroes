@@ -56,6 +56,16 @@ header {
     box-shadow: none;
 }
 
+#lang-select{
+    font-size: 15px;
+    font-family: 'Bangers', cursive;
+
+    margin-left: 10px;
+    border-radius: 18px;
+    height: 30px;
+    width: 40px;
+}
+
 #menu-close-button, #menu-open-button {
     display: none;
     font-size: 2em;
@@ -104,7 +114,6 @@ ul.nav-menu {
     border-color: var(--navy-blue);
     outline: none;
 }
-
 .main{
     display: flex;
     flex-direction: column;
@@ -237,21 +246,46 @@ ul.nav-menu {
         border-radius: 8px;
     }
 
+    #menu-open-button {
+        display: block;
+    }
+
     ul.nav-menu {
+        box-sizing: border-box;
         display: flex;
-        flex-direction: row;
-        align-items: center;
-        gap: 6px;
-        margin-left: 12px;
-        padding: 0;
-        position: static;
-        width: auto;
-        height: auto;
-        background: none;
-        box-shadow: none;
-        transition: none;
-        z-index: 1;
-        overflow: visible;
+        flex-direction: column;
+        position: fixed;
+        gap: 20px;
+
+        top: 0;
+        margin-top: 0;
+        margin-left: 0;
+
+        left: -300px;
+        width: 200px;
+        height: 100dvh;
+        padding-top: 50px;
+
+        background: var(--dark-yellow);
+        box-shadow: 2px 0 12px 0 var(--navy-blue);
+
+        transition: left 0.35s;
+        z-index: 10;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .nav-link {
+        width: 90px;
+        font-size: 0.99em;
+        padding: 13px 0;
+        margin: 0;
+        border-radius: 50px;
+        text-align: center;
+    }
+
+    body.show-mobile-menu ul.nav-menu {
+        left: 0;
     }
 
     .nav-item {
@@ -270,7 +304,6 @@ ul.nav-menu {
         padding: 0 3px 2px 3px;
         border-radius: 4px;
     }
-
     #menu-open-button {
         display: block;
     }
@@ -287,7 +320,7 @@ ul.nav-menu {
         margin-left: 0;
 
         left: -300px;
-        width: 150px;
+        width: 200px;
         height: 100dvh;
         padding-top: 50px;
 
@@ -309,17 +342,27 @@ ul.nav-menu {
     }
 
     .title {
-        font-size: 1.1em;
+        font-size: 1.2em;
     }
 
     .game-header {
-        font-size: 0.91em;
+        font-size: 1.2em;
         padding: 4px 2px;
         border-radius: 7px;
     }
 
+    .rank-container {
+        width: 70vw;
+        max-width: 70vw;
+        padding: 12px 3vw;
+        overflow: auto;
+        min-height: 60vh;
+        height: auto;
+        font-size: 1.2em;
+    }
+
     .list-players li {
-        font-size: 0.9em;
+        font-size: 1em;
         padding: 6px 4px;
         border-radius: 6px;
     }

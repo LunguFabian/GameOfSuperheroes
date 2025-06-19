@@ -23,6 +23,7 @@ body {
 
 header {
     background: var(--dark-yellow);
+    padding: 0;
     box-shadow: 0 4px 0 var(--yellow);
     position: relative;
     z-index: 2;
@@ -113,7 +114,7 @@ ul.nav-menu {
 }
 
 .main {
-    max-width: 900px;
+    max-width: 800px;
     margin: 50px auto 0 auto;
     background: var(--white);
     border-radius: 24px;
@@ -192,30 +193,28 @@ ul.nav-menu {
     letter-spacing: 0.5px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 900px){
     .main {
-        max-width: 98vw;
-        padding: 26px 4vw 28px 4vw;
-        border-radius: 18px;
+        max-width: 80vw;
+        padding: 13px 2vw 14px 2vw;
+        border-radius: 9px;
     }
-    .title-page {
-        font-size: 1.5em;
-    }
+
     .about {
-        gap: 18px;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
     }
     .about-box {
-        max-width: 180px;
-        padding: 18px 4vw 14px 4vw;
-        border-radius: 12px;
+        max-width: 99vw;
+        padding: 10px 2px 10px 2px;
+        border-radius: 7px;
     }
-    .user-image {
-        width: 72px;
-        height: 72px;
-    }
-}
 
-@media (max-width: 600px) {
+    .header{
+        padding: 0.8em 0 0.6em 0;
+    }
+
     .navbar {
         flex-direction: row;
         padding: 0 7px;
@@ -225,42 +224,61 @@ ul.nav-menu {
         padding: 0 3px 2px 3px;
         border-radius: 4px;
     }
+    #menu-open-button {
+        display: block;
+    }
+
     ul.nav-menu {
+        box-sizing: border-box;
+        display: flex;
         flex-direction: column;
-        gap: 16px;
-        margin-left: 0;
-        position:fixed;
+        position: fixed;
+        gap: 20px;
+
         top: 0;
+        margin-top: 0;
+        margin-left: 0;
+
         left: -300px;
-        width: 180px;
-        height: 100vh;
+        width: 170px;
+        height: 100dvh;
+        padding-top: 50px;
+
         background: var(--dark-yellow);
         box-shadow: 2px 0 12px 0 var(--navy-blue);
-        padding-top: 70px;
+
         transition: left 0.35s;
         z-index: 10;
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
+
     body.show-mobile-menu ul.nav-menu {
         left: 0;
     }
-    #menu-open-button, #menu-close-button {
-        display: block;
+
+    .nav-item {
+        list-style: none;
     }
     .nav-link {
         width: 90px;
         font-size: 0.99em;
         padding: 13px 0;
         margin: 0;
-        border-radius: 13px;
+        border-radius: 50px;
+        text-align: center;
     }
+
+}
+
+@media (max-width: 600px) {
     .main {
-        max-width: 99vw;
-        padding: 13px 2vw 14px 2vw;
+        max-width: 70vw;
+        padding: 13px 1vw 14px 1vw;
         border-radius: 9px;
     }
     .title-page {
-        font-size: 1.1em;
+        font-size: 2em;
     }
     .about {
         flex-direction: column;

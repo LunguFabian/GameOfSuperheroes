@@ -1,6 +1,6 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const token = localStorage.getItem("token");
+const token = localStorage.getItem("token");
 
+document.addEventListener("DOMContentLoaded", () => {
     if (!token) {
         window.location.href = "/front/NotAuthorizedPage/NotAuthorized.html";
         return;
@@ -192,11 +192,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         const result = await updateResponse.json();
 
                         if (!updateResponse.ok) {
-                            alert("Eroare la schimbarea eroului: " + result.message);
+                            showCustomPopup("Eroare la schimbarea eroului: " + result.message);
                             return;
                         }
 
-                        alert("Erou actualizat cu succes: " + hero.name);
+                        showCustomPopup("Erou actualizat cu succes: " + hero.name);
 
                         const nameElem = document.getElementById("currentHeroName");
                         const imgElem = document.getElementById("currentHeroImg");
@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         location.reload();
                     } catch (error) {
                         console.error("Eroare la update:", error);
-                        alert("A aparut o eroare la schimbarea eroului.");
+                        showCustomPopup("A aparut o eroare la schimbarea eroului.");
                     }
                 });
 
@@ -418,4 +418,20 @@ document.getElementById('logout-btn').addEventListener('click', function (event)
     localStorage.removeItem('token');
     window.location.href = '/home';
 });
+
+function showCustomPopup(message, duration = 3) {
+    const popup = document.getElementById('customPopup');
+    const msgElem = document.getElementById('customPopupMessage');
+    msgElem.textContent = message;
+    popup.style.display = 'flex';
+
+    document.getElementById('closePopupBtn').onclick = () => {
+        popup.style.display = 'none';
+    };
+    if (duration > 0) {
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, duration);
+    }
+}
 

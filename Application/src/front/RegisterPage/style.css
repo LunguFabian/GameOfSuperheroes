@@ -169,11 +169,30 @@ h1 {
     text-decoration: underline;
 }
 
+.custom-popup {
+    display: none;
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background: #fff;
+    color: #222;
+    border: 1px solid #888;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    padding: 18px 24px 18px 18px;
+    min-width: 220px;
+    font-size: 17px;
+    align-items: center;
+    justify-content: center;
+}
+
 @media (max-width: 600px) {
     .wrapper {
         padding: 21px 3vw 17px 3vw;
         min-width: 0;
-        max-width: 97vw;
+        max-width: 60vw;
         border-radius: 13px;
     }
     h1 {

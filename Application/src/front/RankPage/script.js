@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         window.location.href = '/home';
     });
 
-
     const TRANSLATABLE_IDS = [
         ["page-title", "player_rank_title"],
         ["site-title", "title"],
@@ -53,8 +52,6 @@ document.addEventListener("DOMContentLoaded", async function () {
         localStorage.setItem("lang", this.value);
         location.reload();
     });
-
-
 });
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -99,5 +96,5 @@ document.addEventListener("DOMContentLoaded", async function () {
     const menuOpenButton = document.querySelector("#menu-open-button");
     menuOpenButton.addEventListener("click", () => {
         document.body.classList.toggle("show-mobile-menu");
-    })
+    });
 });

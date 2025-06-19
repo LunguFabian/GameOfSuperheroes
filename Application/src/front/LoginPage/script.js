@@ -26,11 +26,11 @@ form.addEventListener('submit', async (event) => {
 
         }else
         {
-            alert(result.message||'Login failed.');
+            showCustomPopup(result.message||'Login failed');
         }
     }catch(err){
         console.log('Error:',err);
-        alert('An error occurred while logging in.');
+        showCustomPopup('An error occurred while logging in');
     }
 })
 
@@ -75,3 +75,16 @@ document.getElementById("lang-select").addEventListener("change", function() {
     localStorage.setItem("lang", this.value);
     location.reload();
 });
+
+function showCustomPopup(message, duration = 5000) {
+    const popup = document.getElementById('customPopup');
+    const msgElem = document.getElementById('customPopupMessage');
+    msgElem.textContent = message;
+    popup.style.display = 'flex';
+
+    if (duration > 0) {
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, duration);
+    }
+}

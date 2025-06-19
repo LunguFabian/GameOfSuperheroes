@@ -23,12 +23,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     const lang = params.get('lang') || 'en';
                     window.location.href = `../game?difficulty=${difficulty}&game_id=${body.game_id}&lang=${lang}`;
                 } else {
-                    alert(body.message || "Eroare necunoscuta.");
+                    showCustomPopup(body.message || "Eroare necunoscuta.");
                 }
             })
             .catch(err => {
                 console.error("Eroare:", err);
-                alert("A apărut o eroare la trimiterea cererii.");
+                showCustomPopup("A apărut o eroare la trimiterea cererii.");
             });
     }
     document.getElementById("easyButton").addEventListener("click", function(e) {
@@ -57,10 +57,6 @@ function getLangFromUrl() {
 
 const lang = getLangFromUrl();
 let langMessages = {};
-
-function t(key) {
-    return langMessages[key] || key;
-}
 
 function loadLangMessages(cb) {
     fetch(`/front/lang/${lang}.json`)
@@ -92,5 +88,21 @@ function applyTranslations() {
             el.textContent = langMessages[key];
         }
     });
+}
+
+function showCustomPopup(message, duration = 3) {
+    const popup = document.getElementById('customPopup');
+    const msgElem = document.getElementById('customPopupMessage');
+    msgElem.textContent = message;
+    popup.style.display = 'flex';
+
+    document.getElementById('closePopupBtn').onclick = () => {
+        popup.style.display = 'none';
+    };
+    if (duration > 0) {
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, duration);
+    }
 }
 

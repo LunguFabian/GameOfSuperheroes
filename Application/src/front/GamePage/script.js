@@ -35,7 +35,7 @@ window.onload = () => {
         .then(res => res.json())
         .then(data => {
             if (!data || !data.scenario || !data.questions) {
-                alert("Eroare la primirea datelor jocului.");
+                showCustomPopup("Eroare la primirea datelor jocului.");
                 return;
             }
 
@@ -47,7 +47,7 @@ window.onload = () => {
         })
         .catch(err => {
             console.error("Eroare la fetch:", err);
-            alert("Nu s-a putut incarca jocul.");
+            showCustomPopup("Nu s-a putut incarca jocul.");
         });
 };
 
@@ -55,7 +55,11 @@ function configureDifficultyUI(difficulty) {
     const thirdOption = document.getElementById("third-option");
     const fourthOption = document.getElementById("fourth-option");
 
-    document.getElementById("difficultyDisplay").textContent = "Dificultate: " + difficulty;
+    fetch(`/front/lang/${lang}.json`)
+        .then(res => res.json())
+        .then(messages => {
+            document.getElementById("difficultyDisplay").textContent = "Dificultate: " + messages[difficulty];
+        });
 
     if (difficulty === "easy") {
         if (thirdOption) thirdOption.style.display = "none";
@@ -114,7 +118,6 @@ continueBtn.addEventListener('click', () => {
             })
                 .then(res => res.json())
                 .then(data => {
-                    console.log("🎉 Joc terminat! Scor actualizat. Rank obținut: " + data.new_rank);
                     document.getElementById('quiz').style.display = 'none';
                     let score = data.added_score;
                     console.log(score);
@@ -122,7 +125,7 @@ continueBtn.addEventListener('click', () => {
                 })
                 .catch(err => {
                     console.error("Eroare la actualizare scor:", err);
-                    alert("A aparut o eroare la actualizarea scorului.");
+                    showCustomPopup("A aparut o eroare la actualizarea scorului.");
                 });
         }
     }
@@ -161,7 +164,7 @@ nextBtn.addEventListener('click', () => {
     }
 
     if (!answer) {
-        alert("Selecteaza sau introdu un raspuns!");
+        showCustomPopup("Selecteaza sau introdu un raspuns!");
         return;
     }
 
@@ -180,9 +183,9 @@ nextBtn.addEventListener('click', () => {
         .then(res => res.json())
         .then(data => {
             if (data.is_correct) {
-                alert("✔️ Corect! Scor curent: " + data.score);
+                showCustomPopup("Corect! Scor curent: " + data.score,5);
             } else {
-                alert("❌ Gresit!");
+                showCustomPopup("Gresit!");
             }
 
             currentPart++;
@@ -200,8 +203,7 @@ nextBtn.addEventListener('click', () => {
             answerOptions.forEach(opt => opt.classList.remove('selected'));
         })
         .catch(err => {
-            console.error("Eroare la verificare:", err);
-            alert("A aparut o eroare la verificarea raspunsului.");
+            showCustomPopup("A aparut o eroare la verificarea raspunsului.");
         });
 });
 
@@ -231,7 +233,7 @@ function showGameOverPopup(finalScore) {
 }
 const TRANSLATABLE_IDS = [
     ["page-title", "game_page_title"],
-    ["game-title", "superheroes_game_title"],
+    ["game-title", "subtitle"],
     ["continueBtn", "continue"],
     ["question-label", "question"],
     ["option-1", "answer_1"],
@@ -272,4 +274,20 @@ function applyTranslations() {
                 }
             });
         });
+}
+
+function showCustomPopup(message, duration = 3) {
+    const popup = document.getElementById('customPopup');
+    const msgElem = document.getElementById('customPopupMessage');
+    msgElem.textContent = message;
+    popup.style.display = 'flex';
+
+    document.getElementById('closePopupBtn').onclick = () => {
+        popup.style.display = 'none';
+    };
+    if (duration > 0) {
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, duration);
+    }
 }
