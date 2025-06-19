@@ -1,6 +1,3 @@
-Use
-heroes_db;
-
 CREATE table users
 (
     id       INT AUTO_INCREMENT PRIMARY KEY,
