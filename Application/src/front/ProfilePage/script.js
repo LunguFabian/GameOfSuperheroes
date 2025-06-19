@@ -6,6 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
+    document.getElementById('logout-btn').addEventListener('click', function (event) {
+        event.preventDefault();
+        localStorage.removeItem('token');
+        window.location.href = '/home';
+    });
+
     fetchProfileData(token);
     fetchGameHistory(token);
 

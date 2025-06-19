@@ -18,7 +18,6 @@ const USERS_API_URL = '/api/admin/users.php';
 const SCENARIOS_API_URL = '/api/admin/scenarios.php';
 const QUESTIONS_API_URL = '/api/admin/questions.php';
 
-// Language messages loader and translation function
 let lang = localStorage.getItem("lang") || "ro";
 let langMessages = {};
 
@@ -293,7 +292,7 @@ function renderQuestionOptions() {
 
 document.addEventListener('DOMContentLoaded', () => {
     loadLangMessages().then(() => {
-        // Table/label translations
+
         const TRANSLATABLE_IDS = [
             ["page-title", "admin"],
             ["users-title", "users"],

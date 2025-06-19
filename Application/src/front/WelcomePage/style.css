@@ -222,6 +222,33 @@ main {
     outline: none;
 }
 
+#admin-btn {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 9999;
+    padding: 12px 20px;
+    background: var(--dark-yellow);
+    color: var(--navy-blue);
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+
+    box-shadow: 2px 2px 0 var(--navy-blue), 4px 4px 0 var(--light-blue);
+    border-color: var(--navy-blue);
+    outline: none;
+}
+
+#admin-btn:hover,
+#admin-btn:focus{
+    background: var(--yellow);
+    color: var(--navy-blue);
+    border-color: var(--light-blue);
+    box-shadow: 2px 2px 0 var(--navy-blue), 4px 4px 0 var(--light-blue);
+    outline: none;
+}
+
 @media (max-width: 900px) {
     main, body {
         display: flex;

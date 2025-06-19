@@ -77,7 +77,7 @@ function applyTranslations() {
         ["site-title", "site_title"],
         ["difficulty-title", "difficulty_title"],
         ["easy-title", "easy"],
-        ["medium-title", "normal"],
+        ["medium-title", "medium"],
         ["hard-title", "hard"],
         ["easyButton", "play"],
         ["normalButton", "play"],

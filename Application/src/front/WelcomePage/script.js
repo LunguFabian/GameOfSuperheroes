@@ -9,6 +9,28 @@ if(token==null){
     document.getElementById("logout").style.display = "none";
 }
 
+function parseJwt(token) {
+    if (!token) return {};
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+}
+
+const payload = token ? parseJwt(token) : {};
+
+if (payload.is_admin) {
+    const btn = document.createElement('button');
+    btn.id = 'admin-btn';
+    btn.innerText = 'Admin';
+    btn.onclick = () => {
+        window.location.href = '/admin';
+    };
+    document.getElementById('admin-btn-container').appendChild(btn);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     applyTranslations();
 

@@ -5,6 +5,12 @@ document.addEventListener("DOMContentLoaded", async function () {
         document.getElementById("logout").style.display = "none";
     }
 
+    document.getElementById('logout-btn').addEventListener('click', function (event) {
+        event.preventDefault();
+        localStorage.removeItem('token');
+        window.location.href = '/home';
+    });
+
     const TRANSLATABLE_IDS = [
         ["page-title", "about"],
         ["site-title", "title"],
