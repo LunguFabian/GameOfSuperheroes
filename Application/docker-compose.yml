@@ -19,6 +19,6 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - ./database_volume:/var/lib/mysql
+     # - ./database_volume:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     command: --log-bin-trust-function-creators=1
