@@ -2,62 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title id="page-title">Register</title>
     <link rel="stylesheet" href="front/RegisterPage/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
-
 <body>
+<label for="lang-select"></label>
+<select id="lang-select">
+    <option value="en">En</option>
+    <option value="ro">Ro</option>
+</select>
 <div class="main">
-
+    <div id="customPopup" class="custom-popup">
+        <span id="customPopupMessage"></span>
+    </div>
     <div class="wrapper">
-
         <form id="registerForm">
-            <h1>Register</h1>
-
+            <h1 id="register-title">Register</h1>
             <div class="input-box">
-                <input id="username" type="text" placeholder="Username"
-                       required>
+                <input id="username-input" type="text" placeholder="Username" required>
                 <i class='bx bxs-user' ></i>
             </div>
             <div class="input-box">
-                <input id="email" type="email" placeholder="Email"
-                        required>
+                <input id="email-input" type="email" placeholder="Email" required>
                 <i class='bx bxs-envelope'></i>
-
             </div>
             <div class="input-box">
-                <input id="password" type="password"
+                <input id="password-input" type="password"
                        style="-webkit-text-security: circle"
                        placeholder="Password"
                        required>
                 <i class='bx bxs-lock-alt' ></i>
-
             </div>
             <div class="input-box">
-                <input id="confirmPassword" type="password"
+                <input id="confirm-password-input" type="password"
                        style="-webkit-text-security: circle"
                        placeholder="Confirm Password"
                        required>
                 <i class='bx bxs-lock-alt' ></i>
-
             </div>
-
-            <button type="submit" class="btn">Register</button>
-
-
+            <button type="submit" class="btn" id="register-btn">Register</button>
             <div class="register-link">
-                <p>Already have an account?
-                    <a href="/login" style="text-decoration: none;">
-                        Log in
-                    </a>
+                <p id="already-account-text">Already have an account?
+                    <a href="/login" style="text-decoration: none;" id="login-link">Log in</a>
                 </p>
             </div>
         </form>
-
     </div>
-
-
 </div>
 <script src="front/RegisterPage/script.js"></script>
 </body>

@@ -2,45 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HTML Login Form</title>
+    <title id="page-title">HTML Login Form</title>
     <link rel="stylesheet" href="front/LoginPage/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <body>
 <div class="main">
+    <label for="lang-select"></label>
+    <select id="lang-select">
+        <option value="en">En</option>
+        <option value="ro">Ro</option>
+    </select>
+    <div id="customPopup" class="custom-popup">
+        <span id="customPopupMessage"></span>
+    </div>
     <div class="wrapper">
         <form id="loginForm">
-            <h1>Login</h1>
-
+            <h1 id="login-title">Login</h1>
             <div class="input-box">
-                <input class="username" id="username" type="text" placeholder="Username"
+                <input class="username" id="username-input" type="text" placeholder="Username"
                        required>
                 <i class='bx bxs-user icon' ></i>
             </div>
             <div class="input-box">
-                <input id="password" type="password"
+                <input id="password-input" type="password"
                        style="-webkit-text-security: circle"
                        placeholder="Password"
                        required>
                 <i class='bx bxs-lock-alt icon' ></i>
             </div>
-            <button type="submit" class="btn">Login</button>
-
+            <button type="submit" class="btn" id="login-btn">Login</button>
 
             <div class="register-link">
-                <p>Not registered?
-                    <a href="/register" style="text-decoration: none;">
+                <p id="not-registered-text">Not registered?
+                    <a href="/register" style="text-decoration: none;" id="create-account-link">
                         Create an account
                     </a>
                 </p>
             </div>
         </form>
-
     </div>
-
 </div>
 <script src="front/LoginPage/script.js"></script>
 </body>
-
 </html>

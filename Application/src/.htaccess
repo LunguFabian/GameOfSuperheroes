@@ -23,9 +23,14 @@ RewriteRule ^aboutus$ front/AboutUsPage/AboutUs.html [L]
 
 RewriteRule ^profile$ front/ProfilePage/ProfilePage.html [L]
 
-RewriteRule ^game$ front/MainGamePage/MainGamePage.html [L]
+RewriteRule ^difficulty$ front/MainGamePage/MainGamePage.html [L]
+
+RewriteRule ^game$ front/GamePage/GamePage.html [L]
 
 RewriteRule ^finish$ /front/FinishGamePage/FinishGamePage.html [L]
 
 RewriteRule ^admin$ /front/AdminPage/admin.html [L]
+
 RewriteRule ^rank$ /front/RankPage/RankPage.html [L]
+
+RewriteRule ^unauthorized$ /front/NotAuthorizedPage/NotAuthorized.html [L]

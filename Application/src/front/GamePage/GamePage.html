@@ -1,272 +1,47 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Game</title>
+    <link rel="stylesheet" href="/front/GamePage/style.css">
 </head>
 <body>
-
 <div class="container">
-  <h1>The game of SuperHeroes</h1>
-  <p id="difficultyDisplay"></p>
-  <div class="grey-box" id="mainBox">
-    <div id="storyText"></div>
-    <button class="btn" id="continueBtn" style="display:none;">Continua</button>
-    <div id="quiz">
-      <p><strong>Intrebare:</strong> </p>
-      <div id="multiple-options">
-        <div class="quiz-option">Raspuns 1</div>
-        <div class="quiz-option">Raspuns 2</div>
-        <div class="quiz-option" id="third-option">Raspuns 3</div>
-        <div class="quiz-option" id="fourth-option">Raspuns 4</div>
-      </div>
-      <div id="input-answer" style="display:none;">
-        <input type="text" id="textAnswer" placeholder="Scrie raspunsul...">
-      </div>
-      <button class="btn" id="nextBtn">Next</button>
+    <h1 id="game-title">The game of SuperHeroes</h1>
+    <p id="difficultyDisplay"></p>
+    <div class="grey-box" id="mainBox">
+        <div id="storyText"></div>
+        <button class="btn" id="continueBtn" style="display:none;">Continue</button>
+        <div id="quiz">
+            <p><strong id="question-label">Question:</strong></p>
+            <div id="multiple-options">
+                <div class="quiz-option" id="option-1">Answer 1</div>
+                <div class="quiz-option" id="option-2">Answer 2</div>
+                <div class="quiz-option" id="option-3">Answer 3</div>
+                <div class="quiz-option" id="option-4">Answer 4</div>
+            </div>
+            <div id="input-answer" style="display:none;">
+                <input type="text" id="textAnswer" placeholder="Type your answer..." />
+            </div>
+            <button class="btn" id="nextBtn">Next</button>
+        </div>
+        <div id="customPopup" class="custom-popup">
+            <span id="customPopupMessage"></span>
+            <button id="closePopupBtn">&times;</button>
+        </div>
+        <div id="gameOverPopup">
+            <div class="popup-content">
+                <h2 id="gameover-title">Game Over!</h2>
+                <div><span id="score-label">Your score:</span> <span id="finalScore">0</span></div>
+                <div id="popupCountdown">
+                    <span id="redirect-label">You will be redirected in</span> <span id="popupTimer">15</span> <span id="seconds-label">seconds</span>
+                </div>
+                <button id="playAgainBtn">Play Again</button>
+            </div>
+        </div>
     </div>
-
-    <div id="gameOverPopup">
-      <div class="popup-content">
-        <h2>Game Over!</h2>
-        <div>Scorul tău: <span id="finalScore">0</span></div>
-        <div id="popupCountdown">Veți fi redirecționat în <span id="popupTimer">15</span> secunde</div>
-        <button id="playAgainBtn">Play Again</button>
-      </div>
-  </div>
-
-
-  </div>
 </div>
-
-<script>
-  const textBox = document.getElementById('storyText');
-  const continueBtn = document.getElementById('continueBtn');
-  const quizBox = document.getElementById('quiz');
-  const nextBtn = document.getElementById('nextBtn');
-  const inputAnswer = document.getElementById('input-answer');
-  const multipleOptions = document.getElementById('multiple-options');
-  const answerOptions = document.querySelectorAll('.quiz-option');
-  const popup = document.getElementById('gameOverPopup');
-
-  let difficultyGame;
-  let i = 0;
-  const params = new URLSearchParams(window.location.search);
-  const gameId = params.get("game_id");
-  const token = localStorage.getItem("token");
-
-  let storyParts = [];
-  let currentPart = 0;
-  let currentQuestionIndex = 0;
-  let questions = [];
-  let selectedAnswer = null;
-
-  popup.style.display = 'none';
-  quizBox.style.display = 'none';
-
-  window.onload = () => {
-    fetch(`http://localhost:8082/api/game/game.php?id=${gameId}`, {
-      method: 'GET',
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-            .then(res => res.json())
-            .then(data => {
-              if (!data || !data.scenario || !data.questions) {
-                alert("Eroare la primirea datelor jocului.");
-                return;
-              }
-
-              storyParts = Object.values(data.scenario);
-              questions = data.questions;
-              typeStory(storyParts[currentPart]);
-              configureDifficultyUI(data.difficulty);
-              difficultyGame = data.difficulty;
-            })
-            .catch(err => {
-              console.error("Eroare la fetch:", err);
-              alert("Nu s-a putut incarca jocul.");
-            });
-  };
-
-  function configureDifficultyUI(difficulty) {
-    document.getElementById("difficultyDisplay").textContent = "Dificultate: " + difficulty;
-
-    if (difficulty === "easy") {
-      document.getElementById("third-option").style.display = "none";
-      document.getElementById("fourth-option").style.display = "none";
-      multipleOptions.style.display = "block";
-      inputAnswer.style.display = "none";
-    } else if (difficulty === "medium") {
-      document.getElementById("third-option").style.display = "block";
-      document.getElementById("fourth-option").style.display = "block";
-      multipleOptions.style.display = "block";
-      inputAnswer.style.display = "none";
-    } else if (difficulty === "hard") {
-      multipleOptions.style.display = "none";
-      inputAnswer.style.display = "block";
-    }
-  }
-
-  function typeStory(text) {
-    let i = -1;
-    textBox.textContent = ' ';
-    function typeChar() {
-      if (i < text.length) {
-        textBox.textContent += text.charAt(i);
-        i++;
-        setTimeout(typeChar, 20);
-      } else {
-        continueBtn.style.display = 'inline-block';
-      }
-    }
-    typeChar();
-  }
-
-  continueBtn.addEventListener('click', () => {
-    continueBtn.style.display = 'none';
-    textBox.style.display = 'none';
-    quizBox.style.display = 'block';
-
-    if (currentQuestionIndex < questions.length) {
-      populateQuiz(currentQuestionIndex);
-    } else {
-      currentPart++;
-
-      if (currentPart === 3) {
-        continueBtn.textContent = "Finish";
-      }
-
-      if (currentPart < storyParts.length) {
-        textBox.style.display = 'block';
-        typeStory(storyParts[currentPart]);
-      } else {
-        fetch(`http://localhost:8082/api/user/score_rank.php?id=${gameId}`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        })
-                .then(res => res.json())
-                .then(data => {
-                  console.log("🎉 Joc terminat! Scor actualizat. Rank obținut: " + data.new_rank);
-                  document.getElementById('quiz').style.display = 'none';
-                  let score = data.added_score;
-                  console.log(score);
-                  showGameOverPopup(score);
-                })
-                .catch(err => {
-                  console.error("Eroare la actualizare scor:", err);
-                  alert("A apărut o eroare la actualizarea scorului.");
-                });
-      }
-    }
-  });
-
-  function populateQuiz(index) {
-    const question = questions[index];
-    const questionParagraph = document.querySelector('#quiz p');
-    questionParagraph.innerHTML = `<strong>Intrebare ${index + 1}:</strong> ${question.text}`;
-
-    if (question.options) {
-      const options = question.options;
-      answerOptions.forEach((opt, i) => {
-        opt.textContent = options[i] || '';
-        opt.style.display = options[i] ? 'block' : 'none';
-      });
-    }
-  }
-
-  answerOptions.forEach(option => {
-    option.addEventListener('click', () => {
-      answerOptions.forEach(opt => opt.classList.remove('selected'));
-      option.classList.add('selected');
-      selectedAnswer = option.textContent;
-    });
-  });
-
-  nextBtn.addEventListener('click', () => {
-    const question = questions[currentQuestionIndex];
-    let answer;
-
-    if (difficultyGame === 'hard') {
-      answer = document.getElementById("textAnswer").value;
-    } else {
-      answer = selectedAnswer;
-    }
-
-    if (!answer) {
-      alert("Selectează sau introdu un răspuns!");
-      return;
-    }
-
-    fetch('http://localhost:8082/api/game/answer.php', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        game_id: gameId,
-        question_id: question.id,
-        answer: answer
-      })
-    })
-            .then(res => res.json())
-            .then(data => {
-              if (data.is_correct) {
-                alert("✔️ Corect! Scor curent: " + data.score);
-              } else {
-                alert("❌ Gresit!");
-              }
-
-              currentPart++;
-              currentQuestionIndex++;
-
-              if (currentPart < storyParts.length) {
-                typeStory(storyParts[currentPart]);
-              }
-
-              quizBox.style.display = 'none';
-              textBox.style.display = 'block';
-              textBox.textContent = '';
-              selectedAnswer = null;
-              document.getElementById("textAnswer").value = '';
-              answerOptions.forEach(opt => opt.classList.remove('selected'));
-            })
-            .catch(err => {
-              console.error("Eroare la verificare:", err);
-              alert("A apărut o eroare la verificarea răspunsului.");
-            });
-  });
-
-  function showGameOverPopup(finalScore) {
-    const scoreElem = document.getElementById('finalScore');
-    const timerElem = document.getElementById('popupTimer');
-    const playAgainBtn = document.getElementById('playAgainBtn');
-    let timeLeft = 15;
-
-    scoreElem.textContent = finalScore;
-    popup.style.display = 'flex';
-
-    timerElem.textContent = timeLeft;
-    const interval = setInterval(() => {
-      timeLeft--;
-      timerElem.textContent = timeLeft;
-      if (timeLeft <= 0) {
-        clearInterval(interval);
-        window.location.href = "/home";
-      }
-    }, 1000);
-
-    playAgainBtn.onclick = () => {
-      clearInterval(interval);
-      window.location.href = "/game";
-    };
-  }
-</script>
+<script src="/front/GamePage/script.js"></script>
 </body>
 </html>

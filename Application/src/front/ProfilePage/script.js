@@ -1,19 +1,79 @@
 const token = localStorage.getItem("token");
-if(token==null){
-    document.getElementById("profile").style.display = "none";
-    document.getElementById("logout").style.display = "none";
-}
 
 document.addEventListener("DOMContentLoaded", () => {
-    const token = localStorage.getItem("token");
-
     if (!token) {
         window.location.href = "/front/NotAuthorizedPage/NotAuthorized.html";
         return;
     }
 
+    document.getElementById('logout-btn').addEventListener('click', function (event) {
+        event.preventDefault();
+        localStorage.removeItem('token');
+        window.location.href = '/home';
+    });
+
     fetchProfileData(token);
     fetchGameHistory(token);
+
+
+    const TRANSLATABLE_IDS = [
+        ["page-title", "profile_title"],
+        ["site-title", "title"],
+        ["rss-link", "rss"],
+        ["rank-link", "rank"],
+        ["about-link", "about"],
+        ["profile-link", "profile"],
+        ["logout-btn", "logout"],
+        ["edit-profile-btn", "edit_profile"],
+        ["change-hero-btn", "change_hero"],
+        ["profile-username-label", "username"],
+        ["user-rank-label", "user_rank"],
+        ["user-points-label", "user_points"],
+        ["game-history-title", "game_history"],
+        ["col-number", "number_sign"],
+        ["col-hero-name", "hero_name"],
+        ["col-difficulty", "difficulty"],
+        ["col-points", "points"],
+        ["select-hero-title", "select_hero"],
+        ["edit-profile-title", "edit_profile"],
+        ["change-username-label", "change_username"],
+        ["save-username-btn", "change_username"],
+        ["change-email-label", "change_email"],
+        ["save-email-btn", "change_email"],
+        ["change-password-label", "change_password"],
+        ["save-password-btn", "change_password"]
+    ];
+
+    let lang = localStorage.getItem("lang") || "en";
+    document.getElementById("lang-select").value = lang;
+
+    function applyTranslations() {
+        fetch(`/front/lang/${lang}.json`)
+            .then(res => res.json())
+            .then(messages => {
+                TRANSLATABLE_IDS.forEach(([elId, key]) => {
+                    const el = document.getElementById(elId);
+                    if (el && messages[key]) {
+                        if (el.tagName === "TITLE") {
+                            el.textContent = messages[key];
+                            document.title = messages[key];
+                        } else if (el.tagName === "INPUT") {
+                            el.placeholder = messages[key];
+                        } else {
+                            el.textContent = messages[key];
+                        }
+                    }
+                });
+            });
+    }
+
+    applyTranslations();
+
+    document.getElementById("lang-select").addEventListener("change", function () {
+        localStorage.setItem("lang", this.value);
+        location.reload();
+    });
+
 });
 
 function fetchProfileData(token) {
@@ -116,7 +176,6 @@ document.addEventListener("DOMContentLoaded", () => {
         <span class="hero-name">${hero.name}</span>
     `;
 
-                // Click pe un erou => trimite PUT către backend
                 heroDiv.addEventListener("click", async () => {
                     try {
                         const updateResponse = await fetch("http://localhost:8082/api/user/hero.php", {
@@ -133,13 +192,12 @@ document.addEventListener("DOMContentLoaded", () => {
                         const result = await updateResponse.json();
 
                         if (!updateResponse.ok) {
-                            alert("Eroare la schimbarea eroului: " + result.message);
+                            showCustomPopup("Eroare la schimbarea eroului: " + result.message);
                             return;
                         }
 
-                        alert("Erou actualizat cu succes: " + hero.name);
+                        showCustomPopup("Erou actualizat cu succes: " + hero.name);
 
-                        // Dacă ai un element cu eroul actual, îl actualizezi aici
                         const nameElem = document.getElementById("currentHeroName");
                         const imgElem = document.getElementById("currentHeroImg");
                         if (nameElem) nameElem.textContent = hero.name;
@@ -149,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         location.reload();
                     } catch (error) {
                         console.error("Eroare la update:", error);
-                        alert("A apărut o eroare la schimbarea eroului.");
+                        showCustomPopup("A aparut o eroare la schimbarea eroului.");
                     }
                 });
 
@@ -172,4 +230,208 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+document.getElementById('editProfileModal').classList.add('hidden');
+document.addEventListener('DOMContentLoaded', function () {
+
+    const editProfileBtn = document.querySelector('.profile-button');
+    const editProfileModal = document.getElementById('editProfileModal');
+    const closeEditProfileModal = document.getElementById('closeEditProfileModal');
+
+    editProfileBtn.addEventListener('click', function () {
+        editProfileModal.classList.remove('hidden');
+    });
+
+    closeEditProfileModal.addEventListener('click', function () {
+        editProfileModal.classList.add('hidden');
+    });
+});
+
+
+document.getElementById('save-username-btn').addEventListener('click', async function () {
+    const newUsername = document.getElementById('new-username').value.trim();
+    const password = document.getElementById('current-password-username').value;
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        showEditProfileMessage("Nu esti autentificat(a)!");
+        return;
+    }
+
+    if (!newUsername || !password) {
+        showEditProfileMessage("Completeaza noul username si parola curenta!");
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:8082/api/user/username.php', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({
+                newUsername: newUsername,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            showEditProfileMessage(data.message, response.ok);
+            document.getElementById('editProfileModal').classList.add('hidden');
+        } else {
+            showEditProfileMessage(data.message);
+        }
+    } catch (error) {
+        showEditProfileMessage(error.message);
+    }
+});
+
+document.getElementById('save-email-btn').addEventListener('click', async function () {
+    const newEmail = document.getElementById('new-email').value.trim();
+    const password = document.getElementById('current-password-email').value;
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        showEditProfileMessage("Nu esti autentificat(a)!");
+        return;
+    }
+
+    if (!newEmail || !password) {
+        showEditProfileMessage("Completeaza noul email si parola curenta!");
+        return;
+    }
+
+    if (!isValidEmail(newEmail)) {
+        showEditProfileMessage("Emailul nu este valid!");
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:8082/api/user/email.php', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({
+                newEmail: newEmail,
+                password: password
+            })
+        });
+
+        const data = await response.json();
+
+        showEditProfileMessage(data.message, response.ok);
+        if (response.ok) {
+            setTimeout(() => {
+                document.getElementById('editProfileModal').classList.add('hidden');
+            }, 2000);
+        }
+    } catch (error) {
+        showEditProfileMessage("Eroare la conectarea cu serverul!");
+    }
+});
+
+document.getElementById('save-password-btn').addEventListener('click', async function () {
+    const newPassword = document.getElementById('new-password').value;
+    const oldPassword = document.getElementById('current-password-password').value;
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        showEditProfileMessage("Nu esti autentificat(a)!");
+        return;
+    }
+
+    if (!newPassword || !oldPassword) {
+        showEditProfileMessage("Completeaza noua parola si parola curenta!");
+        return;
+    }
+
+    if (newPassword.length < 8) {
+        showEditProfileMessage("Parola noua trebuie sa aiba cel puțin 8 caractere!");
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:8082/api/user/password.php', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({
+                newPassword: newPassword,
+                oldPassword: oldPassword
+            })
+        });
+
+        const data = await response.json();
+
+        showEditProfileMessage(data.message, response.ok);
+        if (response.ok) {
+            setTimeout(() => {
+                document.getElementById('editProfileModal').classList.add('hidden');
+            }, 1200);
+        }
+    } catch (error) {
+        showEditProfileMessage("Eroare la conectarea cu serverul!");
+    }
+});
+
+function showEditProfileMessage(msg, isSuccess = false) {
+    const msgDiv = document.getElementById('edit-profile-message');
+    msgDiv.textContent = msg;
+    msgDiv.className = 'edit-profile-message' + (isSuccess ? ' success' : '');
+    msgDiv.style.display = 'block';
+    setTimeout(() => {
+        msgDiv.style.display = 'none';
+    }, 3500);
+}
+
+function isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+const menuOpenButton = document.querySelector("#menu-open-button");
+console.log("aici");
+menuOpenButton.addEventListener("click", () => {
+    document.body.classList.toggle("show-mobile-menu");
+})
+
+if (token == null) {
+    document.getElementById("profile").style.display = "none";
+    document.getElementById("logout").style.display = "none";
+}
+
+document.getElementById('logout-btn').addEventListener('click', function (event) {
+    event.preventDefault();
+    localStorage.removeItem('token');
+    window.location.href = '/home';
+});
+
+document.getElementById('logout-btn').addEventListener('click', function (event) {
+    event.preventDefault();
+    localStorage.removeItem('token');
+    window.location.href = '/home';
+});
+
+function showCustomPopup(message, duration = 3) {
+    const popup = document.getElementById('customPopup');
+    const msgElem = document.getElementById('customPopupMessage');
+    msgElem.textContent = message;
+    popup.style.display = 'flex';
+
+    document.getElementById('closePopupBtn').onclick = () => {
+        popup.style.display = 'none';
+    };
+    if (duration > 0) {
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, duration);
+    }
+}
 

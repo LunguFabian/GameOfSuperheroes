@@ -18,44 +18,52 @@ body {
     padding: 0;
     color: var(--navy-blue);
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     width: 100vw;
     overflow-x: hidden;
 }
 
 header {
     background: var(--dark-yellow);
-    color: var(--navy-blue);
-    padding: 20px 0 10px 0;
-    text-align: center;
-    font-size: 1.5em;
-    letter-spacing: 2px;
-    box-shadow: 0 4px 0 var(--yellow), 0 7px 0 var(--light-blue);
+    box-shadow: 0 4px 0 var(--yellow);
     position: relative;
     z-index: 2;
 }
 
 .navbar {
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
+    align-items: center;
+    max-width: 100%;
+    padding: 0 20px;
     position: relative;
+}
+
+.nav-logo {
+    text-decoration: none;
 }
 
 .logo-text {
     color:  var(--navy-blue);
-    font-size: 2.1em;
+    font-size: 2em;
     font-family: 'Bangers', cursive;
     letter-spacing: 2px;
     margin: 0;
     text-shadow: 2px 2px 0  var(--white), 4px 4px 0  var(--light-blue);
     background: var(--dark-yellow);
     display: inline-block;
-    border-radius: 8px;
     box-shadow: none;
-    padding: 0 10px 2px 10px;
+}
+
+#lang-select{
+    font-size: 15px;
+    font-family: 'Bangers', cursive;
+
+    margin-left: 10px;
+    border-radius: 18px;
+    height: 30px;
+    width: 40px;
 }
 
 #menu-close-button, #menu-open-button {
@@ -76,7 +84,6 @@ ul.nav-menu {
     gap: 18px;
     margin-left: auto;
     align-items: center;
-    padding-left: 0;
 }
 
 .nav-item {
@@ -89,15 +96,16 @@ ul.nav-menu {
     background: var(--yellow);
     color: var(--navy-blue);
     font-family: 'Bangers', cursive;
-    font-size: 1.08em;
+    font-size: 1.1em;
     letter-spacing: 1px;
-    padding: 10px 24px 8px 24px;
+    padding: 10px 28px 8px 28px;
     border: 2px solid var(--navy-blue);
-    border-radius: 16px;
+    border-radius: 18px;
     box-shadow: 2px 2px 0 var(--navy-blue), 4px 4px 0 var(--light-blue);
     transition: background 0.22s, color 0.22s, box-shadow 0.22s;
     text-shadow: 1px 1px 0 var(--white);
 }
+
 .nav-link:hover,
 .nav-link:focus {
     background: var(--dark-yellow);
@@ -106,16 +114,33 @@ ul.nav-menu {
     border-color: var(--navy-blue);
     outline: none;
 }
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.main-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 0;
+    padding: 0 0 24px 0;
+}
 
 .rank-container {
     max-width: 620px;
-    margin: 56px auto 0 auto;
+    width: 620px;
     background: var(--white);
     border-radius: 24px;
     box-shadow: 0 8px 0 var(--dark-yellow), 0 15px 0 var(--navy-blue);
     padding: 36px 24px 44px 24px;
     text-align: center;
     position: relative;
+    height: 500px;
     min-height: 400px;
 }
 
@@ -126,6 +151,16 @@ ul.nav-menu {
     text-shadow: 2px 2px 0 var(--white), 3px 3px 0 var(--light-blue);
     letter-spacing: 2px;
     margin-bottom: 28px;
+}
+
+#lang-select{
+    font-size: 15px;
+    font-family: 'Bangers', cursive;
+
+    margin-left: 10px;
+    border-radius: 18px;
+    height: 30px;
+    width: 40px;
 }
 
 .game-header {
@@ -145,7 +180,7 @@ ul.nav-menu {
 .col {
     flex: 1;
     text-align: center;
-    font-weight: bold;
+    font-weight: normal;
     letter-spacing: 1px;
 }
 
@@ -158,6 +193,7 @@ ul.nav-menu {
     padding: 0;
     margin: 0;
     width: 100%;
+    overflow-y: auto;
 }
 
 .list-players li {
@@ -189,9 +225,12 @@ ul.nav-menu {
 
 @media (max-width: 900px) {
     .rank-container {
-        max-width: 98vw;
-        padding: 24px 3vw 30px 3vw;
-        border-radius: 18px;
+        width: 70vw;
+        max-width: 50vw;
+        padding: 12px 3vw;
+        overflow: auto;
+        min-height: 60vh;
+        height: auto;
     }
     .title {
         font-size: 1.5em;
@@ -206,6 +245,52 @@ ul.nav-menu {
         padding: 8px 9px;
         border-radius: 8px;
     }
+
+    #menu-open-button {
+        display: block;
+    }
+
+    ul.nav-menu {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        gap: 20px;
+
+        top: 0;
+        margin-top: 0;
+        margin-left: 0;
+
+        left: -300px;
+        width: 200px;
+        height: 100dvh;
+        padding-top: 50px;
+
+        background: var(--dark-yellow);
+        box-shadow: 2px 0 12px 0 var(--navy-blue);
+
+        transition: left 0.35s;
+        z-index: 10;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .nav-link {
+        width: 90px;
+        font-size: 0.99em;
+        padding: 13px 0;
+        margin: 0;
+        border-radius: 50px;
+        text-align: center;
+    }
+
+    body.show-mobile-menu ul.nav-menu {
+        left: 0;
+    }
+
+    .nav-item {
+        list-style: none;
+    }
 }
 
 @media (max-width: 600px) {
@@ -213,56 +298,71 @@ ul.nav-menu {
         flex-direction: row;
         padding: 0 7px;
     }
+
     .logo-text {
         font-size: 1.08em;
         padding: 0 3px 2px 3px;
         border-radius: 4px;
     }
+    #menu-open-button {
+        display: block;
+    }
+
     ul.nav-menu {
+        box-sizing: border-box;
+        display: flex;
         flex-direction: column;
-        gap: 16px;
-        margin-left: 0;
-        position:fixed;
+        position: fixed;
+        gap: 20px;
+
         top: 0;
+        margin-top: 0;
+        margin-left: 0;
+
         left: -300px;
-        width: 180px;
-        height: 100vh;
+        width: 200px;
+        height: 100dvh;
+        padding-top: 50px;
+
         background: var(--dark-yellow);
         box-shadow: 2px 0 12px 0 var(--navy-blue);
-        padding-top: 70px;
+
         transition: left 0.35s;
         z-index: 10;
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
+
     body.show-mobile-menu ul.nav-menu {
         left: 0;
     }
-    #menu-open-button, #menu-close-button {
-        display: block;
+
+    .nav-item {
+        list-style: none;
     }
-    .nav-link {
-        width: 90px;
-        font-size: 0.99em;
-        padding: 13px 0;
-        margin: 0;
-        border-radius: 13px;
-    }
-    .rank-container {
-        max-width: 99vw;
-        padding: 13px 2vw 14px 2vw;
-        border-radius: 9px;
-        min-width: 0;
-    }
+
     .title {
-        font-size: 1.1em;
+        font-size: 1.2em;
     }
+
     .game-header {
-        font-size: 0.91em;
+        font-size: 1.2em;
         padding: 4px 2px;
         border-radius: 7px;
     }
+
+    .rank-container {
+        width: 70vw;
+        max-width: 70vw;
+        padding: 12px 3vw;
+        overflow: auto;
+        min-height: 60vh;
+        height: auto;
+        font-size: 1.2em;
+    }
+
     .list-players li {
-        font-size: 0.9em;
+        font-size: 1em;
         padding: 6px 4px;
         border-radius: 6px;
     }
