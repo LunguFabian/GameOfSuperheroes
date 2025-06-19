@@ -98,9 +98,6 @@ CREATE TABLE game_info
     FOREIGN KEY (question3_id) REFERENCES questions (id)
 );
 
-DELIMITER
-//
-
 CREATE TRIGGER after_game_insert
     AFTER INSERT
     ON games
@@ -144,10 +141,6 @@ BEGIN
     INSERT INTO game_info (game_id, scenario_id, question1_id, question2_id, question3_id)
     VALUES (NEW.id, scen_id, q1_id, q2_id, q3_id);
 END;
-//
-
-
-DELIMITER ;
 
 
 INSERT INTO heroes(name, image_url)
