@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 function fetchProfileData(token) {
-    fetch("http://localhost:8082/api/user/profile.php", {
+    fetch("/api/user/profile.php", {
         headers: {
             Authorization: "Bearer " + token
         }
@@ -101,7 +101,7 @@ function fetchProfileData(token) {
 }
 
 function fetchGameHistory(token) {
-    fetch("http://localhost:8082/api/user/game_history.php", {
+    fetch("/api/user/game_history.php", {
         headers: {
             Authorization: "Bearer " + token
         }
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
         heroList.innerHTML = "<p>Loading heroes...</p>";
 
         try {
-            const response = await fetch("http://localhost:8082/api/hero/all_heroes.php", {
+            const response = await fetch("/api/hero/all_heroes.php", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -178,7 +178,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 heroDiv.addEventListener("click", async () => {
                     try {
-                        const updateResponse = await fetch("http://localhost:8082/api/user/hero.php", {
+                        const updateResponse = await fetch("/api/user/hero.php", {
                             method: "PUT",
                             headers: {
                                 "Content-Type": "application/json",
@@ -264,7 +264,7 @@ document.getElementById('save-username-btn').addEventListener('click', async fun
     }
 
     try {
-        const response = await fetch('http://localhost:8082/api/user/username.php', {
+        const response = await fetch('/api/user/username.php', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -310,7 +310,7 @@ document.getElementById('save-email-btn').addEventListener('click', async functi
     }
 
     try {
-        const response = await fetch('http://localhost:8082/api/user/email.php', {
+        const response = await fetch('/api/user/email.php', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -356,7 +356,7 @@ document.getElementById('save-password-btn').addEventListener('click', async fun
     }
 
     try {
-        const response = await fetch('http://localhost:8082/api/user/password.php', {
+        const response = await fetch('/api/user/password.php', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

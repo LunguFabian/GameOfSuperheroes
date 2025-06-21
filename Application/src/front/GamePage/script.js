@@ -26,7 +26,7 @@ quizBox.style.display = 'none';
 window.onload = () => {
     applyTranslations();
 
-    fetch(`http://localhost:8082/api/game/game.php?id=${gameId}`, {
+    fetch(`/api/game/game.php?id=${gameId}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`
@@ -40,6 +40,7 @@ window.onload = () => {
             }
 
             storyParts = Object.values(data.scenario);
+            console.log(storyParts);
             questions = data.questions;
             typeStory(storyParts[currentPart]);
             configureDifficultyUI(data.difficulty);
@@ -80,6 +81,7 @@ function configureDifficultyUI(difficulty) {
 function typeStory(text) {
     let i = -1;
     textBox.textContent = ' ';
+    console.log(text);
     function typeChar() {
         if (i < text.length) {
             textBox.textContent += text.charAt(i);
@@ -110,7 +112,7 @@ continueBtn.addEventListener('click', () => {
             textBox.style.display = 'block';
             typeStory(storyParts[currentPart]);
         } else {
-            fetch(`http://localhost:8082/api/user/score_rank.php?id=${gameId}`, {
+            fetch(`/api/user/score_rank.php?id=${gameId}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -168,7 +170,7 @@ nextBtn.addEventListener('click', () => {
         return;
     }
 
-    fetch('http://localhost:8082/api/game/answer.php', {
+    fetch('/api/game/answer.php', {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`,

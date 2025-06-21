@@ -10,7 +10,7 @@ form.addEventListener('submit', async (event) => {
     }
 
     try{
-        const response = await fetch('http://4.210.231.174:8082/api/auth/login.php', {
+        const response = await fetch('/api/auth/login.php', {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',

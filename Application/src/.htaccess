@@ -1,3 +1,5 @@
+AddDefaultCharset UTF-8
+
 RewriteEngine On
 
 # Dacă există fișierul cerut direct (de exemplu api/auth/login.php), îl servim normal
@@ -29,7 +31,7 @@ RewriteRule ^game$ front/GamePage/GamePage.html [L]
 
 RewriteRule ^finish$ /front/FinishGamePage/FinishGamePage.html [L]
 
-RewriteRule ^admin$ /front/AdminPage/admin.html [L]
+RewriteRule ^admin$ /front/AdminPage/Admin.html [L]
 
 RewriteRule ^rank$ /front/RankPage/RankPage.html [L]
 
