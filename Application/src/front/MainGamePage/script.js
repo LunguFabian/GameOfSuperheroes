@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("token");
-    /*if (!token) {
+    if (!token) {
         window.location.href = '../NotAuthorizedPage/NotAuthorized.html'
         return;
-    }*/
+    }
 
     loadLangMessages(applyTranslations);
 

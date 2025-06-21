@@ -10,9 +10,9 @@ function parseJwt(token) {
 
 const token = localStorage.getItem('token');
 const payload = token ? parseJwt(token) : {};
-/*if (!token || !payload.is_admin) {
+if (!token || !payload.is_admin) {
     window.location.href = "/unauthorized";
-}*/
+}
 
 const USERS_API_URL = '/api/admin/users.php';
 const SCENARIOS_API_URL = '/api/admin/scenarios.php';

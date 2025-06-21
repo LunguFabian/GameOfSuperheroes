@@ -40,6 +40,7 @@ window.onload = () => {
             }
 
             storyParts = Object.values(data.scenario);
+            console.log(storyParts);
             questions = data.questions;
             typeStory(storyParts[currentPart]);
             configureDifficultyUI(data.difficulty);
