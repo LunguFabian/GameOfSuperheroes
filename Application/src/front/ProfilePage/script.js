@@ -1,10 +1,10 @@
 const token = localStorage.getItem("token");
 
 document.addEventListener("DOMContentLoaded", () => {
-    if (!token) {
+    /*if (!token) {
         window.location.href = "/front/NotAuthorizedPage/NotAuthorized.html";
         return;
-    }
+    }*/
 
     document.getElementById('logout-btn').addEventListener('click', function (event) {
         event.preventDefault();
