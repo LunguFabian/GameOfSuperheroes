@@ -22,7 +22,7 @@ form.addEventListener('submit', async (event) => {
     }
 
     try{
-        const response = await fetch('http://localhost:8082/api/auth/login.php', {
+        const response = await fetch('/api/auth/login.php', {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',

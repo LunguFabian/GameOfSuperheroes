@@ -84,37 +84,39 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-
         if (passwordInput.value !== confirmPasswordInput.value) {
             showCustomPopup('Parolele nu coincid');
             return;
         }
+            const userData = {
+                username: usernameInput.value,
+                email: emailInput.value,
+                password: passwordInput.value
+            };
 
-        const userData = {
-            username: usernameInput.value,
-            email: emailInput.value,
-            password: passwordInput.value
-        };
+            try {
+                const response = await fetch('/api/auth/register.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
 
-        try {
-            const response = await fetch('http://localhost:8082/api/auth/register.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(userData)
-            });
+                const result = await response.json();
 
-            const result = await response.json();
-
-            if (response.ok) {
-                showCustomPopup('User registered successfully!');
-                setTimeout(() => {
-                    window.location.href = '/login';
-                }, 1500);
-            } else {
-                showCustomPopup('Error: ' + (result.message || 'Registration failed.'));
-            }
+                if (response.ok) {
+                    showCustomPopup('User registered successfully!');
+                    setTimeout(() => {
+                        window.location.href = '/login';
+                    }, 1500);
+                } else {
+                    showCustomPopup('Error: ' + (result.message || 'Registration failed.'));
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showCustomPopup('An error occurred while registering.');
+           }
         } catch (error) {
             console.error('Error:', error);
             showCustomPopup('error 500');

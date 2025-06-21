@@ -45,7 +45,7 @@ function showCustomPopup(message, duration = 3) {
 
 
 function fetchProfileData(token) {
-    fetch("http://localhost:8082/api/user/profile.php", {
+    fetch("/api/user/profile.php", {
         headers: {
             Authorization: "Bearer " + token
         }
@@ -69,7 +69,7 @@ function fetchProfileData(token) {
 }
 
 function fetchGameHistory(token) {
-    fetch("http://localhost:8082/api/user/game_history.php", {
+    fetch("/api/user/game_history.php", {
         headers: {
             Authorization: "Bearer " + token
         }
@@ -178,9 +178,11 @@ document.addEventListener("DOMContentLoaded", () => {
         heroList.innerHTML = "<p>Loading heroes...</p>";
 
         try {
-            const response = await fetch("http://localhost:8082/api/hero/all_heroes.php", {
-                method: "GET", headers: {
-                    "Content-Type": "application/json", "Authorization": "Bearer " + localStorage.getItem("token")
+            const response = await fetch("/api/hero/all_heroes.php", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + localStorage.getItem("token")
                 }
             });
 
@@ -206,8 +208,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 heroDiv.addEventListener("click", async () => {
                     try {
-                        const updateResponse = await fetch("http://localhost:8082/api/user/hero.php", {
-                            method: "PUT", headers: {
+                        const updateResponse = await fetch("/api/user/hero.php", {
+                            method: "PUT",
+                            headers: {
                                 "Content-Type": "application/json",
                                 "Authorization": "Bearer " + localStorage.getItem("token")
                             }, body: JSON.stringify({
@@ -293,11 +296,15 @@ document.getElementById('save-username-btn').addEventListener('click', async fun
     }
 
     try {
-        const response = await fetch('http://localhost:8082/api/user/username.php', {
-            method: 'PUT', headers: {
-                'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token
-            }, body: JSON.stringify({
-                newUsername: newUsername, password: password
+        const response = await fetch('/api/user/username.php', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({
+                newUsername: newUsername,
+                password: password
             })
         });
 
@@ -335,11 +342,15 @@ document.getElementById('save-email-btn').addEventListener('click', async functi
     }
 
     try {
-        const response = await fetch('http://localhost:8082/api/user/email.php', {
-            method: 'PUT', headers: {
-                'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token
-            }, body: JSON.stringify({
-                newEmail: newEmail, password: password
+        const response = await fetch('/api/user/email.php', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({
+                newEmail: newEmail,
+                password: password
             })
         });
 
@@ -383,11 +394,15 @@ document.getElementById('save-password-btn').addEventListener('click', async fun
     }
 
     try {
-        const response = await fetch('http://localhost:8082/api/user/password.php', {
-            method: 'PUT', headers: {
-                'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token
-            }, body: JSON.stringify({
-                newPassword: newPassword, oldPassword: oldPassword
+        const response = await fetch('/api/user/password.php', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({
+                newPassword: newPassword,
+                oldPassword: oldPassword
             })
         });
 

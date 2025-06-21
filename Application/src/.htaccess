@@ -1,3 +1,5 @@
+AddDefaultCharset UTF-8
+
 RewriteEngine On
 
 RewriteCond %{REQUEST_FILENAME} -f [OR]
@@ -23,7 +25,7 @@ RewriteRule ^game$ front/GamePage/GamePage.html [L]
 
 RewriteRule ^finish$ /front/FinishGamePage/FinishGamePage.html [L]
 
-RewriteRule ^admin$ /front/AdminPage/admin.html [L]
+RewriteRule ^admin$ /front/AdminPage/Admin.html [L]
 
 RewriteRule ^rank$ /front/RankPage/RankPage.html [L]
 

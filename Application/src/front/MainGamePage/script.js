@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadLangMessages(applyTranslations);
 
     function sendGameRequest(difficulty) {
-        fetch("http://localhost:8082/api/game/start.php", {
+        fetch("/api/game/start.php", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
