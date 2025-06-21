@@ -26,7 +26,7 @@ quizBox.style.display = 'none';
 window.onload = () => {
     applyTranslations();
 
-    fetch(`http://localhost:8082/api/game/game.php?id=${gameId}`, {
+    fetch(`/api/game/game.php?id=${gameId}`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`

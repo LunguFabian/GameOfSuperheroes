@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     playerList.innerHTML = '<li>Loading...</li>';
 
     try {
-        const response = await fetch('http://localhost:8082/api/user/leaderboard.php', {
+        const response = await fetch('/api/user/leaderboard.php', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
