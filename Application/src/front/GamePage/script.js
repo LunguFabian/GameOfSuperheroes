@@ -80,6 +80,7 @@ function configureDifficultyUI(difficulty) {
 function typeStory(text) {
     let i = -1;
     textBox.textContent = ' ';
+    console.log(text);
     function typeChar() {
         if (i < text.length) {
             textBox.textContent += text.charAt(i);
