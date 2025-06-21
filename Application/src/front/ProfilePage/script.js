@@ -1,80 +1,48 @@
 const token = localStorage.getItem("token");
+const menuOpenButton = document.querySelector("#menu-open-button");
+const TRANSLATABLE_IDS = [["page-title", "profile_title"], ["site-title", "title"], ["rss-link", "rss"], ["rank-link", "rank"], ["about-link", "about"], ["profile-link", "profile"], ["logout-btn", "logout"], ["edit-profile-btn", "edit_profile"], ["change-hero-btn", "change_hero"], ["profile-username-label", "username"], ["user-rank-label", "user_rank"], ["user-points-label", "user_points"], ["game-history-title", "game_history"], ["col-number", "number_sign"], ["col-hero-name", "hero_name"], ["col-difficulty", "difficulty"], ["col-points", "points"], ["select-hero-title", "select_hero"], ["edit-profile-title", "edit_profile"], ["change-username-label", "change_username"], ["save-username-btn", "change_username"], ["change-email-label", "change_email"], ["save-email-btn", "change_email"], ["change-password-label", "change_password"], ["save-password-btn", "change_password"]];
+menuOpenButton.addEventListener("click", () => {
+    document.body.classList.toggle("show-mobile-menu");
+})
 
-document.addEventListener("DOMContentLoaded", () => {
-    if (!token) {
-        window.location.href = "/front/NotAuthorizedPage/NotAuthorized.html";
-        return;
+if (!token || isJwtExpired(token)) {
+    window.location.href = "/unauthorized";
+}
+
+function isJwtExpired(token) {
+    if (!token) return true;
+    const payload = parseJwt(token);
+    if (!payload.exp) return true;
+    const now = Math.floor(Date.now() / 1000);
+    return now > payload.exp;
+}
+
+function parseJwt(token) {
+    if (!token) return {};
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+}
+
+function showCustomPopup(message, duration = 3) {
+    const popup = document.getElementById('customPopup');
+    const msgElem = document.getElementById('customPopupMessage');
+    msgElem.textContent = message;
+    popup.style.display = 'flex';
+
+    document.getElementById('closePopupBtn').onclick = () => {
+        popup.style.display = 'none';
+    };
+    if (duration > 0) {
+        setTimeout(() => {
+            popup.style.display = 'none';
+        }, duration);
     }
+}
 
-    document.getElementById('logout-btn').addEventListener('click', function (event) {
-        event.preventDefault();
-        localStorage.removeItem('token');
-        window.location.href = '/home';
-    });
-
-    fetchProfileData(token);
-    fetchGameHistory(token);
-
-
-    const TRANSLATABLE_IDS = [
-        ["page-title", "profile_title"],
-        ["site-title", "title"],
-        ["rss-link", "rss"],
-        ["rank-link", "rank"],
-        ["about-link", "about"],
-        ["profile-link", "profile"],
-        ["logout-btn", "logout"],
-        ["edit-profile-btn", "edit_profile"],
-        ["change-hero-btn", "change_hero"],
-        ["profile-username-label", "username"],
-        ["user-rank-label", "user_rank"],
-        ["user-points-label", "user_points"],
-        ["game-history-title", "game_history"],
-        ["col-number", "number_sign"],
-        ["col-hero-name", "hero_name"],
-        ["col-difficulty", "difficulty"],
-        ["col-points", "points"],
-        ["select-hero-title", "select_hero"],
-        ["edit-profile-title", "edit_profile"],
-        ["change-username-label", "change_username"],
-        ["save-username-btn", "change_username"],
-        ["change-email-label", "change_email"],
-        ["save-email-btn", "change_email"],
-        ["change-password-label", "change_password"],
-        ["save-password-btn", "change_password"]
-    ];
-
-    let lang = localStorage.getItem("lang") || "en";
-    document.getElementById("lang-select").value = lang;
-
-    function applyTranslations() {
-        fetch(`/front/lang/${lang}.json`)
-            .then(res => res.json())
-            .then(messages => {
-                TRANSLATABLE_IDS.forEach(([elId, key]) => {
-                    const el = document.getElementById(elId);
-                    if (el && messages[key]) {
-                        if (el.tagName === "TITLE") {
-                            el.textContent = messages[key];
-                            document.title = messages[key];
-                        } else if (el.tagName === "INPUT") {
-                            el.placeholder = messages[key];
-                        } else {
-                            el.textContent = messages[key];
-                        }
-                    }
-                });
-            });
-    }
-
-    applyTranslations();
-
-    document.getElementById("lang-select").addEventListener("change", function () {
-        localStorage.setItem("lang", this.value);
-        location.reload();
-    });
-
-});
 
 function fetchProfileData(token) {
     fetch("/api/user/profile.php", {
@@ -137,6 +105,68 @@ function fetchGameHistory(token) {
         });
 }
 
+function showEditProfileMessage(msg, isSuccess = false) {
+    const msgDiv = document.getElementById('edit-profile-message');
+    msgDiv.textContent = msg;
+    msgDiv.className = 'edit-profile-message' + (isSuccess ? ' success' : '');
+    msgDiv.style.display = 'block';
+    setTimeout(() => {
+        msgDiv.style.display = 'none';
+    }, 3500);
+}
+
+function isValidEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    if (!token) {
+        window.location.href = "/front/NotAuthorizedPage/NotAuthorized.html";
+        return;
+    }
+
+    document.getElementById('logout-btn').addEventListener('click', function (event) {
+        event.preventDefault();
+        localStorage.removeItem('token');
+        window.location.href = '/home';
+    });
+
+    fetchProfileData(token);
+    fetchGameHistory(token);
+
+    let lang = localStorage.getItem("lang") || "en";
+    document.getElementById("lang-select").value = lang;
+
+    function applyTranslations() {
+        fetch(`/front/lang/${lang}.json`)
+            .then(res => res.json())
+            .then(messages => {
+                TRANSLATABLE_IDS.forEach(([elId, key]) => {
+                    const el = document.getElementById(elId);
+                    if (el && messages[key]) {
+                        if (el.tagName === "TITLE") {
+                            el.textContent = messages[key];
+                            document.title = messages[key];
+                        } else if (el.tagName === "INPUT") {
+                            el.placeholder = messages[key];
+                        } else {
+                            el.textContent = messages[key];
+                        }
+                    }
+                });
+            });
+    }
+
+    applyTranslations();
+
+    document.getElementById("lang-select").addEventListener("change", function () {
+        localStorage.setItem("lang", this.value);
+        location.reload();
+    });
+
+});
+
 document.addEventListener("DOMContentLoaded", () => {
     const changeHeroBtn = document.getElementById("change-hero-btn");
     const heroModal = document.getElementById("heroModal");
@@ -183,8 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             headers: {
                                 "Content-Type": "application/json",
                                 "Authorization": "Bearer " + localStorage.getItem("token")
-                            },
-                            body: JSON.stringify({
+                            }, body: JSON.stringify({
                                 heroId: hero.id
                             })
                         });
@@ -206,7 +235,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         heroModal.classList.add("hidden");
                         location.reload();
                     } catch (error) {
-                        console.error("Eroare la update:", error);
                         showCustomPopup("A aparut o eroare la schimbarea eroului.");
                     }
                 });
@@ -215,7 +243,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
         } catch (error) {
-            console.error("Error fetching heroes:", error);
             heroList.innerHTML = "<p style='color: red;'>Error loading heroes.</p>";
         }
     });
@@ -247,6 +274,11 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
+document.getElementById('logout-btn').addEventListener('click', function (event) {
+    event.preventDefault();
+    localStorage.removeItem('token');
+    window.location.href = '/home';
+});
 
 document.getElementById('save-username-btn').addEventListener('click', async function () {
     const newUsername = document.getElementById('new-username').value.trim();
@@ -331,7 +363,7 @@ document.getElementById('save-email-btn').addEventListener('click', async functi
             }, 2000);
         }
     } catch (error) {
-        showEditProfileMessage("Eroare la conectarea cu serverul!");
+        showEditProfileMessage("Error 500");
     }
 });
 
@@ -339,19 +371,25 @@ document.getElementById('save-password-btn').addEventListener('click', async fun
     const newPassword = document.getElementById('new-password').value;
     const oldPassword = document.getElementById('current-password-password').value;
     const token = localStorage.getItem('token');
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
 
     if (!token) {
-        showEditProfileMessage("Nu esti autentificat(a)!");
+        showEditProfileMessage("Nu esti autentificat");
         return;
     }
 
     if (!newPassword || !oldPassword) {
-        showEditProfileMessage("Completeaza noua parola si parola curenta!");
+        showEditProfileMessage("Completeaza noua parola si parola curenta");
         return;
     }
 
+    if (regex.test(newPassword)) {
+        showEditProfileMessage("Parola noua trebuie sa aibe litere mari, mici, cifre si caractere speciale");
+        return
+    }
+
     if (newPassword.length < 8) {
-        showEditProfileMessage("Parola noua trebuie sa aiba cel puțin 8 caractere!");
+        showEditProfileMessage("Parola noua trebuie sa aiba cel putin 8 caractere");
         return;
     }
 
@@ -377,61 +415,6 @@ document.getElementById('save-password-btn').addEventListener('click', async fun
             }, 1200);
         }
     } catch (error) {
-        showEditProfileMessage("Eroare la conectarea cu serverul!");
+        showEditProfileMessage("Eroare la conectarea cu serverul");
     }
 });
-
-function showEditProfileMessage(msg, isSuccess = false) {
-    const msgDiv = document.getElementById('edit-profile-message');
-    msgDiv.textContent = msg;
-    msgDiv.className = 'edit-profile-message' + (isSuccess ? ' success' : '');
-    msgDiv.style.display = 'block';
-    setTimeout(() => {
-        msgDiv.style.display = 'none';
-    }, 3500);
-}
-
-function isValidEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-const menuOpenButton = document.querySelector("#menu-open-button");
-console.log("aici");
-menuOpenButton.addEventListener("click", () => {
-    document.body.classList.toggle("show-mobile-menu");
-})
-
-if (token == null) {
-    document.getElementById("profile").style.display = "none";
-    document.getElementById("logout").style.display = "none";
-}
-
-document.getElementById('logout-btn').addEventListener('click', function (event) {
-    event.preventDefault();
-    localStorage.removeItem('token');
-    window.location.href = '/home';
-});
-
-document.getElementById('logout-btn').addEventListener('click', function (event) {
-    event.preventDefault();
-    localStorage.removeItem('token');
-    window.location.href = '/home';
-});
-
-function showCustomPopup(message, duration = 3) {
-    const popup = document.getElementById('customPopup');
-    const msgElem = document.getElementById('customPopupMessage');
-    msgElem.textContent = message;
-    popup.style.display = 'flex';
-
-    document.getElementById('closePopupBtn').onclick = () => {
-        popup.style.display = 'none';
-    };
-    if (duration > 0) {
-        setTimeout(() => {
-            popup.style.display = 'none';
-        }, duration);
-    }
-}
-

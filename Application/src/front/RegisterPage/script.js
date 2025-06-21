@@ -66,18 +66,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
 
         if (!usernameInput || !emailInput || !passwordInput || !confirmPasswordInput) {
-            console.error('One or more form fields are missing from the DOM!');
             return;
         }
 
+        console.log(regex.test(passwordInput.value) + " " + passwordInput.value);
+        if (!regex.test(passwordInput.value)) {
+            showCustomPopup("Parola trebuie sa aibe litere mari, mici, cifre si caractere speciale");
+            return
+        }
 
-            if (passwordInput.value !== confirmPasswordInput.value) {
-                showCustomPopup('Passwords do not match!');
-                return;
-            }
+        console.log(regex.test(passwordInput.value.length) + " " + passwordInput.value);
+        if (passwordInput.value.length < 8) {
+            showCustomPopup("Parola trebuie sa aiba cel putin 8 caractere");
+            return;
+        }
 
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            showCustomPopup('Parolele nu coincid');
+            return;
+        }
             const userData = {
                 username: usernameInput.value,
                 email: emailInput.value,
@@ -106,6 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 console.error('Error:', error);
                 showCustomPopup('An error occurred while registering.');
-            }
+           }
+        } catch (error) {
+            console.error('Error:', error);
+            showCustomPopup('error 500');
+        }
     });
 });

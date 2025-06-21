@@ -89,8 +89,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             `;
         });
     } catch (err) {
-        console.log(err.message);
-        playerList.innerHTML = '<li>Eroare la conectarea cu serverul!</li>';
+        playerList.innerHTML = '<li>Error 500</li>';
     }
 
     const menuOpenButton = document.querySelector("#menu-open-button");

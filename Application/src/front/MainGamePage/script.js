@@ -1,10 +1,37 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-        window.location.href = '../NotAuthorizedPage/NotAuthorized.html'
-        return;
-    }
+const elements = [
+    ["page-title", "difficulty_page_title"],
+    ["site-title", "site_title"],
+    ["difficulty-title", "difficulty_title"],
+    ["easy-title", "easy"],
+    ["medium-title", "medium"],
+    ["hard-title", "hard"],
+    ["easyButton", "play"],
+    ["normalButton", "play"],
+    ["hardButton", "play"]
+];
 
+const token = localStorage.getItem("token");
+if (!token || isJwtExpired(token)) {
+    window.location.href = "/unauthorized";
+}
+function isJwtExpired(token) {
+    if (!token) return true;
+    const payload = parseJwt(token);
+    if (!payload.exp) return true;
+    const now = Math.floor(Date.now() / 1000);
+    return now > payload.exp;
+}
+function parseJwt(token) {
+    if (!token) return {};
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+}
+
+document.addEventListener("DOMContentLoaded", () => {
     loadLangMessages(applyTranslations);
 
     function sendGameRequest(difficulty) {
@@ -28,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .catch(err => {
                 console.error("Eroare:", err);
-                showCustomPopup("A apărut o eroare la trimiterea cererii.");
+                showCustomPopup("A aparut o eroare la trimiterea cererii.");
             });
     }
     document.getElementById("easyButton").addEventListener("click", function(e) {
@@ -66,19 +93,7 @@ function loadLangMessages(cb) {
             if(cb) cb();
         });
 }
-
 function applyTranslations() {
-    const elements = [
-        ["page-title", "difficulty_page_title"],
-        ["site-title", "site_title"],
-        ["difficulty-title", "difficulty_title"],
-        ["easy-title", "easy"],
-        ["medium-title", "medium"],
-        ["hard-title", "hard"],
-        ["easyButton", "play"],
-        ["normalButton", "play"],
-        ["hardButton", "play"]
-    ];
 
     elements.forEach(([id, key]) => {
         const el = document.getElementById(id);

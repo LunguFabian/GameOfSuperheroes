@@ -24,6 +24,10 @@ body {
     overflow-x: hidden;
 }
 
+body::-webkit-scrollbar {
+    width: 2px;
+}
+
 header {
     background: var(--dark-yellow);
     box-shadow: 0 4px 0 var(--yellow);
@@ -161,6 +165,16 @@ ul.nav-menu {
     border-radius: 18px;
     height: 30px;
     width: 40px;
+}
+
+.list-players-container{
+    height:350px;
+    border-radius: 18px;
+    overflow-y: auto;
+}
+
+.list-players-container::-webkit-scrollbar{
+    width: 2px;
 }
 
 .game-header {
@@ -337,33 +351,4 @@ ul.nav-menu {
         left: 0;
     }
 
-    .nav-item {
-        list-style: none;
-    }
-
-    .title {
-        font-size: 1.2em;
-    }
-
-    .game-header {
-        font-size: 1.2em;
-        padding: 4px 2px;
-        border-radius: 7px;
-    }
-
-    .rank-container {
-        width: 70vw;
-        max-width: 70vw;
-        padding: 12px 3vw;
-        overflow: auto;
-        min-height: 60vh;
-        height: auto;
-        font-size: 1.2em;
-    }
-
-    .list-players li {
-        font-size: 1em;
-        padding: 6px 4px;
-        border-radius: 6px;
-    }
 }
