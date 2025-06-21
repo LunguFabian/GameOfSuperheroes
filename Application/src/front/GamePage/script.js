@@ -110,7 +110,7 @@ continueBtn.addEventListener('click', () => {
             textBox.style.display = 'block';
             typeStory(storyParts[currentPart]);
         } else {
-            fetch(`http://localhost:8082/api/user/score_rank.php?id=${gameId}`, {
+            fetch(`/api/user/score_rank.php?id=${gameId}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`
@@ -168,7 +168,7 @@ nextBtn.addEventListener('click', () => {
         return;
     }
 
-    fetch('http://localhost:8082/api/game/answer.php', {
+    fetch('/api/game/answer.php', {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${token}`,
