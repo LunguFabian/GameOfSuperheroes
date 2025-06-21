@@ -191,7 +191,7 @@ function setCharacterImages(villainSrc, heroSrc) {
 }
 
 window.onload = () => {
-    if (!token || isJwtExpired(token)) {
+    if (!token || isJwtExpired(token) || gameId==null) {
         window.location.href = "/unauthorized";
     }
     applyTranslations();
@@ -218,7 +218,6 @@ window.onload = () => {
         })
         .catch(err => {
             console.error("Eroare la fetch:", err);
-            showCustomPopup("Nu s-a putut incarca jocul.");
         });
 };
 

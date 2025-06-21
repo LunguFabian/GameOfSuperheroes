@@ -81,7 +81,7 @@ function fetchGameHistory(token) {
 
             if (data.message) {
                 const li = document.createElement("li");
-                li.textContent = "No games played yet.";
+                li.textContent = "No games played yet";
                 list.appendChild(li);
                 return;
             }
@@ -280,18 +280,19 @@ document.getElementById('logout-btn').addEventListener('click', function (event)
     window.location.href = '/home';
 });
 
+
 document.getElementById('save-username-btn').addEventListener('click', async function () {
     const newUsername = document.getElementById('new-username').value.trim();
     const password = document.getElementById('current-password-username').value;
     const token = localStorage.getItem('token');
 
     if (!token) {
-        showEditProfileMessage("Nu esti autentificat(a)!");
+        showEditProfileMessage("Nu esti autentificat");
         return;
     }
 
     if (!newUsername || !password) {
-        showEditProfileMessage("Completeaza noul username si parola curenta!");
+        showEditProfileMessage("Completeaza noul username si parola curenta");
         return;
     }
 
@@ -313,6 +314,7 @@ document.getElementById('save-username-btn').addEventListener('click', async fun
         if (response.ok) {
             showEditProfileMessage(data.message, response.ok);
             document.getElementById('editProfileModal').classList.add('hidden');
+            location.reload();
         } else {
             showEditProfileMessage(data.message);
         }
@@ -327,17 +329,17 @@ document.getElementById('save-email-btn').addEventListener('click', async functi
     const token = localStorage.getItem('token');
 
     if (!token) {
-        showEditProfileMessage("Nu esti autentificat(a)!");
+        showEditProfileMessage("Nu esti autentificat!");
         return;
     }
 
     if (!newEmail || !password) {
-        showEditProfileMessage("Completeaza noul email si parola curenta!");
+        showEditProfileMessage("Completeaza noul email si parola curenta");
         return;
     }
 
     if (!isValidEmail(newEmail)) {
-        showEditProfileMessage("Emailul nu este valid!");
+        showEditProfileMessage("Emailul nu este valid");
         return;
     }
 

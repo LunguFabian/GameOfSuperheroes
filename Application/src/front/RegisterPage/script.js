@@ -117,9 +117,5 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error:', error);
                 showCustomPopup('An error occurred while registering.');
            }
-        } catch (error) {
-            console.error('Error:', error);
-            showCustomPopup('error 500');
-        }
     });
 });

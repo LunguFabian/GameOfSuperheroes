@@ -50,7 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     const lang = params.get('lang') || 'en';
                     window.location.href = `../game?difficulty=${difficulty}&game_id=${body.game_id}&lang=${lang}`;
                 } else {
-                    showCustomPopup(body.message || "Eroare necunoscuta.");
+                    showCustomPopup(body.message || "Eroare necunoscuta.",5000);
+                    if(body.message === "Hero not selected. Please select a hero before starting a game."){
+                        setTimeout(function() {
+                            window.location.href = "/profile";
+                        }, 3000);
+                    }
                 }
             })
             .catch(err => {
@@ -60,19 +65,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     document.getElementById("easyButton").addEventListener("click", function(e) {
         e.preventDefault();
-        console.log("e");
         sendGameRequest("easy");
     });
 
     document.getElementById("normalButton").addEventListener("click", function(e) {
         e.preventDefault();
-        console.log("m");
         sendGameRequest("medium");
     });
 
     document.getElementById("hardButton").addEventListener("click", function(e) {
         e.preventDefault();
-        console.log("h");
         sendGameRequest("hard");
     });
 });

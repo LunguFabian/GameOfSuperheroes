@@ -11,7 +11,7 @@ include_once('../jwtUtil/decodeJWT.php');
 
 if($_SERVER['REQUEST_METHOD'] !='POST'){
     http_response_code(405);
-    echo json_encode(["message"=>"Method not allowed."]);
+    echo json_encode(["message"=>"Method not allowed"]);
     exit();
 }
 
@@ -56,7 +56,7 @@ if(!$user){
 
 if ($user['hero_id'] === null) {
     http_response_code(400);
-    echo json_encode(["message" => "Hero not selected. Please select a hero before starting a game."]);
+    echo json_encode(["message" => "Hero not selected Please select a hero before starting a game"]);
     exit();
 }
 
