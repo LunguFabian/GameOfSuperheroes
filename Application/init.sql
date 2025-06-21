@@ -385,3 +385,6 @@ VALUES ('What is the chemical formula for water?', 'H2O', NULL, NULL, NULL, 1, '
        ('What is the freezing point of water (°C)?', '0', NULL, NULL, NULL, 1, 'hard', 25, 'en'),
        ('Who is known as the "Father of Computers"?', 'Charles Babbage', NULL, NULL, NULL, 1, 'hard', 25, 'en'),
        ('Which scientist proposed the three laws of motion?', 'Isaac Newton', NULL, NULL, NULL, 1, 'hard', 25, 'en');
+
+INSERT INTO users(username, email, password, is_admin)
+    VALUES ('admin','admin@goh.com','$2a$12$DoEnFQ7gHFaDXbV0V8/5HeWApAjn5Pmw1wdnTXXjXpquzH9JU9ZsG',TRUE);
