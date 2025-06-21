@@ -66,46 +66,58 @@ document.addEventListener('DOMContentLoaded', () => {
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
+        const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
 
         if (!usernameInput || !emailInput || !passwordInput || !confirmPasswordInput) {
-            console.error('One or more form fields are missing from the DOM!');
+            return;
+        }
+
+        console.log(regex.test(passwordInput.value) + " " + passwordInput.value);
+        if (!regex.test(passwordInput.value)) {
+            showCustomPopup("Parola trebuie sa aibe litere mari, mici, cifre si caractere speciale");
+            return
+        }
+
+        console.log(regex.test(passwordInput.value.length) + " " + passwordInput.value);
+        if (passwordInput.value.length < 8) {
+            showCustomPopup("Parola trebuie sa aiba cel putin 8 caractere");
             return;
         }
 
 
-            if (passwordInput.value !== confirmPasswordInput.value) {
-                showCustomPopup('Passwords do not match!');
-                return;
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            showCustomPopup('Parolele nu coincid');
+            return;
+        }
+
+        const userData = {
+            username: usernameInput.value,
+            email: emailInput.value,
+            password: passwordInput.value
+        };
+
+        try {
+            const response = await fetch('http://localhost:8082/api/auth/register.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(userData)
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+                showCustomPopup('User registered successfully!');
+                setTimeout(() => {
+                    window.location.href = '/login';
+                }, 1500);
+            } else {
+                showCustomPopup('Error: ' + (result.message || 'Registration failed.'));
             }
-
-            const userData = {
-                username: usernameInput.value,
-                email: emailInput.value,
-                password: passwordInput.value
-            };
-
-            try {
-                const response = await fetch('http://4.210.231.174:8082/api/auth/register.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(userData)
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    showCustomPopup('User registered successfully!');
-                    setTimeout(() => {
-                        window.location.href = '/login';
-                    }, 1500);
-                } else {
-                    showCustomPopup('Error: ' + (result.message || 'Registration failed.'));
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showCustomPopup('An error occurred while registering.');
-            }
+        } catch (error) {
+            console.error('Error:', error);
+            showCustomPopup('error 500');
+        }
     });
 });

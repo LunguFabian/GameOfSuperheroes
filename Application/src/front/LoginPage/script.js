@@ -1,6 +1,18 @@
 const form = document.getElementById('loginForm');
 const usernameInput = document.getElementById('username-input');
 const passwordInput = document.getElementById('password-input');
+
+let lang = localStorage.getItem("lang") || "en";
+
+const TRANSLATABLE_IDS = [
+    ["page-title", "login_form_title"],
+    ["login-title", "login"],
+    ["username-input", "username"],
+    ["password-input", "password"],
+    ["login-btn", "login"],
+    ["not-registered-text", "not_registered"],
+    ["create-account-link", "create_account"]
+];
 form.addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -10,7 +22,7 @@ form.addEventListener('submit', async (event) => {
     }
 
     try{
-        const response = await fetch('http://4.210.231.174:8082/api/auth/login.php', {
+        const response = await fetch('http://localhost:8082/api/auth/login.php', {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json',
@@ -34,19 +46,12 @@ form.addEventListener('submit', async (event) => {
     }
 })
 
-const TRANSLATABLE_IDS = [
-    ["page-title", "login_form_title"],
-    ["login-title", "login"],
-    ["username-input", "username"],
-    ["password-input", "password"],
-    ["login-btn", "login"],
-    ["not-registered-text", "not_registered"],
-    ["create-account-link", "create_account"]
-];
+document.getElementById("lang-select").addEventListener("change", function() {
+    localStorage.setItem("lang", this.value);
+    location.reload();
+});
 
-let lang = localStorage.getItem("lang") || "en";
 document.getElementById("lang-select").value = lang;
-
 function applyTranslations() {
     fetch(`/front/lang/${lang}.json`)
         .then(res => res.json())
@@ -70,11 +75,6 @@ function applyTranslations() {
 }
 
 applyTranslations();
-
-document.getElementById("lang-select").addEventListener("change", function() {
-    localStorage.setItem("lang", this.value);
-    location.reload();
-});
 
 function showCustomPopup(message, duration = 5000) {
     const popup = document.getElementById('customPopup');

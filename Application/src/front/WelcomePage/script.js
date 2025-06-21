@@ -1,13 +1,3 @@
-function parseJwt(token) {
-    if (!token) return {};
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
-    return JSON.parse(jsonPayload);
-}
-
 const menuOpenButton = document.querySelector("#menu-open-button");
 const token = localStorage.getItem("token");
 const payload = token ? parseJwt(token) : {};
@@ -27,13 +17,21 @@ const TRANSLATABLE_IDS = [
     ["play-btn", "play"]
 ];
 
-menuOpenButton.addEventListener("click", () => {
-    document.body.classList.toggle("show-mobile-menu");
-});
-
 if (!token) {
     document.getElementById("profile").style.display = "none";
     document.getElementById("logout").style.display = "none";
+}
+
+if (token && isJwtExpired(token)) {
+    localStorage.removeItem('token');
+    window.location.href = '/home'
+}
+function isJwtExpired(token) {
+    if (!token) return true;
+    const payload = parseJwt(token);
+    if (!payload.exp) return true;
+    const now = Math.floor(Date.now() / 1000);
+    return now > payload.exp;
 }
 
 if (payload.is_admin) {
@@ -44,6 +42,34 @@ if (payload.is_admin) {
         window.location.href = '/admin';
     };
     document.getElementById('admin-btn-container').appendChild(btn);
+}
+
+function parseJwt(token) {
+    if (!token) return {};
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(jsonPayload);
+}
+
+function applyTranslations() {
+    fetch(`front/lang/${lang}.json`)
+        .then(res => res.json())
+        .then(messages => {
+            TRANSLATABLE_IDS.forEach(([elId, key]) => {
+                const el = document.getElementById(elId);
+                if (el && messages[key]) {
+                    if (el.tagName === "TITLE") {
+                        el.textContent = messages[key];
+                        document.title = messages[key];
+                    } else {
+                        el.textContent = messages[key];
+                    }
+                }
+            });
+        });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -66,11 +92,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const langSelect = document.getElementById('lang-select');
     document.getElementById("lang-select").value = lang;
 
-    playBtn?.addEventListener('click', function(e) {
-        e.preventDefault();
+    playBtn?.addEventListener('click', function(event) {
+        event.preventDefault();
         const lang = langSelect.value || 'en';
         window.location.href = `/difficulty?lang=${lang}`;
     });
+});
+
+menuOpenButton.addEventListener("click", () => {
+    document.body.classList.toggle("show-mobile-menu");
 });
 
 document.getElementById('logout-btn').addEventListener('click', function (event) {
@@ -78,24 +108,6 @@ document.getElementById('logout-btn').addEventListener('click', function (event)
     localStorage.removeItem('token');
     window.location.href = '/home';
 });
-
-function applyTranslations() {
-    fetch(`front/lang/${lang}.json`)
-        .then(res => res.json())
-        .then(messages => {
-            TRANSLATABLE_IDS.forEach(([elId, key]) => {
-                const el = document.getElementById(elId);
-                if (el && messages[key]) {
-                    if (el.tagName === "TITLE") {
-                        el.textContent = messages[key];
-                        document.title = messages[key];
-                    } else {
-                        el.textContent = messages[key];
-                    }
-                }
-            });
-        });
-}
 
 document.getElementById("lang-select").addEventListener("change", function() {
     localStorage.setItem("lang", this.value);

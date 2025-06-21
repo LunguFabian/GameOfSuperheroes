@@ -1,3 +1,15 @@
+const token = localStorage.getItem('token');
+const USERS_API_URL = '/api/admin/users.php';
+const SCENARIOS_API_URL = '/api/admin/scenarios.php';
+const QUESTIONS_API_URL = '/api/admin/questions.php';
+
+let lang = localStorage.getItem("lang") || "ro";
+let langMessages = {};
+
+const payload = token ? parseJwt(token) : {};
+if (!token || !payload.is_admin) {
+    window.location.href = "/unauthorized";
+}
 function parseJwt(token) {
     if (!token) return {};
     const base64Url = token.split('.')[1];
@@ -7,19 +19,6 @@ function parseJwt(token) {
     }).join(''));
     return JSON.parse(jsonPayload);
 }
-
-const token = localStorage.getItem('token');
-const payload = token ? parseJwt(token) : {};
-if (!token || !payload.is_admin) {
-    window.location.href = "/unauthorized";
-}
-
-const USERS_API_URL = '/api/admin/users.php';
-const SCENARIOS_API_URL = '/api/admin/scenarios.php';
-const QUESTIONS_API_URL = '/api/admin/questions.php';
-
-let lang = localStorage.getItem("lang") || "ro";
-let langMessages = {};
 
 function loadLangMessages() {
     return fetch(`/front/lang/${lang}.json`)
@@ -53,9 +52,9 @@ function fetchUsers() {
                 <td>${user.email}</td>
                 <td>${user.score}</td>
                 <td>${user.userRank}</td>
-                <td>${user.is_admin == 1 || user.is_admin === "1" ? t('yes') : t('no')}</td>
+                <td>${user.is_admin === 1 || user.is_admin === "1" ? t('yes') : t('no')}</td>
                 <td>
-                    <button class="action-btn promote-btn" ${user.is_admin == 1 || user.is_admin === "1" ? 'disabled' : ''} data-id="${user.id}">${t('make_admin')}</button>
+                    <button class="action-btn promote-btn" ${user.is_admin === 1 || user.is_admin === "1" ? 'disabled' : ''} data-id="${user.id}">${t('make_admin')}</button>
                     <button class="action-btn delete-btn" data-id="${user.id}">${t('delete')}</button>
                 </td>
             `;
