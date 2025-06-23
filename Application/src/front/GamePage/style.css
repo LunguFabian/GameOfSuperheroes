@@ -81,23 +81,19 @@ header nav a:hover {
  }
 
 .character-image {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background: var(--grey);
+    width: 200px;
+    height: 240px;
     overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 10px rgba(24, 39, 72, 0.17), 0 3px 0 var(--navy-blue);
-    border: 3px solid var(--navy-blue);
+
     transition: box-shadow 0.19s;
 }
 .character-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
 }
 
 .vs-text {
