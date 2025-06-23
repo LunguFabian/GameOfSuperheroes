@@ -27,7 +27,7 @@ services:
     image: nginx:alpine
     ports:
       - "8443:443"
-      - "8082:80"
+      - "8083:80"
     depends_on:
       - php-apache
     volumes:
