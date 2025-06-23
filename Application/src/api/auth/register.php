@@ -8,7 +8,7 @@ include_once('../../includes/db.php');
 
 if($_SERVER["REQUEST_METHOD"] != "POST"){
     http_response_code(405);
-    echo json_encode(["message"=>"Method not allowed."]);
+    echo json_encode(["message"=>"method_not_allowed"]);
     exit();
 }
 
@@ -16,7 +16,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 
 if (!isset($data['username'], $data['email'], $data['password'])) {
     http_response_code(400);
-    echo json_encode(["message" => "Missing required fields."]);
+    echo json_encode(["message" => "missing_fields"]);
     exit();
 }
 
@@ -26,7 +26,7 @@ $password = trim($data['password']);
 
 if (empty($username) || empty($email) || empty($password)) {
     http_response_code(400);
-    echo json_encode(["message" => "All fields are required."]);
+    echo json_encode(["message" => "all_fields_required"]);
     exit();
 }
 
@@ -37,7 +37,7 @@ $username_check->store_result();
 
 if ($username_check->num_rows > 0) {
     http_response_code(409);
-    echo json_encode(["message" => "Username already exists."]);
+    echo json_encode(["message" => "user_exist"]);
     exit();
 }
 
@@ -48,7 +48,7 @@ $email_check->store_result();
 
 if ($email_check->num_rows > 0) {
     http_response_code(409);
-    echo json_encode(["message" => "Email already exists."]);
+    echo json_encode(["message" => "email_exist"]);
     exit();
 }
 
@@ -59,10 +59,10 @@ $insert->bind_param("sss", $username, $email, $hashedPassword);
 
 if ($insert->execute()) {
     http_response_code(201);
-    echo json_encode(["message" => "User registered successfully."]);
+    echo json_encode(["message" => "register_succes"]);
 } else {
     http_response_code(500);
-    echo json_encode(["message" => "Failed to register user."]);
+    echo json_encode(["message" => "register_fail"]);
 }
 
 $username_check->close();

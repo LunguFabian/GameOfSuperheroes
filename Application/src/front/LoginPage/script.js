@@ -11,6 +11,7 @@ const form = document.getElementById('loginForm');
 const usernameInput = document.getElementById('username-input');
 const passwordInput = document.getElementById('password-input');
 let lang = localStorage.getItem("lang") || "en";
+let transMessages = {};
 
 applyTranslations();
 
@@ -31,6 +32,7 @@ function applyTranslations() {
     fetch(`/front/lang/${lang}.json`)
         .then(res => res.json())
         .then(messages => {
+            transMessages=messages;
             TRANSLATABLE_IDS.forEach(([elId, key]) => {
                 const el = document.getElementById(elId);
                 if (el && messages[key]) {
@@ -47,6 +49,10 @@ function applyTranslations() {
                 }
             });
         });
+}
+
+function t(key) {
+    return transMessages[key] || key;
 }
 
 form.addEventListener('submit', async (event) => {
@@ -74,14 +80,13 @@ form.addEventListener('submit', async (event) => {
 
         }else
         {
-            showCustomPopup(result.message||'Login failed');
+            showCustomPopup(t("error") + " " + t(result.message)||t("error") + " " + t("login_failed"));
         }
     }catch(err){
         console.log('Error:',err);
-        showCustomPopup('An error occurred while logging in');
+        showCustomPopup(t("error") + " " + 500);
     }
 })
-
 
 document.getElementById("lang-select").addEventListener("change", function() {
     localStorage.setItem("lang", this.value);

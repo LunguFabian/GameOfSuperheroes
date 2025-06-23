@@ -11,7 +11,7 @@ include_once('../jwtUtil/decodeJWT.php');
 
 if($_SERVER["REQUEST_METHOD"] != "PUT"){
     http_response_code(405);
-    echo json_encode(["message"=>"Method not allowed."]);
+    echo json_encode(["message"=>"method_not_allowed"]);
     exit();
 }
 
@@ -20,7 +20,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 $headers=getallheaders();
 if(!isset($headers['Authorization'])){
     http_response_code(401);
-    echo json_encode(["message"=>"Unauthorized Access!"]);
+    echo json_encode(["message"=>"unauthorized_access"]);
     exit();
 }
 
@@ -28,7 +28,7 @@ $token=str_replace('Bearer ', '', $headers['Authorization']);
 
 if(!validateJWT($token)){
     http_response_code(401);
-    echo json_encode(["message"=>"Invalid or expired token!"]);
+    echo json_encode(["message"=>"invalid_token"]);
     exit();
 }
 
@@ -37,7 +37,7 @@ $user_id = $payload['id']??null;
 
 if(!$user_id){
     http_response_code(400);
-    echo json_encode(["message"=>"Invalid token payload"]);
+    echo json_encode(["message"=>"invalid_token_payload"]);
     exit();
 }
 
@@ -58,13 +58,13 @@ $user = $result->fetch_assoc();
 
 if(!$user){
     http_response_code(400);
-    echo json_encode(["message"=>"User not found!"]);
+    echo json_encode(["message"=>"user_not_found"]);
     exit();
 }
 
 if (!password_verify($oldPassword, $user['password'])) {
     http_response_code(403);
-    echo json_encode(["message" => "Incorrect password"]);
+    echo json_encode(["message" => "incorrect_password"]);
     exit();
 }
 
@@ -73,10 +73,10 @@ $hashedNewPassword = password_hash($newPassword, PASSWORD_BCRYPT);
 $updateStmt = $conn->prepare("UPDATE users SET password = ? WHERE id = ?");
 $updateStmt->bind_param("si", $hashedNewPassword, $user_id);
 if ($updateStmt->execute()) {
-    echo json_encode(["message" => "Password updated successfully"]);
+    echo json_encode(["message" => "password_updated"]);
 } else {
     http_response_code(500);
-    echo json_encode(["message" => "Failed to update username"]);
+    echo json_encode(["message" => "password_update_failed"]);
 }
 
 $stmt->close();

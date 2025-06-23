@@ -12,7 +12,7 @@ include_once('../jwtUtil/decodeJWT.php');
 $headers = getallheaders();
 if (!isset($headers['Authorization'])) {
     http_response_code(401);
-    echo json_encode(["message" => "Unauthorized"]);
+    echo json_encode(["message" => "unauthorized"]);
     exit();
 }
 
@@ -20,7 +20,7 @@ $token = str_replace('Bearer ', '', $headers['Authorization']);
 
 if (!validateJWT($token)) {
     http_response_code(401);
-    echo json_encode(["message" => "Invalid or expired token!"]);
+    echo json_encode(["message" => "invalid_token"]);
     exit();
 }
 
@@ -28,7 +28,7 @@ $payload = decodeJWT($token);
 
 if (empty($payload['is_admin']) || !$payload['is_admin']) {
     http_response_code(403);
-    echo json_encode(["message" => "Admin access required"]);
+    echo json_encode(["message" => "admin_required"]);
     exit();
 }
 
@@ -71,4 +71,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'DELETE') {
 }
 
 http_response_code(405);
-echo json_encode(["message" => "Method not allowed"]);
+echo json_encode(["message" => "method_not_allowed"]);

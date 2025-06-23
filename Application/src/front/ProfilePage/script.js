@@ -1,8 +1,32 @@
 const token = localStorage.getItem("token");
 const menuOpenButton = document.querySelector("#menu-open-button");
-const TRANSLATABLE_IDS = [["page-title", "profile_title"], ["site-title", "title"], ["rss-link", "rss"], ["rank-link", "rank"], ["about-link", "about"], ["profile-link", "profile"], ["logout-btn", "logout"], ["edit-profile-btn", "edit_profile"], ["change-hero-btn", "change_hero"], ["profile-username-label", "username"], ["user-rank-label", "user_rank"], ["user-points-label", "user_points"], ["game-history-title", "game_history"], ["col-number", "number_sign"], ["col-hero-name", "hero_name"], ["col-difficulty", "difficulty"], ["col-points", "points"], ["select-hero-title", "select_hero"], ["edit-profile-title", "edit_profile"], ["change-username-label", "change_username"], ["save-username-btn", "change_username"], ["change-email-label", "change_email"], ["save-email-btn", "change_email"], ["change-password-label", "change_password"],
+const TRANSLATABLE_IDS = [["page-title", "profile_title"],
+    ["site-title", "title"],
+    ["rss-link", "rss"],
+    ["rank-link", "rank"],
+    ["about-link", "about"],
+    ["profile-link", "profile"],
+    ["logout-btn", "logout"],
+    ["edit-profile-btn", "edit_profile"],
+    ["change-hero-btn", "change_hero"],
+    ["profile-username-label", "username"],
+    ["user-rank-label", "user_rank"],
+    ["user-points-label", "user_points"],
+    ["game-history-title", "game_history"],
+    ["col-number", "number_sign"],
+    ["col-hero-name", "hero_name"],
+    ["col-difficulty", "difficulty"],
+    ["col-points", "points"],
+    ["select-hero-title", "select_hero"],
+    ["edit-profile-title", "edit_profile"],
+    ["change-username-label", "change_username"],
+    ["save-username-btn", "change_username"],
+    ["change-email-label", "change_email"],
+    ["save-email-btn", "change_email"],
+    ["change-password-label", "change_password"],
     ["save-password-btn", "change_password"]];
 let lang = localStorage.getItem("lang") || "en";
+let transMessages = {};
 
 document.getElementById("lang-select").value = lang;
 applyTranslations();
@@ -33,6 +57,7 @@ function applyTranslations() {
     fetch(`/front/lang/${lang}.json`)
         .then(res => res.json())
         .then(messages => {
+            transMessages=messages;
             TRANSLATABLE_IDS.forEach(([elId, key]) => {
                 const el = document.getElementById(elId);
                 if (el && messages[key]) {
@@ -47,6 +72,10 @@ function applyTranslations() {
                 }
             });
         });
+}
+
+function t(key) {
+    return transMessages[key] || key;
 }
 
 function showCustomPopup(message, duration = 5000) {
@@ -201,11 +230,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         const result = await updateResponse.json();
 
                         if (!updateResponse.ok) {
-                            showCustomPopup("Eroare la schimbarea eroului: " + result.message);
+                            showCustomPopup(t("error_change_hero") + result.message);
                             return;
                         }
 
-                        showCustomPopup("Erou actualizat cu succes: " + hero.name);
+                        showCustomPopup(t("success_change_hero") + hero.name);
 
                         const nameElem = document.getElementById("currentHeroName");
                         const imgElem = document.getElementById("currentHeroImg");
@@ -215,7 +244,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         heroModal.classList.add("hidden");
                         location.reload();
                     } catch (error) {
-                        showCustomPopup("A aparut o eroare la schimbarea eroului.");
+                        showCustomPopup(t("server_error_change_hero"));
                     }
                 });
                 heroList.appendChild(heroDiv);
@@ -268,13 +297,8 @@ document.getElementById('save-username-btn').addEventListener('click', async fun
     const password = document.getElementById('current-password-username').value;
     const token = localStorage.getItem('token');
 
-    if (!token) {
-        showEditProfileMessage("Nu esti autentificat");
-        return;
-    }
-
     if (!newUsername || !password) {
-        showEditProfileMessage("Completeaza noul username si parola curenta");
+        showEditProfileMessage(t("fill_username_password"));
         return;
     }
 
@@ -301,7 +325,7 @@ document.getElementById('save-username-btn').addEventListener('click', async fun
             showEditProfileMessage(data.message);
         }
     } catch (error) {
-        showEditProfileMessage(error.message);
+        showEditProfileMessage(t(error.message));
     }
 });
 
@@ -310,18 +334,13 @@ document.getElementById('save-email-btn').addEventListener('click', async functi
     const password = document.getElementById('current-password-email').value;
     const token = localStorage.getItem('token');
 
-    if (!token) {
-        showEditProfileMessage("Nu esti autentificat!");
-        return;
-    }
-
     if (!newEmail || !password) {
-        showEditProfileMessage("Completeaza noul email si parola curenta");
+        showEditProfileMessage(t("fill_email_password"));
         return;
     }
 
     if (!isValidEmail(newEmail)) {
-        showEditProfileMessage("Emailul nu este valid");
+        showEditProfileMessage(t("fill_email_password"));
         return;
     }
 
@@ -347,7 +366,7 @@ document.getElementById('save-email-btn').addEventListener('click', async functi
             }, 2000);
         }
     } catch (error) {
-        showEditProfileMessage("Error 500");
+        showEditProfileMessage(t(error.message));
     }
 });
 
@@ -357,23 +376,18 @@ document.getElementById('save-password-btn').addEventListener('click', async fun
     const token = localStorage.getItem('token');
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).+$/;
 
-    if (!token) {
-        showEditProfileMessage("Nu esti autentificat");
-        return;
-    }
-
     if (!newPassword || !oldPassword) {
-        showEditProfileMessage("Completeaza noua parola si parola curenta");
+        showEditProfileMessage(t("fill_passwords"));
         return;
     }
 
     if (regex.test(newPassword)) {
-        showEditProfileMessage("Parola noua trebuie sa aibe litere mari, mici, cifre si caractere speciale");
+        showEditProfileMessage(t("password_invalid_pattern"));
         return
     }
 
     if (newPassword.length < 8) {
-        showEditProfileMessage("Parola noua trebuie sa aiba cel putin 8 caractere");
+        showEditProfileMessage(t("password_too_short"));
         return;
     }
 
@@ -399,7 +413,7 @@ document.getElementById('save-password-btn').addEventListener('click', async fun
             }, 1200);
         }
     } catch (error) {
-        showEditProfileMessage("Eroare la conectarea cu serverul");
+        showEditProfileMessage(t(error.message));
     }
 });
 

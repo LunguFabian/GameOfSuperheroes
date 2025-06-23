@@ -36,6 +36,7 @@ let currentQuestionIndex = 0;
 let questions = [];
 let selectedAnswer = null;
 let lang = getLangFromUrl();
+let transMessages = {};
 
 popup.style.display = 'none';
 quizBox.style.display = 'none';
@@ -80,6 +81,7 @@ function applyTranslations() {
     fetch(`/front/lang/${lang}.json`)
         .then(res => res.json())
         .then(messages => {
+            transMessages=messages;
             TRANSLATABLE_IDS.forEach(([elId, key]) => {
                 const el = document.getElementById(elId);
                 if (el && messages[key]) {
@@ -94,6 +96,10 @@ function applyTranslations() {
                 }
             });
         });
+}
+
+function t(key) {
+    return transMessages[key] || key;
 }
 
 function showCustomPopup(message, duration = 3) {
@@ -136,7 +142,7 @@ function configureDifficultyUI(difficulty) {
     fetch(`/front/lang/${lang}.json`)
         .then(res => res.json())
         .then(messages => {
-            document.getElementById("difficultyDisplay").textContent = "Dificultate: " + messages[difficulty];
+            document.getElementById("difficultyDisplay").textContent = t("difficulty") + ": " + messages[difficulty];
         });
 
     if (difficulty === "easy") {
@@ -213,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.json())
         .then(data => {
             if (!data || !data.scenario || !data.questions) {
-                showCustomPopup("Eroare");
+                showCustomPopup(t("error"));
                 return;
             }
 
@@ -225,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
             difficultyGame = data.difficulty;
         })
         .catch(err => {
-            console.error("Eroare la fetch:", err);
+            console.error(t("error_500"), err);
         });
 });
 
@@ -260,7 +266,7 @@ continueBtn.addEventListener('click', () => {
                     showGameOverPopup(score);
                 })
                 .catch(err => {
-                    showCustomPopup("A aparut o eroare la actualizarea scorului.");
+                    showCustomPopup(t("answer_check_error"));
                 });
         }
     }
@@ -277,7 +283,7 @@ nextBtn.addEventListener('click', () => {
     }
 
     if (!answer) {
-        showCustomPopup("Selecteaza sau introdu un raspuns");
+        showCustomPopup(t("select_or_type_answer"));
         return;
     }
 
@@ -296,9 +302,9 @@ nextBtn.addEventListener('click', () => {
         .then(res => res.json())
         .then(data => {
             if (data.is_correct) {
-                showCustomPopup("Corect! Scor curent: " + data.score, 5000);
+                showCustomPopup("correct_answer_with_score " + data.score, 5000);
             } else {
-                showCustomPopup("Gresit!");
+                showCustomPopup(t("wrong_answer"));
             }
 
             currentPart++;
@@ -316,6 +322,6 @@ nextBtn.addEventListener('click', () => {
             answerOptions.forEach(opt => opt.classList.remove('selected'));
         })
         .catch(err => {
-            showCustomPopup("A aparut o eroare la verificarea raspunsului.");
+            showCustomPopup(t("score_update_error"));
         });
 });

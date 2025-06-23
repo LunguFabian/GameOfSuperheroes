@@ -48,7 +48,7 @@ body {
 }
 
 .wrapper {
-    background: var(--blue);
+    background: var(--white);
     border: 4px solid var(--light-blue);
     border-radius: 28px;
     box-shadow: 0 8px 0 var(--dark-yellow), 0 15px 0 var(--navy-blue);
@@ -71,11 +71,10 @@ form {
 
 h1 {
     font-size: 2.3em;
-    color: var(--white);
     margin-bottom: 28px;
     font-family: 'Bangers', cursive;
     letter-spacing: 2px;
-    text-shadow: 2px 2px 0 var(--navy-blue), 3px 3px 0 var(--light-blue);
+    text-shadow: 2px 2px 0 var(--white), 3px 3px 0 var(--light-blue);
 }
 
 .input-box {
@@ -130,7 +129,7 @@ h1 {
 .btn {
     width: 100%;
     padding: 13px 0;
-    background: var(--light-blue);
+    background: var(--blue);
     color: var(--white);
     border: 2px solid var(--navy-blue);
     border-radius: 21px;
@@ -147,7 +146,7 @@ h1 {
 }
 
 .btn:hover, .btn:focus {
-    background: var(--navy-blue);
+    background: var(--light-blue);
     color: var(--white);
     border-color: var(--light-blue);
     box-shadow: 2px 2px 0 var(--white), 4px 4px 0 var(--light-blue);
@@ -155,7 +154,6 @@ h1 {
 
 .register-link {
     font-size: 1.07em;
-    color: var(--white);
     font-family: 'Bangers', cursive;
     text-align: center;
 }
