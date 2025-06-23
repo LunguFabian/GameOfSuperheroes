@@ -116,8 +116,10 @@
   "next": "Next",
   "game_over": "Game Over!",
   "your_score": "Your score: ",
-  "redirect_in": "You will be redirected in <span id=\"popupTimer\">15</span> seconds",
+  "redirect_in": "You will be redirected in",
+  "seconds": "seconds",
   "play_again": "Play Again",
+  "final": "Final",
   "fill_username_password": "Please enter the new username and your current password",
   "fill_email_password": "Please enter the new email and your current password",
   "invalid_email": "The email is not valid",
@@ -169,5 +171,5 @@
   "options_required_medium": "All 4 options and correct_option are required for medium questions",
   "question_added": "Question added!",
   "question_id_required": "Question id required",
-  "question_deleted": "Question deleted!",
+  "question_deleted": "Question deleted!"
 }

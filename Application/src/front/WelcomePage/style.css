@@ -165,7 +165,7 @@ main {
     color: var(--white);
     font-family: 'Bangers', cursive;
     margin-bottom: 0.25em;
-    text-shadow: 5px 5px 0 var(--navy-blue), 5px 5px 0 var(--light-blue);
+    text-shadow: 5px 5px 0 var(--navy-blue);
     letter-spacing: 5px;
 }
 
@@ -283,11 +283,12 @@ main {
         flex-direction: row;
         padding: 0 4px;
     }
-
+    .nav-logo {
+        text-decoration: none;
+    }
     .logo-text {
         font-size: 1.07em;
         padding: 0 3px 2px 3px;
-        box-shadow: 0 2px 0 var(--navy-blue);
         color: var(--navy-blue);
         font-family: 'Bangers', cursive;
         letter-spacing: 2px;
@@ -297,6 +298,7 @@ main {
         display: inline-block;
         border-radius: 4px;
         border:none;
+        text-decoration: none;
     }
     ul.nav-menu {
         flex-direction: column;
