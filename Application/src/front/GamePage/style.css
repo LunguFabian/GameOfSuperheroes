@@ -71,6 +71,49 @@ header nav a:hover {
     outline: none;
 }
 
+ .hero-villain-box {
+     width: 100%;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: 32px;
+     margin-bottom: 30px;
+ }
+
+.character-image {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: var(--grey);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(24, 39, 72, 0.17), 0 3px 0 var(--navy-blue);
+    border: 3px solid var(--navy-blue);
+    transition: box-shadow 0.19s;
+}
+.character-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.vs-text {
+    font-size: 2.2em;
+    font-family: 'Bangers', cursive;
+    font-weight: bold;
+    color: var(--navy-blue);
+    background: var(--yellow);
+    border-radius: 50%;
+    padding: 0.3em 0.7em;
+    box-shadow: 2px 2px 0 var(--navy-blue);
+    letter-spacing: 1.5px;
+    outline: 2px solid var(--light-blue);
+    outline-offset: 2px;
+}
+
 .container {
     width: 480px;
     margin: 50px auto 0 auto;

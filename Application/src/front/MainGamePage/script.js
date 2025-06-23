@@ -73,10 +73,10 @@ function applyTranslations() {
             transMessages=messages;
             TRANSLATABLE_IDS.forEach(([id, key]) => {
                 const el = document.getElementById(id);
-                if (id === "page-title" && langMessages[key]) {
-                    document.title = langMessages[key];
-                } else if (el && langMessages[key]) {
-                    el.textContent = langMessages[key];
+                if (id === "page-title" && messages[key]) {
+                    document.title = messages[key];
+                } else if (el && messages[key]) {
+                    el.textContent = messages[key];
                 }
             });
         });

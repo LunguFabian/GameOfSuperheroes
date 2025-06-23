@@ -1,17 +1,17 @@
 const TRANSLATABLE_IDS = [
-    ["page-title", "game_page_title"],
+    ["page-title", "game_title"],
     ["game-title", "subtitle"],
     ["continueBtn", "continue"],
     ["question-label", "question"],
-    ["option-1", "answer_1"],
-    ["option-2", "answer_2"],
-    ["option-3", "answer_3"],
-    ["option-4", "answer_4"],
-    ["textAnswer", "input_placeholder"],
+    ["option-1", "answer1"],
+    ["option-2", "answer2"],
+    ["option-3", "answer3"],
+    ["option-4", "answer4"],
+    ["textAnswer", "answer_placeholder"],
     ["nextBtn", "next"],
     ["gameover-title", "game_over"],
     ["score-label", "your_score"],
-    ["redirect-label", "redirect"],
+    ["redirect-label", "redirect_in"],
     ["seconds-label", "seconds"],
     ["playAgainBtn", "play_again"]
 ];
@@ -84,6 +84,8 @@ function applyTranslations() {
             transMessages=messages;
             TRANSLATABLE_IDS.forEach(([elId, key]) => {
                 const el = document.getElementById(elId);
+                console.log("[BEFORE]" + elId + " " + key);
+                console.log(el + " " + messages[key]);
                 if (el && messages[key]) {
                     if (el.tagName === "TITLE" || elId === "page-title") {
                         el.textContent = messages[key];
@@ -93,6 +95,7 @@ function applyTranslations() {
                     } else {
                         el.textContent = messages[key];
                     }
+                    console.log(elId + " " + key);
                 }
             });
         });
@@ -102,7 +105,7 @@ function t(key) {
     return transMessages[key] || key;
 }
 
-function showCustomPopup(message, duration = 3) {
+function showCustomPopup(message, duration = 5000) {
     const popup = document.getElementById('customPopup');
     const msgElem = document.getElementById('customPopupMessage');
     msgElem.textContent = message;
@@ -178,7 +181,7 @@ function typeStory(text) {
 function populateQuiz(index) {
     const question = questions[index];
     const questionParagraph = document.querySelector('#quiz p');
-    questionParagraph.innerHTML = `<strong>Intrebare ${index + 1}:</strong> ${question.text}`;
+    questionParagraph.innerHTML = `<strong>${t("question")} ${index + 1}:</strong> ${question.text}`;
 
     if (question.options) {
         const options = question.options;
@@ -189,16 +192,11 @@ function populateQuiz(index) {
     }
 }
 
-function setCharacterImages(villainSrc, heroSrc) {
-    const villainDiv = document.getElementById('villain-image');
-    const heroDiv = document.getElementById('hero-image');
-
-    villainDiv.innerHTML = villainSrc
-        ? `<img src="${villainSrc}" alt="Villain" />`
-        : '';
-    heroDiv.innerHTML = heroSrc
-        ? `<img src="${heroSrc}" alt="Hero" />`
-        : '';
+function setCharacterImages(villainImgUrl, heroImgUrl) {
+    const heroImage = document.getElementById('heroImage');
+    const villainImage = document.getElementById('villainImage');
+    heroImage.src = heroImgUrl;
+    villainImage.src = villainImgUrl;
 }
 
 answerOptions.forEach(option => {
@@ -246,7 +244,7 @@ continueBtn.addEventListener('click', () => {
         currentPart++;
 
         if (currentPart === 3) {
-            continueBtn.textContent = "Finish";
+            continueBtn.textContent = t("final");
         }
 
         if (currentPart < storyParts.length) {
@@ -266,7 +264,7 @@ continueBtn.addEventListener('click', () => {
                     showGameOverPopup(score);
                 })
                 .catch(err => {
-                    showCustomPopup(t("answer_check_error"));
+                    showCustomPopup(t(err.message));
                 });
         }
     }
@@ -322,6 +320,6 @@ nextBtn.addEventListener('click', () => {
             answerOptions.forEach(opt => opt.classList.remove('selected'));
         })
         .catch(err => {
-            showCustomPopup(t("score_update_error"));
+            showCustomPopup(t(err.message));
         });
 });
