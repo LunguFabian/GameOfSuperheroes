@@ -57,5 +57,3 @@ document.getElementById('logout-btn').addEventListener('click', function (event)
 menuOpenButton.addEventListener("click", () => {
     document.body.classList.toggle("show-mobile-menu");
 })
-
-menuCloseButton.addEventListener("click", () => menuOpenButton.click());
