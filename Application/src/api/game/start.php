@@ -11,7 +11,7 @@ include_once('../jwtUtil/decodeJWT.php');
 
 if($_SERVER['REQUEST_METHOD'] !='POST'){
     http_response_code(405);
-    echo json_encode(["message"=>"Method not allowed"]);
+    echo json_encode(["message"=>"method_not_allowed"]);
     exit();
 }
 
@@ -20,7 +20,7 @@ $data = json_decode(file_get_contents("php://input"),true);
 $headers=getallheaders();
 if(!isset($headers['Authorization'])){
     http_response_code(401);
-    echo json_encode(["message"=>"Unauthorized access!"]);
+    echo json_encode(["message"=>"unauthorized_access"]);
     exit();
 }
 
@@ -28,7 +28,7 @@ $token =str_replace("Bearer ","",$headers['Authorization']);
 
 if(!validateJWT($token)){
     http_response_code(401);
-    echo json_encode(["message"=>"Invalid or expired token!"]);
+    echo json_encode(["message"=>"invalid_token"]);
     exit();
 }
 
@@ -37,7 +37,7 @@ $user_id = $payload['id']??null;
 
 if(!$user_id){
     http_response_code(401);
-    echo json_encode(["message"=>"Invalid token payload"]);
+    echo json_encode(["message"=>"invalid_token_payload"]);
     exit();
 }
 
@@ -50,13 +50,13 @@ $stmt->close();
 
 if(!$user){
     http_response_code(404);
-    echo json_encode(["message"=>"User not found!"]);
+    echo json_encode(["message"=>"user_not_found"]);
     exit();
 }
 
 if ($user['hero_id'] === null) {
     http_response_code(400);
-    echo json_encode(["message" => "Hero not selected Please select a hero before starting a game"]);
+    echo json_encode(["message" => "hero_not_selected"]);
     exit();
 }
 
@@ -65,7 +65,7 @@ $language = $data['language']??'ro';
 
 if(!in_array($difficulty, ['easy', 'medium', 'hard'])){
     http_response_code(400);
-    echo json_encode(["message"=>"Invalid difficulty."]);
+    echo json_encode(["message"=>"Invalid difficulty"]);
     exit();
 }
 
@@ -77,7 +77,7 @@ $stmt->close();
 
 echo json_encode([
     "game_id" => $game_id,
-    "message" => "Game created successfully!"
+    "message" => "Game created successfully"
 ]);
 
 $conn->close();

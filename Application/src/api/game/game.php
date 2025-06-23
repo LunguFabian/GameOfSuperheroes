@@ -11,14 +11,14 @@ include_once('../jwtUtil/decodeJWT.php');
 
 if ($_SERVER['REQUEST_METHOD'] != 'GET') {
     http_response_code(405);
-    echo json_encode(["message" => "Method not allowed."]);
+    echo json_encode(["message" => "method_not_allowed"]);
     exit();
 }
 
 $headers = getallheaders();
 if (!isset($headers['Authorization'])) {
     http_response_code(401);
-    echo json_encode(["message" => "Unauthorized access!"]);
+    echo json_encode(["message" => "unauthorized_access"]);
     exit();
 }
 
@@ -26,7 +26,7 @@ $token = str_replace("Bearer ", "", $headers['Authorization']);
 
 if (!validateJWT($token)) {
     http_response_code(401);
-    echo json_encode(["message" => "Invalid or expired token!"]);
+    echo json_encode(["message" => "invalid_token"]);
     exit();
 }
 
@@ -36,13 +36,13 @@ $game_id = $_GET['id'] ?? null;
 
 if (!$user_id) {
     http_response_code(401);
-    echo json_encode(["message" => "Invalid token payload"]);
+    echo json_encode(["message" => "invalid_token_payload"]);
     exit();
 }
 
 if (!$game_id) {
     http_response_code(400);
-    echo json_encode(["message" => "Missing game ID!"]);
+    echo json_encode(["message" => "missing_game_id"]);
     exit();
 }
 
@@ -58,13 +58,13 @@ $stmt->close();
 
 if (!$game) {
     http_response_code(404);
-    echo json_encode(["message" => "Game not found!"]);
+    echo json_encode(["message" => "game_not_found!"]);
     exit();
 }
 
 if ($game['score'] != -1) {
     http_response_code(403);
-    echo json_encode(["message" => "Game has already been started!"]);
+    echo json_encode(["message" => "game_started"]);
     exit();
 }
 

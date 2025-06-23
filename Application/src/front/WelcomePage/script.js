@@ -19,9 +19,11 @@ const lang = localStorage.getItem("lang") || "en";
 const langSelect = document.getElementById('lang-select');
 document.getElementById("lang-select").value = lang;
 
+let transMessages = {};
+
 applyTranslations();
 
-if (!token) {
+if(!token) {
     document.getElementById("profile").style.display = "none";
     document.getElementById("logout").style.display = "none";
 }
@@ -62,6 +64,7 @@ function applyTranslations() {
     fetch(`front/lang/${lang}.json`)
         .then(res => res.json())
         .then(messages => {
+            transMessages=messages;
             TRANSLATABLE_IDS.forEach(([elId, key]) => {
                 const el = document.getElementById(elId);
                 if (el && messages[key]) {

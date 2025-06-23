@@ -1,13 +1,3 @@
-const form = document.getElementById('registerForm');
-const usernameInput = document.getElementById('username-input');
-const emailInput = document.getElementById('email-input');
-const passwordInput = document.getElementById('password-input');
-const confirmPasswordInput = document.getElementById('confirm-password-input');
-const langSelect = document.getElementById("lang-select");
-
-let lang = localStorage.getItem("lang") || "en";
-langSelect.value = lang;
-
 const TRANSLATABLE_IDS = [
     ["page-title", "title-register"],
     ["register-title", "register"],
@@ -19,12 +9,26 @@ const TRANSLATABLE_IDS = [
     ["already-account-text", "already_account"],
     ["login-link", "login"]
 ];
+const form = document.getElementById('registerForm');
+const usernameInput = document.getElementById('username-input');
+const emailInput = document.getElementById('email-input');
+const passwordInput = document.getElementById('password-input');
+const confirmPasswordInput = document.getElementById('confirm-password-input');
+const langSelect = document.getElementById("lang-select");
+
+let lang = localStorage.getItem("lang") || "en";
+let transMessages = {};
+langSelect.value = lang;
+
 applyTranslations();
+
+console.log(transMessages["user_registered_success"]);
 
 function applyTranslations() {
     fetch(`/front/lang/${lang}.json`)
         .then(res => res.json())
         .then(messages => {
+            transMessages=messages;
             TRANSLATABLE_IDS.forEach(([elId, key]) => {
                 const el = document.getElementById(elId);
                 if (el && messages[key]) {
@@ -41,6 +45,10 @@ function applyTranslations() {
                 }
             });
         });
+}
+
+function t(key) {
+    return transMessages[key] || key;
 }
 
 function showCustomPopup(message, duration = 3000) {
@@ -67,20 +75,20 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        console.log(regex.test(passwordInput.value) + " " + passwordInput.value);
-        if (!regex.test(passwordInput.value)) {
-            showCustomPopup("Parola trebuie sa aibe litere mari, mici, cifre si caractere speciale");
-            return
-        }
-
         console.log(regex.test(passwordInput.value.length) + " " + passwordInput.value);
         if (passwordInput.value.length < 8) {
-            showCustomPopup("Parola trebuie sa aiba cel putin 8 caractere");
+            showCustomPopup(t("error_password_min8char"));
             return;
         }
 
+        console.log(regex.test(passwordInput.value) + " " + passwordInput.value);
+        if (!regex.test(passwordInput.value)) {
+            showCustomPopup(t("error_password_8char"));
+            return
+        }
+
         if (passwordInput.value !== confirmPasswordInput.value) {
-            showCustomPopup('Parolele nu coincid');
+            showCustomPopup(t("error_mismatch_passwords"));
             return;
         }
             const userData = {
@@ -101,16 +109,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 const result = await response.json();
 
                 if (response.ok) {
-                    showCustomPopup('User registered successfully!');
+                    showCustomPopup(t("user_registered_success"));
                     setTimeout(() => {
                         window.location.href = '/login';
                     }, 1500);
                 } else {
-                    showCustomPopup('Error: ' + (result.message || 'Registration failed.'));
+                    showCustomPopup(t("error") + " " + t(result.message));
                 }
             } catch (error) {
-                console.error('Error:', error);
-                showCustomPopup('An error occurred while registering.');
+                showCustomPopup(t("error") + " " + 500);
            }
     });
 });

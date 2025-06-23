@@ -11,14 +11,14 @@ include_once("../jwtUtil/validateJWT.php");
 
 if($_SERVER["REQUEST_METHOD"] != "GET"){
     http_response_code(405);
-    echo json_encode(["message"=>"Method not allowed."]);
+    echo json_encode(["message"=>"method_not_allowed"]);
     exit();
 }
 
 $headers=getallheaders();
 if(!isset($headers['Authorization'])){
     http_response_code(401);
-    echo json_encode(["message"=>"Unauthorized Access!"]);
+    echo json_encode(["message"=>"unauthorized_access"]);
     exit();
 }
 
@@ -26,7 +26,7 @@ $token = str_replace('Bearer ', '', $headers['Authorization']);
 
 if(!validateJWT($token)){
     http_response_code(401);
-    echo json_encode(["message"=>"Invalid or expired token!"]);
+    echo json_encode(["message"=>"invalid_token"]);
     exit();
 }
 
@@ -35,7 +35,7 @@ $user_id = $payload['id']??null;
 
 if(!$user_id){
     http_response_code(400);
-    echo json_encode(["message"=>"Invalid token payload"]);
+    echo json_encode(["message"=>"invalid_token_payload"]);
     exit();
 }
 
@@ -47,7 +47,7 @@ $user = $result->fetch_assoc();
 
 if(!$user){
     http_response_code(404);
-    echo json_encode(["message"=>"User not found!"]);
+    echo json_encode(["message"=>"user_not_found"]);
     exit();
 }
 

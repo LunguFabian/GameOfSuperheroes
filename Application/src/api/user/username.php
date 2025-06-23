@@ -11,7 +11,7 @@ include_once('../jwtUtil/decodeJWT.php');
 
 if($_SERVER["REQUEST_METHOD"] != "PUT"){
     http_response_code(405);
-    echo json_encode(["message"=>"Method not allowed."]);
+    echo json_encode(["message"=>"method_not_allowed"]);
     exit();
 }
 
@@ -20,7 +20,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 $headers=getallheaders();
 if(!isset($headers['Authorization'])){
     http_response_code(401);
-    echo json_encode(["message"=>"Unauthorized Access!"]);
+    echo json_encode(["message"=>"unauthorized_access"]);
     exit();
 }
 
@@ -28,7 +28,7 @@ $token=str_replace('Bearer ', '', $headers['Authorization']);
 
 if(!validateJWT($token)){
     http_response_code(401);
-    echo json_encode(["message"=>"Invalid or expired token!"]);
+    echo json_encode(["message"=>"invalid_token"]);
     exit();
 }
 
@@ -37,7 +37,7 @@ $user_id = $payload['id']??null;
 
 if(!$user_id){
     http_response_code(400);
-    echo json_encode(["message"=>"Invalid token payload"]);
+    echo json_encode(["message"=>"invalid_token_payload"]);
     exit();
 }
 
@@ -46,7 +46,7 @@ $password = trim($data['password'] ?? '');
 
 if (empty($newUsername) || empty($password)) {
     http_response_code(400);
-    echo json_encode(["message" => "Both new username and password are required"]);
+    echo json_encode(["message" => "passwords_required"]);
     exit();
 }
 
@@ -58,13 +58,13 @@ $user = $result->fetch_assoc();
 
 if(!$user){
     http_response_code(400);
-    echo json_encode(["message"=>"User not found!"]);
+    echo json_encode(["message"=>"user_not_found"]);
     exit();
 }
 
 if (!password_verify($password, $user['password'])) {
     http_response_code(403);
-    echo json_encode(["message" => "Incorrect password"]);
+    echo json_encode(["message" => "incorrect_password"]);
     exit();
 }
 
@@ -75,17 +75,17 @@ $checkResult = $checkStmt->get_result();
 
 if ($checkResult->num_rows > 0) {
     http_response_code(409);
-    echo json_encode(["message" => "Username already taken"]);
+    echo json_encode(["message" => "username_taken"]);
     exit();
 }
 
 $updateStmt = $conn->prepare("UPDATE users SET username = ? WHERE id = ?");
 $updateStmt->bind_param("si", $newUsername, $user_id);
 if ($updateStmt->execute()) {
-    echo json_encode(["message" => "Username updated successfully"]);
+    echo json_encode(["message" => "username_update_success"]);
 } else {
     http_response_code(500);
-    echo json_encode(["message" => "Failed to update username"]);
+    echo json_encode(["message" => "username_update_failed"]);
 }
 
 $stmt->close();

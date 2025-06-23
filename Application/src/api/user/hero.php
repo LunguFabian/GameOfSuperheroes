@@ -11,7 +11,7 @@ include_once('../jwtUtil/decodeJWT.php');
 
 if($_SERVER["REQUEST_METHOD"] != "PUT"){
     http_response_code(405);
-    echo json_encode(["message"=>"Method not allowed"]);
+    echo json_encode(["message"=>"method_not_allowed"]);
     exit();
 }
 
@@ -20,7 +20,7 @@ $data = json_decode(file_get_contents("php://input"), true);
 $headers=getallheaders();
 if(!isset($headers['Authorization'])){
     http_response_code(401);
-    echo json_encode(["message"=>"Unauthorized Access!"]);
+    echo json_encode(["message"=>"unauthorized_access"]);
     exit();
 }
 
@@ -28,7 +28,7 @@ $token=str_replace('Bearer ', '', $headers['Authorization']);
 
 if(!validateJWT($token)){
     http_response_code(401);
-    echo json_encode(["message"=>"Invalid or expired token!"]);
+    echo json_encode(["message"=>"invalid_token"]);
     exit();
 }
 
@@ -37,7 +37,7 @@ $user_id = $payload['id']??null;
 
 if(!$user_id){
     http_response_code(400);
-    echo json_encode(["message"=>"Invalid token payload"]);
+    echo json_encode(["message"=>"invalid_token_payload"]);
     exit();
 }
 
@@ -49,10 +49,10 @@ if(!$new_hero_id){
 $stmt=$conn->prepare("UPDATE users SET hero_id=? WHERE id=?");
 $stmt->bind_param("ii", $new_hero_id, $user_id);
 if($stmt->execute()){
-    echo json_encode(["message"=>"Hero successfully updated!"]);
+    echo json_encode(["message"=>"hero_update_success"]);
 }else{
     http_response_code(500);
-    echo json_encode(["message"=>"Failed to update hero!"]);
+    echo json_encode(["message"=>"hero_update_failed"]);
 }
 
 $stmt->close();

@@ -9,7 +9,7 @@ include_once("../jwtUtil/createJWT.php");
 
 if($_SERVER["REQUEST_METHOD"] != "POST"){
     http_response_code(405);
-    echo json_encode(["message"=>"Method not allowed."]);
+    echo json_encode(["message"=>"method_not_allowed"]);
     exit();
 }
 
@@ -17,7 +17,7 @@ $data = json_decode(file_get_contents("php://input"),true);
 
 if (!isset($data['username'],$data['password'])) {
     http_response_code(400);
-    echo json_encode(["message" => "Missing required fields."]);
+    echo json_encode(["message" => "missing_fields"]);
     exit();
 }
 
@@ -26,7 +26,7 @@ $password=trim($data['password']);
 
 if (empty($username)|| empty($password)) {
     http_response_code(400);
-    echo json_encode(["message" => "All fields are required."]);
+    echo json_encode(["message" => "all_fields_required"]);
     exit();
 }
 
@@ -37,7 +37,7 @@ $result = $stmt->get_result();
 
 if ($result->num_rows === 0) {
     http_response_code(401);
-    echo json_encode(["message" => "Invalid username."]);
+    echo json_encode(["message" => "invalid_username"]);
     exit();
 }
 
@@ -45,7 +45,7 @@ $user=$result->fetch_assoc();
 
 if(!password_verify($password, $user['password'])) {
     http_response_code(401);
-    echo json_encode(["message" => "Invalid password."]);
+    echo json_encode(["message" => "invalid_password"]);
     exit();
 }
 

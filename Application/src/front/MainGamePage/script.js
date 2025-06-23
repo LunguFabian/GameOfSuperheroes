@@ -11,7 +11,7 @@ const TRANSLATABLE_IDS = [
 ];
 const token = localStorage.getItem("token");
 const lang = getLangFromUrl();
-let langMessages = {};
+let transMessages = {};
 
 if (!token || isJwtExpired(token)) {
     window.location.href = "/unauthorized";
@@ -52,8 +52,8 @@ function sendGameRequest(difficulty) {
             if (status === 200) {
                 window.location.href = `/game?difficulty=${difficulty}&game_id=${body.game_id}&lang=${lang}`;
             } else {
-                showCustomPopup(body.valueOf() + "#" + "Eroare necunoscuta.",5000);
-                if(body.message === "Hero not selected. Please select a hero before starting a game."){
+                showCustomPopup(t(body.message),5000);
+                if(body.message === "hero_not_selected"){
                     setTimeout(function() {
                         window.location.href = "/profile";
                     }, 3000);
@@ -62,15 +62,15 @@ function sendGameRequest(difficulty) {
         })
         .catch(err => {
             console.error("Eroare:", err);
-            showCustomPopup("A aparut o eroare la trimiterea cererii.",5000);
+            showCustomPopup(t("error_500"),5000);
         });
 }
 
 function applyTranslations() {
     fetch(`/front/lang/${lang}.json`)
         .then(res => res.json())
-        .then(msgs => {
-            langMessages = msgs;
+        .then(messages => {
+            transMessages=messages;
             TRANSLATABLE_IDS.forEach(([id, key]) => {
                 const el = document.getElementById(id);
                 if (id === "page-title" && langMessages[key]) {
@@ -80,6 +80,10 @@ function applyTranslations() {
                 }
             });
         });
+}
+
+function t(key) {
+    return transMessages[key] || key;
 }
 
 function showCustomPopup(message, duration = 5000) {
