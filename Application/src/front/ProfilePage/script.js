@@ -29,6 +29,8 @@ let lang = localStorage.getItem("lang") || "en";
 let transMessages = {};
 
 document.getElementById("lang-select").value = lang;
+document.getElementById("lang-select").value = lang;
+
 applyTranslations();
 
 if (!token || isJwtExpired(token)) {
