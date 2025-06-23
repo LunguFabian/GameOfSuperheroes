@@ -7,6 +7,17 @@
     <link rel="stylesheet" href="/front/GamePage/style.css">
 </head>
 <body>
+<div id="gameOverPopup">
+    <div class="popup-content">
+        <h2 id="gameover-title">Game Over!</h2>
+        <div><span id="score-label">Your score:</span> <span id="finalScore">0</span></div>
+        <div id="popupCountdown">
+            <span id="redirect-label">You will be redirected in</span> <span id="popupTimer">15</span> <span
+                id="seconds-label">seconds</span>
+        </div>
+        <button id="playAgainBtn">Play Again</button>
+    </div>
+</div>
 <div class="gameContainer id=gameContainer">
     <div class="hero-villain-box" id="heroVillainBox">
         <div class="character-image" id="heroImageWrapper">
@@ -39,17 +50,6 @@
             <div id="customPopup" class="custom-popup">
                 <span id="customPopupMessage"></span>
                 <button id="closePopupBtn">&times;</button>
-            </div>
-            <div id="gameOverPopup">
-                <div class="popup-content">
-                    <h2 id="gameover-title">Game Over!</h2>
-                    <div><span id="score-label">Your score:</span> <span id="finalScore">0</span></div>
-                    <div id="popupCountdown">
-                        <span id="redirect-label">You will be redirected in</span> <span id="popupTimer">15</span> <span
-                            id="seconds-label">seconds</span>
-                    </div>
-                    <button id="playAgainBtn">Play Again</button>
-                </div>
             </div>
         </div>
     </div>
