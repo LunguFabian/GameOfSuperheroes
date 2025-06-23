@@ -282,47 +282,43 @@ VALUES ((SELECT id FROM heroes WHERE name = 'Thor'), (SELECT id FROM villains WH
 
 INSERT INTO scenarios (part1, part2, part3, part4, language)
 VALUES
--- Scenario 1
+
 ('On a chaotic night, an interdimensional portal opens in the middle of the city. A distorted version of your world appears through it. In the mirror, a broken, inverted city stares back... ruled by [ENEMY_NAME].',
  'You cross the portal. In this world, heroes are worshiped as gods, and citizens live in fear. Here, you are a legend... but also a dictator. [ENEMY_NAME] hijacked your image and built an entire society around fear.',
  'You reach the capital''s center. Everything is silent. Patrol robots mistake you for your "evil twin" and escort you directly to the central palace. There, [ENEMY_NAME] awaits, with a cold smile: "Now you see how easy it is to control the world..."',
  'In a clash of wills, you destroy the device keeping the portal open and free the population from hypnosis. As the mirror dimension collapses into chaos, you return to your world. Behind you, the mirror shatters into a thousand pieces. Evil is sealed. For now.',
  'en'),
 
--- Scenario 2
 ('A zero-level alert comes directly from a satellite security network. Someone triggered the "Apocalypse Code" global destruction protocols written in case of alien invasion. But there was no invasion. Only [ENEMY_NAME].',
  'You arrive in a decades-old underground bunker. Massive computers, cathode tubes, and a glowing terminal. The screen displays a countdown. Exactly 9 minutes left until the self-destruction of 3 continents.',
  'You manage to access the system. But you must solve a series of equations and logic codes from the Cold War era. [ENEMY_NAME] left traps. Make a mistake? The timer accelerates. You focus.',
  'With 7 seconds left, you type the final characters. The siren stops. The screen goes black. The air is breathable again. On the surveillance camera, [ENEMY_NAME] bows sarcastically. "You won today. But tomorrow... I will rewrite the Code."',
  'en'),
 
--- Scenario 3
-('A strange cloud covers the city overnight. In the morning, people discover all sources of electricity have vanished. In the city square, a huge generator pulsing with unknown energy, bearing [ENEMY_NAME]’s signature.',
- 'Investigating the generator, you find control devices attached to every streetlight. [ENEMY_NAME] appears on every screen in the city: "No light, no hope! Let’s see who can survive in the dark."',
+('A strange cloud covers the city overnight. In the morning, people discover all sources of electricity have vanished. In the city square, a huge generator pulsing with unknown energy, bearing [ENEMY_NAME]''s signature.',
+ 'Investigating the generator, you find control devices attached to every streetlight. [ENEMY_NAME] appears on every screen in the city: "No light, no hope! Let''s see who can survive in the dark."',
  'You manage to disable some devices, but the generator begins to overload dangerously fast. You have only a few minutes to disarm the system.',
  'At the last moment, you reverse the energy flow and restore the power. [ENEMY_NAME] vanishes again, promising a new game of shadows.',
  'en'),
 
--- Scenario 4
 ('A wave of extreme cold hits the city in mid-summer. All rivers and lakes freeze instantly. On a huge block of ice stands [ENEMY_NAME], plunging the city into an eternal winter.',
  'You venture to the center of the phenomenon, where you discover a climate device controlled by [ENEMY_NAME]. The streets are empty, and dangers lurk beneath the snow.',
- 'You reach [ENEMY_NAME]’s improvised laboratory, where you must solve a series of puzzles to deactivate the cooling system before the city is buried under another layer of ice.',
+ 'You reach [ENEMY_NAME]''s improvised laboratory, where you must solve a series of puzzles to deactivate the cooling system before the city is buried under another layer of ice.',
  'You stop the device, and temperatures return to normal. People come out of their homes, and [ENEMY_NAME] challenges you to "round two" via a cryptic message.',
  'en'),
 
--- Scenario 5
 ('A violet fog covers the city. Anyone who inhales it begins to forget who they are. In the city center, [ENEMY_NAME] orchestrates chaos from an abandoned radio tower.',
- 'You try to move among the amnesiac inhabitants, avoiding traps set by [ENEMY_NAME]. You find a scientist’s journal documenting the antidote for the fog.',
- 'You reach the radio tower and discover that only a specific frequency can disperse the fog. You must set the equipment correctly before everyone’s memory is lost forever.',
+ 'You try to move among the amnesiac inhabitants, avoiding traps set by [ENEMY_NAME]. You find a scientist''s journal documenting the antidote for the fog.',
+ 'You reach the radio tower and discover that only a specific frequency can disperse the fog. You must set the equipment correctly before everyone''s memory is lost forever.',
  'You activate the right frequency, the fog disappears, and people regain their memories. [ENEMY_NAME] vows to return with an even stronger toxin.',
  'en'),
 
--- Scenario 6
 ('Strange noises are heard at night from the city''s underground. An old network of tunnels becomes the scene of mysterious disappearances. [ENEMY_NAME] is building a robot army down there.',
  'You descend underground and find the army''s plans. The robots are programmed to attack at midnight. Time is running out.',
  'You must deactivate the central control core before the robots are activated. Mechanical traps and riddles block your way to the command room.',
- 'With superhuman effort, you deactivate the main system and save the city. [ENEMY_NAME]’s army remains inert, but the threat has not disappeared for good.',
+ 'With superhuman effort, you deactivate the main system and save the city. [ENEMY_NAME]''s army remains inert, but the threat has not disappeared for good.',
  'en');
+
 
 INSERT INTO questions (question_text, option1, option2, option3, option4, correct_option, difficulty, score, language)
 VALUES ('What color is the sky on a clear day?', 'Blue', 'Yellow', NULL, NULL, 1, 'easy', 5, 'en'),
