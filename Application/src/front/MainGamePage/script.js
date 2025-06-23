@@ -1,4 +1,4 @@
-const elements = [
+const TRANSLATABLE_IDS = [
     ["page-title", "difficulty_page_title"],
     ["site-title", "site_title"],
     ["difficulty-title", "difficulty_title"],
@@ -9,11 +9,16 @@ const elements = [
     ["normalButton", "play"],
     ["hardButton", "play"]
 ];
-
 const token = localStorage.getItem("token");
+const lang = getLangFromUrl();
+let langMessages = {};
+
 if (!token || isJwtExpired(token)) {
     window.location.href = "/unauthorized";
 }
+
+applyTranslations();
+
 function isJwtExpired(token) {
     if (!token) return true;
     const payload = parseJwt(token);
@@ -31,83 +36,53 @@ function parseJwt(token) {
     return JSON.parse(jsonPayload);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    loadLangMessages(applyTranslations);
-
-    function sendGameRequest(difficulty) {
-        fetch("/api/game/start.php", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify({ difficulty: difficulty })
-        })
-            .then(response => response.json().then(data => ({ status: response.status, body: data })))
-            .then(({ status, body }) => {
-                if (status === 200) {
-                    const params = new URLSearchParams(window.location.search);
-                    const lang = params.get('lang') || 'en';
-                    window.location.href = `../game?difficulty=${difficulty}&game_id=${body.game_id}&lang=${lang}`;
-                } else {
-                    showCustomPopup(body.message || "Eroare necunoscuta.",5000);
-                    if(body.message === "Hero not selected. Please select a hero before starting a game."){
-                        setTimeout(function() {
-                            window.location.href = "/profile";
-                        }, 3000);
-                    }
-                }
-            })
-            .catch(err => {
-                console.error("Eroare:", err);
-                showCustomPopup("A aparut o eroare la trimiterea cererii.");
-            });
-    }
-    document.getElementById("easyButton").addEventListener("click", function(e) {
-        e.preventDefault();
-        sendGameRequest("easy");
-    });
-
-    document.getElementById("normalButton").addEventListener("click", function(e) {
-        e.preventDefault();
-        sendGameRequest("medium");
-    });
-
-    document.getElementById("hardButton").addEventListener("click", function(e) {
-        e.preventDefault();
-        sendGameRequest("hard");
-    });
-});
-
-function getLangFromUrl() {
+function sendGameRequest(difficulty) {
     const params = new URLSearchParams(window.location.search);
-    return params.get('lang') || 'en';
+    const lang = params.get('lang') || 'en';
+    fetch("/api/game/start.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body: JSON.stringify({ difficulty: difficulty, language: lang })
+    })
+        .then(response => response.json().then(data => ({ status: response.status, body: data })))
+        .then(({ status, body }) => {
+            if (status === 200) {
+                window.location.href = `/game?difficulty=${difficulty}&game_id=${body.game_id}&lang=${lang}`;
+            } else {
+                showCustomPopup(body.valueOf() + "#" + "Eroare necunoscuta.",5000);
+                if(body.message === "Hero not selected. Please select a hero before starting a game."){
+                    setTimeout(function() {
+                        window.location.href = "/profile";
+                    }, 3000);
+                }
+            }
+        })
+        .catch(err => {
+            console.error("Eroare:", err);
+            showCustomPopup("A aparut o eroare la trimiterea cererii.",5000);
+        });
 }
 
-const lang = getLangFromUrl();
-let langMessages = {};
-
-function loadLangMessages(cb) {
+function applyTranslations() {
     fetch(`/front/lang/${lang}.json`)
         .then(res => res.json())
         .then(msgs => {
             langMessages = msgs;
-            if(cb) cb();
+            TRANSLATABLE_IDS.forEach(([id, key]) => {
+                const el = document.getElementById(id);
+                if (id === "page-title" && langMessages[key]) {
+                    document.title = langMessages[key];
+                } else if (el && langMessages[key]) {
+                    el.textContent = langMessages[key];
+                }
+            });
         });
 }
-function applyTranslations() {
 
-    elements.forEach(([id, key]) => {
-        const el = document.getElementById(id);
-        if (id === "page-title" && langMessages[key]) {
-            document.title = langMessages[key];
-        } else if (el && langMessages[key]) {
-            el.textContent = langMessages[key];
-        }
-    });
-}
-
-function showCustomPopup(message, duration = 3) {
+function showCustomPopup(message, duration = 5000) {
     const popup = document.getElementById('customPopup');
     const msgElem = document.getElementById('customPopupMessage');
     msgElem.textContent = message;
@@ -123,3 +98,22 @@ function showCustomPopup(message, duration = 3) {
     }
 }
 
+function getLangFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('lang') || 'en';
+}
+
+document.getElementById("easyButton").addEventListener("click", function(e) {
+    e.preventDefault();
+    sendGameRequest("easy");
+});
+
+document.getElementById("normalButton").addEventListener("click", function(e) {
+    e.preventDefault();
+    sendGameRequest("medium");
+});
+
+document.getElementById("hardButton").addEventListener("click", function(e) {
+    e.preventDefault();
+    sendGameRequest("hard");
+});

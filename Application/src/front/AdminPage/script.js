@@ -1,7 +1,3 @@
-const token = localStorage.getItem('token');
-const USERS_API_URL = '/api/admin/users.php';
-const SCENARIOS_API_URL = '/api/admin/scenarios.php';
-const QUESTIONS_API_URL = '/api/admin/questions.php';
 const TRANSLATABLE_IDS = [
     ["page-title", "admin"],
     ["users-title", "users"],
@@ -44,14 +40,23 @@ const TRANSLATABLE_IDS = [
     ["th-question-language", "language"],
     ["th-actions-questions", "actions"]
 ];
+const token = localStorage.getItem('token');
+const USERS_API_URL = '/api/admin/users.php';
+const SCENARIOS_API_URL = '/api/admin/scenarios.php';
+const QUESTIONS_API_URL = '/api/admin/questions.php';
+const payload = token ? parseJwt(token) : {};
 
 let lang = localStorage.getItem("lang") || "en";
 let langMessages = {};
 
-const payload = token ? parseJwt(token) : {};
+document.getElementById("lang-select").value = lang;
+
 if (!token || !payload.is_admin) {
     window.location.href = "/unauthorized";
 }
+
+applyTranslations();
+
 function parseJwt(token) {
     if (!token) return {};
     const base64Url = token.split('.')[1];
@@ -62,40 +67,36 @@ function parseJwt(token) {
     return JSON.parse(jsonPayload);
 }
 
-function  loadLangMessages() {
+function applyTranslations() {
     fetch(`/front/lang/${lang}.json`)
         .then(res => res.json())
         .then(msgs => {
             langMessages = msgs;
-            translate();
+            TRANSLATABLE_IDS.forEach(([elId, key]) => {
+                const el = document.getElementById(elId);
+                if (el && langMessages[key]) {
+                    if (el.tagName === "TITLE") {
+                        el.textContent = langMessages[key];
+                        document.title = langMessages[key];
+                    } else if (el.tagName === "LABEL") {
+                        let children = Array.from(el.childNodes);
+                        for (let c of children) {
+                            if (c.nodeType === 3) {
+                                c.nodeValue = langMessages[key] + (c.nodeValue.match(/:$/) ? ':' : '');
+                                break;
+                            }
+                        }
+                    } else if (el.tagName === "OPTION" || el.tagName === "BUTTON" || el.tagName === "TH" || el.tagName === "H1") {
+                        el.textContent = langMessages[key];
+                    } else {
+                        el.textContent = langMessages[key];
+                    }
+                }
+            });
         });
 }
 function t(key) {
     return langMessages[key] || key;
-}
-
-function translate(){
-    TRANSLATABLE_IDS.forEach(([elId, key]) => {
-        const el = document.getElementById(elId);
-        if (el && langMessages[key]) {
-            if (el.tagName === "TITLE") {
-                el.textContent = langMessages[key];
-                document.title = langMessages[key];
-            } else if (el.tagName === "LABEL") {
-                let children = Array.from(el.childNodes);
-                for (let c of children) {
-                    if (c.nodeType === 3) {
-                        c.nodeValue = langMessages[key] + (c.nodeValue.match(/:$/) ? ':' : '');
-                        break;
-                    }
-                }
-            } else if (el.tagName === "OPTION" || el.tagName === "BUTTON" || el.tagName === "TH" || el.tagName === "H1") {
-                el.textContent = langMessages[key];
-            } else {
-                el.textContent = langMessages[key];
-            }
-        }
-    });
 }
 
 function showMessage(msg, color = 'green') {
@@ -364,13 +365,6 @@ document.getElementById("lang-select").addEventListener("change", function() {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById("lang-select").value = lang;
-        if (!token) {
-            showMessage(t('not_authenticated'), 'red');
-            return;
-        }
-
-        loadLangMessages();
         fetchUsers();
         fetchScenarios();
         fetchQuestions();

@@ -1,61 +1,30 @@
-document.addEventListener("DOMContentLoaded", async function () {
-    const token = localStorage.getItem("token");
-    if (token == null) {
-        document.getElementById("profile").style.display = "none";
-        document.getElementById("logout").style.display = "none";
-    }
+const TRANSLATABLE_IDS = [
+    ["page-title", "player_rank_title"],
+    ["site-title", "title"],
+    ["rss-link", "rss"],
+    ["rank-link", "rank"],
+    ["about-link", "about"],
+    ["profile-link", "profile"],
+    ["logout-btn", "logout"],
+    ["player-rank-title", "player_rank_title"],
+    ["col-number", "number_sign"],
+    ["col-username", "username"],
+    ["col-points", "points"]
+];
+const token = localStorage.getItem("token");
+const playerList = document.getElementById('player-list');
+const menuOpenButton = document.querySelector("#menu-open-button");
 
-    document.getElementById('logout-btn').addEventListener('click', function (event) {
-        event.preventDefault();
-        localStorage.removeItem('token');
-        window.location.href = '/home';
-    });
+let lang = localStorage.getItem("lang") || "en";
+document.getElementById("lang-select").value = lang;
+applyTranslations();
 
-    const TRANSLATABLE_IDS = [
-        ["page-title", "player_rank_title"],
-        ["site-title", "title"],
-        ["rss-link", "rss"],
-        ["rank-link", "rank"],
-        ["about-link", "about"],
-        ["profile-link", "profile"],
-        ["logout-btn", "logout"],
-        ["player-rank-title", "player_rank_title"],
-        ["col-number", "number_sign"],
-        ["col-username", "username"],
-        ["col-points", "points"]
-    ];
-
-    let lang = localStorage.getItem("lang") || "en";
-    document.getElementById("lang-select").value = lang;
-
-    function applyTranslations() {
-        fetch(`/front/lang/${lang}.json`)
-            .then(res => res.json())
-            .then(messages => {
-                TRANSLATABLE_IDS.forEach(([elId, key]) => {
-                    const el = document.getElementById(elId);
-                    if (el && messages[key]) {
-                        if (el.tagName === "TITLE") {
-                            el.textContent = messages[key];
-                            document.title = messages[key];
-                        } else {
-                            el.textContent = messages[key];
-                        }
-                    }
-                });
-            });
-    }
-
-    applyTranslations();
-
-    document.getElementById("lang-select").addEventListener("change", function () {
-        localStorage.setItem("lang", this.value);
-        location.reload();
-    });
-});
+if (token == null) {
+    document.getElementById("profile").style.display = "none";
+    document.getElementById("logout").style.display = "none";
+}
 
 document.addEventListener("DOMContentLoaded", async function () {
-    const playerList = document.getElementById('player-list');
     playerList.innerHTML = '<li>Loading...</li>';
 
     try {
@@ -91,9 +60,36 @@ document.addEventListener("DOMContentLoaded", async function () {
     } catch (err) {
         playerList.innerHTML = '<li>Error 500</li>';
     }
-
-    const menuOpenButton = document.querySelector("#menu-open-button");
-    menuOpenButton.addEventListener("click", () => {
-        document.body.classList.toggle("show-mobile-menu");
-    });
 });
+
+document.getElementById('logout-btn').addEventListener('click', function (event) {
+    event.preventDefault();
+    localStorage.removeItem('token');
+    window.location.href = '/home';
+});
+document.getElementById("lang-select").addEventListener("change", function () {
+    localStorage.setItem("lang", this.value);
+    location.reload();
+});
+
+menuOpenButton.addEventListener("click", () => {
+    document.body.classList.toggle("show-mobile-menu");
+});
+
+function applyTranslations() {
+    fetch(`/front/lang/${lang}.json`)
+        .then(res => res.json())
+        .then(messages => {
+            TRANSLATABLE_IDS.forEach(([elId, key]) => {
+                const el = document.getElementById(elId);
+                if (el && messages[key]) {
+                    if (el.tagName === "TITLE") {
+                        el.textContent = messages[key];
+                        document.title = messages[key];
+                    } else {
+                        el.textContent = messages[key];
+                    }
+                }
+            });
+        });
+}

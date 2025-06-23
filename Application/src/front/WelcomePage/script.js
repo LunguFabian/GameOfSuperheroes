@@ -1,7 +1,3 @@
-const menuOpenButton = document.querySelector("#menu-open-button");
-const token = localStorage.getItem("token");
-const payload = token ? parseJwt(token) : {};
-const lang = localStorage.getItem("lang") || "en";
 const TRANSLATABLE_IDS = [
     ["page-title", "title"],
     ["page-title-text", "title"],
@@ -16,6 +12,14 @@ const TRANSLATABLE_IDS = [
     ["register-btn", "register"],
     ["play-btn", "play"]
 ];
+const menuOpenButton = document.querySelector("#menu-open-button");
+const token = localStorage.getItem("token");
+const payload = token ? parseJwt(token) : {};
+const lang = localStorage.getItem("lang") || "en";
+const langSelect = document.getElementById('lang-select');
+document.getElementById("lang-select").value = lang;
+
+applyTranslations();
 
 if (!token) {
     document.getElementById("profile").style.display = "none";
@@ -73,8 +77,6 @@ function applyTranslations() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    applyTranslations();
-
     const loginBtn = document.querySelector(".button.login");
     const registerBtn = document.querySelector(".button.register");
     const playBtn = document.querySelector(".button.play");
@@ -88,9 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (playBtn) playBtn.style.display = "none";
         if (profileNav) profileNav.style.display = "none";
     }
-
-    const langSelect = document.getElementById('lang-select');
-    document.getElementById("lang-select").value = lang;
 
     playBtn?.addEventListener('click', function(event) {
         event.preventDefault();
