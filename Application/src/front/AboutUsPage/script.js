@@ -12,7 +12,6 @@ const TRANSLATABLE_IDS = [
     ["bianca-description", "bianca_description"]
 ];
 const menuOpenButton = document.querySelector("#menu-open-button");
-const menuCloseButton = document.querySelector("#menu-close-button");
 const token = localStorage.getItem("token");
 let lang = localStorage.getItem("lang") || "en";
 

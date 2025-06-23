@@ -31,9 +31,9 @@ let transMessages = {};
 document.getElementById("lang-select").value = lang;
 applyTranslations();
 
-/*if (!token || isJwtExpired(token)) {
+if (!token || isJwtExpired(token)) {
     window.location.href = "/unauthorized";
-}*/
+}
 
 function isJwtExpired(token) {
     if (!token) return true;

@@ -13,9 +13,9 @@ const token = localStorage.getItem("token");
 const lang = getLangFromUrl();
 let transMessages = {};
 
-/*if (!token || isJwtExpired(token)) {
+if (!token || isJwtExpired(token)) {
     window.location.href = "/unauthorized";
-}*/
+}
 
 applyTranslations();
 
