@@ -22,3 +22,15 @@ services:
      # - ./database_volume:/var/lib/mysql
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     command: --log-bin-trust-function-creators=1
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "443:443"
+      - "80:80"
+    depends_on:
+      - php-apache
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./letsencrypt/fullchain.pem:/etc/nginx/fullchain.pem:ro
+      - ./letsencrypt/privkey.pem:/etc/nginx/privkey.pem:ro
