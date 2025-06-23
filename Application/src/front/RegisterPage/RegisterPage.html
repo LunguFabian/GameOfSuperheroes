@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">Register</title>
     <link rel="stylesheet" href="front/RegisterPage/style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -20,14 +21,17 @@
         <form id="registerForm">
             <h1 id="register-title">Register</h1>
             <div class="input-box">
+                <label for="username-input"></label>
                 <input id="username-input" type="text" placeholder="Username" required>
                 <i class='bx bxs-user' ></i>
             </div>
             <div class="input-box">
+                <label for="email-input"></label>
                 <input id="email-input" type="email" placeholder="Email" required>
                 <i class='bx bxs-envelope'></i>
             </div>
             <div class="input-box">
+                <label for="password-input"></label>
                 <input id="password-input" type="password"
                        style="-webkit-text-security: circle"
                        placeholder="Password"
@@ -35,6 +39,7 @@
                 <i class='bx bxs-lock-alt' ></i>
             </div>
             <div class="input-box">
+                <label for="confirm-password-input"></label>
                 <input id="confirm-password-input" type="password"
                        style="-webkit-text-security: circle"
                        placeholder="Confirm Password"

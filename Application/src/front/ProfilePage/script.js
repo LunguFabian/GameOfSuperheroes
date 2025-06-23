@@ -1,9 +1,11 @@
 const token = localStorage.getItem("token");
 const menuOpenButton = document.querySelector("#menu-open-button");
-const TRANSLATABLE_IDS = [["page-title", "profile_title"], ["site-title", "title"], ["rss-link", "rss"], ["rank-link", "rank"], ["about-link", "about"], ["profile-link", "profile"], ["logout-btn", "logout"], ["edit-profile-btn", "edit_profile"], ["change-hero-btn", "change_hero"], ["profile-username-label", "username"], ["user-rank-label", "user_rank"], ["user-points-label", "user_points"], ["game-history-title", "game_history"], ["col-number", "number_sign"], ["col-hero-name", "hero_name"], ["col-difficulty", "difficulty"], ["col-points", "points"], ["select-hero-title", "select_hero"], ["edit-profile-title", "edit_profile"], ["change-username-label", "change_username"], ["save-username-btn", "change_username"], ["change-email-label", "change_email"], ["save-email-btn", "change_email"], ["change-password-label", "change_password"], ["save-password-btn", "change_password"]];
-menuOpenButton.addEventListener("click", () => {
-    document.body.classList.toggle("show-mobile-menu");
-})
+const TRANSLATABLE_IDS = [["page-title", "profile_title"], ["site-title", "title"], ["rss-link", "rss"], ["rank-link", "rank"], ["about-link", "about"], ["profile-link", "profile"], ["logout-btn", "logout"], ["edit-profile-btn", "edit_profile"], ["change-hero-btn", "change_hero"], ["profile-username-label", "username"], ["user-rank-label", "user_rank"], ["user-points-label", "user_points"], ["game-history-title", "game_history"], ["col-number", "number_sign"], ["col-hero-name", "hero_name"], ["col-difficulty", "difficulty"], ["col-points", "points"], ["select-hero-title", "select_hero"], ["edit-profile-title", "edit_profile"], ["change-username-label", "change_username"], ["save-username-btn", "change_username"], ["change-email-label", "change_email"], ["save-email-btn", "change_email"], ["change-password-label", "change_password"],
+    ["save-password-btn", "change_password"]];
+let lang = localStorage.getItem("lang") || "en";
+
+document.getElementById("lang-select").value = lang;
+applyTranslations();
 
 if (!token || isJwtExpired(token)) {
     window.location.href = "/unauthorized";
@@ -27,7 +29,27 @@ function parseJwt(token) {
     return JSON.parse(jsonPayload);
 }
 
-function showCustomPopup(message, duration = 3) {
+function applyTranslations() {
+    fetch(`/front/lang/${lang}.json`)
+        .then(res => res.json())
+        .then(messages => {
+            TRANSLATABLE_IDS.forEach(([elId, key]) => {
+                const el = document.getElementById(elId);
+                if (el && messages[key]) {
+                    if (el.tagName === "TITLE") {
+                        el.textContent = messages[key];
+                        document.title = messages[key];
+                    } else if (el.tagName === "INPUT") {
+                        el.placeholder = messages[key];
+                    } else {
+                        el.textContent = messages[key];
+                    }
+                }
+            });
+        });
+}
+
+function showCustomPopup(message, duration = 5000) {
     const popup = document.getElementById('customPopup');
     const msgElem = document.getElementById('customPopupMessage');
     msgElem.textContent = message;
@@ -81,7 +103,7 @@ function fetchGameHistory(token) {
 
             if (data.message) {
                 const li = document.createElement("li");
-                li.textContent = "No games played yet.";
+                li.textContent = "No games played yet";
                 list.appendChild(li);
                 return;
             }
@@ -101,7 +123,7 @@ function fetchGameHistory(token) {
             });
         })
         .catch(err => {
-            console.error("Failed to load game history:", err);
+            console.error("Fail:", err);
         });
 }
 
@@ -121,50 +143,8 @@ function isValidEmail(email) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    if (!token) {
-        window.location.href = "/front/NotAuthorizedPage/NotAuthorized.html";
-        return;
-    }
-
-    document.getElementById('logout-btn').addEventListener('click', function (event) {
-        event.preventDefault();
-        localStorage.removeItem('token');
-        window.location.href = '/home';
-    });
-
     fetchProfileData(token);
     fetchGameHistory(token);
-
-    let lang = localStorage.getItem("lang") || "en";
-    document.getElementById("lang-select").value = lang;
-
-    function applyTranslations() {
-        fetch(`/front/lang/${lang}.json`)
-            .then(res => res.json())
-            .then(messages => {
-                TRANSLATABLE_IDS.forEach(([elId, key]) => {
-                    const el = document.getElementById(elId);
-                    if (el && messages[key]) {
-                        if (el.tagName === "TITLE") {
-                            el.textContent = messages[key];
-                            document.title = messages[key];
-                        } else if (el.tagName === "INPUT") {
-                            el.placeholder = messages[key];
-                        } else {
-                            el.textContent = messages[key];
-                        }
-                    }
-                });
-            });
-    }
-
-    applyTranslations();
-
-    document.getElementById("lang-select").addEventListener("change", function () {
-        localStorage.setItem("lang", this.value);
-        location.reload();
-    });
-
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -238,10 +218,8 @@ document.addEventListener("DOMContentLoaded", () => {
                         showCustomPopup("A aparut o eroare la schimbarea eroului.");
                     }
                 });
-
                 heroList.appendChild(heroDiv);
             });
-
         } catch (error) {
             heroList.innerHTML = "<p style='color: red;'>Error loading heroes.</p>";
         }
@@ -280,18 +258,23 @@ document.getElementById('logout-btn').addEventListener('click', function (event)
     window.location.href = '/home';
 });
 
+document.getElementById("lang-select").addEventListener("change", function () {
+    localStorage.setItem("lang", this.value);
+    location.reload();
+});
+
 document.getElementById('save-username-btn').addEventListener('click', async function () {
     const newUsername = document.getElementById('new-username').value.trim();
     const password = document.getElementById('current-password-username').value;
     const token = localStorage.getItem('token');
 
     if (!token) {
-        showEditProfileMessage("Nu esti autentificat(a)!");
+        showEditProfileMessage("Nu esti autentificat");
         return;
     }
 
     if (!newUsername || !password) {
-        showEditProfileMessage("Completeaza noul username si parola curenta!");
+        showEditProfileMessage("Completeaza noul username si parola curenta");
         return;
     }
 
@@ -313,6 +296,7 @@ document.getElementById('save-username-btn').addEventListener('click', async fun
         if (response.ok) {
             showEditProfileMessage(data.message, response.ok);
             document.getElementById('editProfileModal').classList.add('hidden');
+            location.reload();
         } else {
             showEditProfileMessage(data.message);
         }
@@ -327,17 +311,17 @@ document.getElementById('save-email-btn').addEventListener('click', async functi
     const token = localStorage.getItem('token');
 
     if (!token) {
-        showEditProfileMessage("Nu esti autentificat(a)!");
+        showEditProfileMessage("Nu esti autentificat!");
         return;
     }
 
     if (!newEmail || !password) {
-        showEditProfileMessage("Completeaza noul email si parola curenta!");
+        showEditProfileMessage("Completeaza noul email si parola curenta");
         return;
     }
 
     if (!isValidEmail(newEmail)) {
-        showEditProfileMessage("Emailul nu este valid!");
+        showEditProfileMessage("Emailul nu este valid");
         return;
     }
 
@@ -418,3 +402,13 @@ document.getElementById('save-password-btn').addEventListener('click', async fun
         showEditProfileMessage("Eroare la conectarea cu serverul");
     }
 });
+
+document.getElementById('logout-btn').addEventListener('click', function (event) {
+    event.preventDefault();
+    localStorage.removeItem('token');
+    window.location.href = '/home';
+});
+
+menuOpenButton.addEventListener("click", () => {
+    document.body.classList.toggle("show-mobile-menu");
+})

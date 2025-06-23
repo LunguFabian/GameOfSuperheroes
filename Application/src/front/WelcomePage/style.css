@@ -54,6 +54,7 @@ header {
     color:  var(--navy-blue);
     font-size: 2em;
     font-family: 'Bangers', cursive;
+    font-weight: 600;
     letter-spacing: 2px;
     margin: 0;
     text-shadow: 2px 2px 0  var(--white), 4px 4px 0  var(--light-blue);
@@ -69,7 +70,7 @@ header {
     margin-left: 10px;
     border-radius: 18px;
     height: 30px;
-    width: 40px;
+    width: 50px;
 }
 
 #menu-close-button, #menu-open-button {
@@ -160,15 +161,17 @@ main {
 
 .hero-details .title {
     font-size: 5em;
+    font-weight: normal;
     color: var(--white);
     font-family: 'Bangers', cursive;
     margin-bottom: 0.25em;
     text-shadow: 5px 5px 0 var(--navy-blue), 5px 5px 0 var(--light-blue);
-    letter-spacing: 4px;
+    letter-spacing: 5px;
 }
 
 .hero-details .subtitle {
     font-size: 3em;
+    font-weight: normal;
     color: var(--light-blue);
     margin-bottom: 0.9em;
     text-shadow: 3px 3px var(--navy-blue);
@@ -185,21 +188,25 @@ main {
 }
 
 .button {
-    padding: 0.6em 2.2em;
+    font-family: 'Bangers', cursive;
     font-size: 4em;
+    font-weight: normal;
+    letter-spacing: 2px;
+    text-decoration: none;
+
     background: var(--light-blue);
     color: var(--white);
-    border: 2.5px solid var(--navy-blue);
-    border-radius: 20px;
-    font-family: 'Bangers', cursive;
-    letter-spacing: 2px;
     text-shadow: 2px 2px var(--navy-blue), 1px 1px var(--white);
     box-shadow: 2px 2px 0 var(--yellow), 4px 4px 0 var(--navy-blue);
-    cursor: pointer;
+
+    border: 2.5px solid var(--navy-blue);
+    border-radius: 20px;
+    padding: 0.6em 2.2em;
     margin-top: 0;
+
+    cursor: pointer;
     outline: none;
     transition: background 0.15s, color 0.15s, box-shadow 0.2s;
-    text-decoration: none;
     display: inline-block;
 }
 
@@ -218,7 +225,7 @@ main {
     background: var(--dark-yellow);
     color: var(--white);
     border-color: var(--navy-blue);
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .button:hover,
@@ -236,15 +243,18 @@ main {
     right: 32px;
     z-index: 9999;
     padding: 12px 20px;
+
     background: var(--dark-yellow);
     color: var(--navy-blue);
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-
     box-shadow: 2px 2px 0 var(--navy-blue), 4px 4px 0 var(--light-blue);
     border-color: var(--navy-blue);
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 100;
+    letter-spacing: 2px;
+    cursor: pointer;
+
     outline: none;
 }
 

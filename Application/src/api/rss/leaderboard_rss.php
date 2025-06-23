@@ -19,7 +19,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
     <channel>
         <title>Top Players - The Game of SuperHeroes</title>
         <link>http://localhost:8082/home</link>
-        <description>The leaderboard of the top 10 players.</description>
+        <description>The leaderboard of the top 10 players</description>
         <language>en-en</language>
         <pubDate><?php echo date(DATE_RSS); ?></pubDate>
 

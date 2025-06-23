@@ -61,6 +61,19 @@ body {
     margin-bottom: 0;
 }
 
+.home-link {
+    color: var(--light-blue);
+    text-decoration: underline;
+    font-family: 'Bangers', cursive;
+    font-size:  1.25em;
+    transition: color 0.17s;
+}
+
+.home-link:hover {
+    color: var(--dark-yellow);
+    text-decoration: underline;
+}
+
 @media (max-width: 600px) {
     .card {
         padding: 22px 7vw 18px 7vw;

@@ -11,7 +11,7 @@ include_once('../jwtUtil/decodeJWT.php');
 
 if($_SERVER["REQUEST_METHOD"] != "PUT"){
     http_response_code(405);
-    echo json_encode(["message"=>"Method not allowed."]);
+    echo json_encode(["message"=>"Method not allowed"]);
     exit();
 }
 

@@ -19,6 +19,7 @@ const TRANSLATABLE_IDS = [
     ["already-account-text", "already_account"],
     ["login-link", "login"]
 ];
+applyTranslations();
 
 function applyTranslations() {
     fetch(`/front/lang/${lang}.json`)
@@ -57,12 +58,6 @@ function showCustomPopup(message, duration = 3000) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    applyTranslations();
-
-    langSelect.addEventListener("change", function () {
-        localStorage.setItem("lang", this.value);
-        location.reload();
-    });
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
@@ -117,9 +112,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error('Error:', error);
                 showCustomPopup('An error occurred while registering.');
            }
-        } catch (error) {
-            console.error('Error:', error);
-            showCustomPopup('error 500');
-        }
     });
+});
+
+langSelect.addEventListener("change", function () {
+    localStorage.setItem("lang", this.value);
+    location.reload();
 });

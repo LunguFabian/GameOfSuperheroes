@@ -67,7 +67,7 @@ header {
     margin-left: 10px;
     border-radius: 18px;
     height: 30px;
-    width: 40px;
+    width: 50px;
 }
 
 #menu-close-button, #menu-open-button {
@@ -164,7 +164,7 @@ ul.nav-menu {
     margin-left: 10px;
     border-radius: 18px;
     height: 30px;
-    width: 40px;
+    width: 50px;
 }
 
 .list-players-container{

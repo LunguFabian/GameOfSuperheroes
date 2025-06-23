@@ -64,7 +64,7 @@ header {
     margin-left: 10px;
     border-radius: 18px;
     height: 30px;
-    width: 40px;
+    width: 50px;
 }
 
 #menu-close-button, #menu-open-button {
@@ -215,36 +215,35 @@ main {
 }
 
 .profile-info .points {
-    background: var(--light-blue);
+    background: var(--yellow);
     border-radius: 10px;
     padding: 4px 16px;
     box-shadow: 2px 2px 0 var(--navy-blue);
     border: 2px solid var(--navy-blue);
-    color: var(--white);
 }
 
 .profile-button {
-    background: var(--light-blue);
-    color: var(--white);
+    background: var(--yellow);
     border: 2px solid var(--navy-blue);
-    border-radius: 17px;
-    padding: 8px 34px;
-    margin-top: 10px;
+    box-shadow: 2px 2px 0 var(--light-blue), 4px 4px 0 var(--navy-blue);
     font-size: 1.15em;
-    cursor: pointer;
     font-family: 'Bangers', cursive;
     font-weight: 300;
     letter-spacing: 1px;
-    box-shadow: 2px 2px 0 var(--yellow), 4px 4px 0 var(--navy-blue);
+
+    border-radius: 17px;
+    padding: 8px 34px;
+    margin-top: 10px;
+    cursor: pointer;
+
+
     outline: none;
     transition: background 0.19s, color 0.19s, box-shadow 0.19s, border 0.19s;
 }
 
 .profile-button:hover,
 .profile-button:focus {
-    background: var(--navy-blue);
-    color: var(--white);
-    border-color: var(--light-blue);
+    background: var(--dark-yellow);
     box-shadow: 2px 2px 0 var(--white), 4px 4px 0 var(--light-blue);
 }
 
@@ -258,14 +257,13 @@ main {
 }
 
 #change-hero-btn {
-    background: var(--light-blue);
     margin-top: 20px;
     margin-bottom: 15px;
     padding: 8px 15px;
     background-color: var(--yellow);
     color: var(--navy-blue);
     border: 2px solid var(--navy-blue);
-    box-shadow: 2px 2px 0 var(--navy-blue), 4px 4px 0 var(--light-blue);
+    box-shadow: 2px 2px 0 var(--light-blue), 4px 4px 0 var(--navy-blue);
     border-radius: var(--border-radius-button);
     font-family: 'Bangers', cursive;
     font-size: 1em;
@@ -314,6 +312,11 @@ main {
     max-height: 80%;
     width: 400px;
     position: relative;
+    overflow-y: auto;
+}
+
+.modal-content-hero::-webkit-scrollbar {
+    width: 10px;
 }
 
 .close-btn {
@@ -328,7 +331,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 .hero-option {

@@ -1,15 +1,62 @@
+const TRANSLATABLE_IDS = [
+    ["page-title", "admin"],
+    ["users-title", "users"],
+    ["th-id", "id"],
+    ["th-username", "username"],
+    ["th-email", "email"],
+    ["th-score", "score"],
+    ["th-rank", "rank"],
+    ["th-admin", "admin_label"],
+    ["th-actions-users", "actions"],
+    ["scenarios-title", "scenarios"],
+    ["label-part1", "part1"],
+    ["label-part2", "part2"],
+    ["label-part3", "part3"],
+    ["label-part4", "part4"],
+    ["label-language-scenarios", "language"],
+    ["option-choose-language", "choose_language"],
+    ["add-scenario-btn", "add_scenario"],
+    ["th-scenario-id", "id"],
+    ["th-part1", "part1"],
+    ["th-part2", "part2"],
+    ["th-part3", "part3"],
+    ["th-part4", "part4"],
+    ["th-scenario-language", "language"],
+    ["th-actions-scenarios", "actions"],
+    ["questions-title", "questions"],
+    ["label-question-text", "question_text"],
+    ["label-difficulty", "difficulty"],
+    ["option-choose-difficulty", "choose"],
+    ["option-easy", "easy"],
+    ["option-medium", "medium"],
+    ["option-hard", "hard"],
+    ["label-language-questions", "language"],
+    ["add-question-btn", "add_question"],
+    ["th-question-id", "id"],
+    ["th-question-text", "text"],
+    ["th-question-difficulty", "difficulty"],
+    ["th-question-options", "options"],
+    ["th-question-correct", "correct"],
+    ["th-question-language", "language"],
+    ["th-actions-questions", "actions"]
+];
 const token = localStorage.getItem('token');
 const USERS_API_URL = '/api/admin/users.php';
 const SCENARIOS_API_URL = '/api/admin/scenarios.php';
 const QUESTIONS_API_URL = '/api/admin/questions.php';
+const payload = token ? parseJwt(token) : {};
 
-let lang = localStorage.getItem("lang") || "ro";
+let lang = localStorage.getItem("lang") || "en";
 let langMessages = {};
 
-const payload = token ? parseJwt(token) : {};
+document.getElementById("lang-select").value = lang;
+
 if (!token || !payload.is_admin) {
     window.location.href = "/unauthorized";
 }
+
+applyTranslations();
+
 function parseJwt(token) {
     if (!token) return {};
     const base64Url = token.split('.')[1];
@@ -20,10 +67,33 @@ function parseJwt(token) {
     return JSON.parse(jsonPayload);
 }
 
-function loadLangMessages() {
-    return fetch(`/front/lang/${lang}.json`)
+function applyTranslations() {
+    fetch(`/front/lang/${lang}.json`)
         .then(res => res.json())
-        .then(msgs => { langMessages = msgs; });
+        .then(msgs => {
+            langMessages = msgs;
+            TRANSLATABLE_IDS.forEach(([elId, key]) => {
+                const el = document.getElementById(elId);
+                if (el && langMessages[key]) {
+                    if (el.tagName === "TITLE") {
+                        el.textContent = langMessages[key];
+                        document.title = langMessages[key];
+                    } else if (el.tagName === "LABEL") {
+                        let children = Array.from(el.childNodes);
+                        for (let c of children) {
+                            if (c.nodeType === 3) {
+                                c.nodeValue = langMessages[key] + (c.nodeValue.match(/:$/) ? ':' : '');
+                                break;
+                            }
+                        }
+                    } else if (el.tagName === "OPTION" || el.tagName === "BUTTON" || el.tagName === "TH" || el.tagName === "H1") {
+                        el.textContent = langMessages[key];
+                    } else {
+                        el.textContent = langMessages[key];
+                    }
+                }
+            });
+        });
 }
 function t(key) {
     return langMessages[key] || key;
@@ -289,86 +359,16 @@ function renderQuestionOptions() {
     }
 }
 
+document.getElementById("lang-select").addEventListener("change", function() {
+    localStorage.setItem("lang", this.value);
+    location.reload();
+});
+
 document.addEventListener('DOMContentLoaded', () => {
-    loadLangMessages().then(() => {
-
-        const TRANSLATABLE_IDS = [
-            ["page-title", "admin"],
-            ["users-title", "users"],
-            ["th-id", "id"],
-            ["th-username", "username"],
-            ["th-email", "email"],
-            ["th-score", "score"],
-            ["th-rank", "rank"],
-            ["th-admin", "admin_label"],
-            ["th-actions-users", "actions"],
-            ["scenarios-title", "scenarios"],
-            ["label-part1", "part1"],
-            ["label-part2", "part2"],
-            ["label-part3", "part3"],
-            ["label-part4", "part4"],
-            ["label-language-scenarios", "language"],
-            ["option-choose-language", "choose_language"],
-            ["add-scenario-btn", "add_scenario"],
-            ["th-scenario-id", "id"],
-            ["th-part1", "part1"],
-            ["th-part2", "part2"],
-            ["th-part3", "part3"],
-            ["th-part4", "part4"],
-            ["th-scenario-language", "language"],
-            ["th-actions-scenarios", "actions"],
-            ["questions-title", "questions"],
-            ["label-question-text", "question_text"],
-            ["label-difficulty", "difficulty"],
-            ["option-choose-difficulty", "choose"],
-            ["option-easy", "easy"],
-            ["option-medium", "medium"],
-            ["option-hard", "hard"],
-            ["label-language-questions", "language"],
-            ["add-question-btn", "add_question"],
-            ["th-question-id", "id"],
-            ["th-question-text", "text"],
-            ["th-question-difficulty", "difficulty"],
-            ["th-question-options", "options"],
-            ["th-question-correct", "correct"],
-            ["th-question-language", "language"],
-            ["th-actions-questions", "actions"]
-        ];
-
-        TRANSLATABLE_IDS.forEach(([elId, key]) => {
-            const el = document.getElementById(elId);
-            if (el && langMessages[key]) {
-                if (el.tagName === "TITLE") {
-                    el.textContent = langMessages[key];
-                    document.title = langMessages[key];
-                } else if (el.tagName === "LABEL") {
-                    let children = Array.from(el.childNodes);
-                    for (let c of children) {
-                        if (c.nodeType === 3) {
-                            c.nodeValue = langMessages[key] + (c.nodeValue.match(/:$/) ? ':' : '');
-                            break;
-                        }
-                    }
-                } else if (el.tagName === "OPTION" || el.tagName === "BUTTON" || el.tagName === "TH" || el.tagName === "H1") {
-                    el.textContent = langMessages[key];
-                } else {
-                    el.textContent = langMessages[key];
-                }
-            }
-        });
-
-        document.getElementById("lang-select").addEventListener("change", function () {
-            localStorage.setItem("lang", this.value);
-            location.reload();
-        });
-
-        if (!token) {
-            showMessage(t('not_authenticated'), 'red');
-            return;
-        }
         fetchUsers();
         fetchScenarios();
         fetchQuestions();
+
 
         document.querySelector('#usersTable tbody').addEventListener('click', (e) => {
             if (e.target.classList.contains('promote-btn')) {
@@ -453,5 +453,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             addQuestion(formData);
         });
-    });
 });

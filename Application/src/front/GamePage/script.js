@@ -1,3 +1,20 @@
+const TRANSLATABLE_IDS = [
+    ["page-title", "game_page_title"],
+    ["game-title", "subtitle"],
+    ["continueBtn", "continue"],
+    ["question-label", "question"],
+    ["option-1", "answer_1"],
+    ["option-2", "answer_2"],
+    ["option-3", "answer_3"],
+    ["option-4", "answer_4"],
+    ["textAnswer", "input_placeholder"],
+    ["nextBtn", "next"],
+    ["gameover-title", "game_over"],
+    ["score-label", "your_score"],
+    ["redirect-label", "redirect"],
+    ["seconds-label", "seconds"],
+    ["playAgainBtn", "play_again"]
+];
 const textBox = document.getElementById('storyText');
 const continueBtn = document.getElementById('continueBtn');
 const quizBox = document.getElementById('quiz');
@@ -23,23 +40,11 @@ let lang = getLangFromUrl();
 popup.style.display = 'none';
 quizBox.style.display = 'none';
 
-const TRANSLATABLE_IDS = [
-    ["page-title", "game_page_title"],
-    ["game-title", "subtitle"],
-    ["continueBtn", "continue"],
-    ["question-label", "question"],
-    ["option-1", "answer_1"],
-    ["option-2", "answer_2"],
-    ["option-3", "answer_3"],
-    ["option-4", "answer_4"],
-    ["textAnswer", "input_placeholder"],
-    ["nextBtn", "next"],
-    ["gameover-title", "game_over"],
-    ["score-label", "your_score"],
-    ["redirect-label", "redirect"],
-    ["seconds-label", "seconds"],
-    ["playAgainBtn", "play_again"]
-];
+if (!token || isJwtExpired(token) || gameId==null) {
+    window.location.href = "/unauthorized";
+}
+
+applyTranslations();
 
 function showGameOverPopup(finalScore) {
     const scoreElem = document.getElementById('finalScore');
@@ -190,12 +195,15 @@ function setCharacterImages(villainSrc, heroSrc) {
         : '';
 }
 
-window.onload = () => {
-    if (!token || isJwtExpired(token)) {
-        window.location.href = "/unauthorized";
-    }
-    applyTranslations();
+answerOptions.forEach(option => {
+    option.addEventListener('click', () => {
+        answerOptions.forEach(opt => opt.classList.remove('selected'));
+        option.classList.add('selected');
+        selectedAnswer = option.textContent;
+    });
+});
 
+document.addEventListener("DOMContentLoaded", () => {
     fetch(`http://localhost:8082/api/game/game.php?id=${gameId}`, {
         method: 'GET',
         headers: {
@@ -218,16 +226,7 @@ window.onload = () => {
         })
         .catch(err => {
             console.error("Eroare la fetch:", err);
-            showCustomPopup("Nu s-a putut incarca jocul.");
         });
-};
-
-answerOptions.forEach(option => {
-    option.addEventListener('click', () => {
-        answerOptions.forEach(opt => opt.classList.remove('selected'));
-        option.classList.add('selected');
-        selectedAnswer = option.textContent;
-    });
 });
 
 continueBtn.addEventListener('click', () => {
@@ -278,7 +277,7 @@ nextBtn.addEventListener('click', () => {
     }
 
     if (!answer) {
-        showCustomPopup("Selecteaza sau introdu un raspuns!");
+        showCustomPopup("Selecteaza sau introdu un raspuns");
         return;
     }
 
