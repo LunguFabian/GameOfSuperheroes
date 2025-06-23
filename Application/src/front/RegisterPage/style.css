@@ -152,13 +152,13 @@ h1 {
 
 .register-link {
     font-size: 1.07em;
-    color: #004DCB;
+    color: var(--blue);
     font-family: 'Bangers', cursive;
     text-align: center;
 }
 
 .register-link a {
-    color: var(--blue);
+    color: #004DCB;
     text-decoration: underline;
     font-family: 'Bangers', cursive;
     transition: color 0.17s;
