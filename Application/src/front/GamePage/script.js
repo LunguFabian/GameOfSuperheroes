@@ -41,9 +41,9 @@ let transMessages = {};
 popup.style.display = 'none';
 quizBox.style.display = 'none';
 
-if (!token || isJwtExpired(token) || gameId==null) {
+/*if (!token || isJwtExpired(token) || gameId==null) {
     window.location.href = "/unauthorized";
-}
+}*/
 
 applyTranslations();
 

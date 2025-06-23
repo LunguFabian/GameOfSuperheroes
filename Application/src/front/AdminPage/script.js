@@ -51,9 +51,9 @@ let langMessages = {};
 
 document.getElementById("lang-select").value = lang;
 
-if (!token || !payload.is_admin) {
+/*if (!token || !payload.is_admin) {
     window.location.href = "/unauthorized";
-}
+}*/
 
 applyTranslations();
 
