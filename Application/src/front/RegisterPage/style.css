@@ -128,8 +128,8 @@ h1 {
 .password-checkbox input[type="checkbox"],
 .confirm-checkbox input[type="checkbox"]{
     accent-color: var(--light-blue);
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
     margin: 0;
     border: none;
     outline: none;
