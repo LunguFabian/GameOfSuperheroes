@@ -34,3 +34,13 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./letsencrypt/fullchain.pem:/etc/nginx/fullchain.pem:ro
       - ./letsencrypt/privkey.pem:/etc/nginx/privkey.pem:ro
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_USER: user
+      PMA_PASSWORD: pass
+    depends_on:
+      - db
