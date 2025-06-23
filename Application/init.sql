@@ -290,7 +290,7 @@ VALUES
  'en'),
 
 -- Scenario 2
-('A zero-level alert comes directly from a satellite security network. Someone triggered the "Apocalypse Code" — global destruction protocols written in case of alien invasion. But there was no invasion. Only [ENEMY_NAME].',
+('A zero-level alert comes directly from a satellite security network. Someone triggered the "Apocalypse Code" global destruction protocols written in case of alien invasion. But there was no invasion. Only [ENEMY_NAME].',
  'You arrive in a decades-old underground bunker. Massive computers, cathode tubes, and a glowing terminal. The screen displays a countdown. Exactly 9 minutes left until the self-destruction of 3 continents.',
  'You manage to access the system. But you must solve a series of equations and logic codes from the Cold War era. [ENEMY_NAME] left traps. Make a mistake? The timer accelerates. You focus.',
  'With 7 seconds left, you type the final characters. The siren stops. The screen goes black. The air is breathable again. On the surveillance camera, [ENEMY_NAME] bows sarcastically. "You won today. But tomorrow... I will rewrite the Code."',
