@@ -16,13 +16,13 @@ const passwordInput = document.getElementById('password-input');
 const confirmPasswordInput = document.getElementById('confirm-password-input');
 const langSelect = document.getElementById("lang-select");
 
-let lang = localStorage.getItem("lang") || "en";
 let transMessages = {};
+let lang = localStorage.getItem("lang") || "en";
+document.getElementById("lang-select").value = lang;
+
 langSelect.value = lang;
 
 applyTranslations();
-
-console.log(transMessages["user_registered_success"]);
 
 function applyTranslations() {
     fetch(`/front/lang/${lang}.json`)

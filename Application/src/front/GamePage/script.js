@@ -84,8 +84,6 @@ function applyTranslations() {
             transMessages=messages;
             TRANSLATABLE_IDS.forEach(([elId, key]) => {
                 const el = document.getElementById(elId);
-                console.log("[BEFORE]" + elId + " " + key);
-                console.log(el + " " + messages[key]);
                 if (el && messages[key]) {
                     if (el.tagName === "TITLE" || elId === "page-title") {
                         el.textContent = messages[key];
@@ -95,7 +93,6 @@ function applyTranslations() {
                     } else {
                         el.textContent = messages[key];
                     }
-                    console.log(elId + " " + key);
                 }
             });
         });
@@ -106,6 +103,7 @@ function t(key) {
 }
 
 function showCustomPopup(message, duration = 5000) {
+    console.log(message);
     const popup = document.getElementById('customPopup');
     const msgElem = document.getElementById('customPopupMessage');
     msgElem.textContent = message;
@@ -300,7 +298,7 @@ nextBtn.addEventListener('click', () => {
         .then(res => res.json())
         .then(data => {
             if (data.is_correct) {
-                showCustomPopup("correct_answer_with_score " + data.score, 5000);
+                showCustomPopup(t("correct_answer_with_score") + data.score, 5000);
             } else {
                 showCustomPopup(t("wrong_answer"));
             }

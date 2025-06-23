@@ -186,42 +186,42 @@ VALUES (1, 1),
        (3, 3);
 
 INSERT INTO questions (question_text, option1, option2, option3, option4, correct_option, difficulty, score)
-VALUES ('Care este capitala Franței?', 'Paris', 'Londra', NULL, NULL, 1, 'easy', 10),
+VALUES ('Care este capitala Frantei?', 'Paris', 'Londra', NULL, NULL, 1, 'easy', 10),
        ('Cine a scris "Romeo si Julieta"?', 'William Shakespeare', 'Mark Twain', NULL, NULL, 1, 'easy', 12),
-       ('Ce planetă este cunoscută ca „Planeta Rosie”?', 'Venus', 'Marte', NULL, NULL, 2, 'easy', 10),
+       ('Ce planeta este cunoscuta ca „Planeta Rosie”?', 'Venus', 'Marte', NULL, NULL, 2, 'easy', 10),
        ('Care este simbolul chimic pentru aur?', 'Au', 'Ag', NULL, NULL, 1, 'easy', 5),
-       ('În ce an a ajuns omul pentru prima dată pe Lună?', '1965', '1969', NULL, NULL, 2, 'easy', 5),
-       ('Ce limbă se vorbeste în Brazilia?', 'Spaniolă', 'Portugheză', NULL, NULL, 2, 'easy', 5);
+       ('In ce an a ajuns omul pentru prima data pe Luna?', '1965', '1969', NULL, NULL, 2, 'easy', 5),
+       ('Ce limba se vorbeste In Brazilia?', 'Spaniola', 'Portugheza', NULL, NULL, 2, 'easy', 5);
 
 INSERT INTO questions (question_text, option1, option2, option3, option4, correct_option, difficulty, score)
-VALUES ('Care este cea mai lungă râu din lume?', 'Amazon', 'Nil', 'Yangtze', 'Mississippi', 2, 'medium', 15),
-       ('Cine a pictat „Cina cea de Taină”?', 'Michelangelo', 'Leonardo da Vinci', 'Rafael', 'Donatello', 2, 'medium',
+VALUES ('Care este cea mai lunga rau din lume?', 'Amazon', 'Nil', 'Yangtze', 'Mississippi', 2, 'medium', 15),
+       ('Cine a pictat „Cina cea de Taina”?', 'Michelangelo', 'Leonardo da Vinci', 'Rafael', 'Donatello', 2, 'medium',
         15),
        ('Ce element chimic are simbolul „Na”?', 'Sodiu', 'Azot', 'Neon', 'Argint', 1, 'medium', 15),
-       ('Câte planete sunt în sistemul solar?', '8', '9', '7', '10', 1, 'medium', 15),
+       ('Cate planete sunt In sistemul solar?', '8', '9', '7', '10', 1, 'medium', 15),
        ('Cine a descoperit penicilina?', 'Alexander Fleming', 'Louis Pasteur', 'Marie Curie', 'Isaac Newton', 1,
         'medium', 15),
-       ('Ce țară are cel mai mare număr de locutori?', 'SUA', 'China', 'India', 'Indonezia', 2, 'medium', 15);
+       ('Ce tara are cel mai mare numar de locutori?', 'SUA', 'China', 'India', 'Indonezia', 2, 'medium', 15);
 
 INSERT INTO questions (question_text, option1, option2, option3, option4, correct_option, difficulty, score)
-VALUES ('Cine a fost primul om care a păsit pe Lună?', 'Neil Armstrong', NULL, NULL, NULL, 1, 'hard', 25),
+VALUES ('Cine a fost primul om care a pasit pe Luna?', 'Neil Armstrong', NULL, NULL, NULL, 1, 'hard', 25),
        ('Ce imperiu a construit Colosseumul din Roma?', 'Imperiul Roman', NULL, NULL, NULL, 1, 'hard', 25),
-       ('Ce țară are cea mai veche monarhie din lume?', 'Japonia', NULL, NULL, NULL, 1, 'hard', 25),
-       ('Care este limba oficială în Elveția care nu este vorbită în alte țări?', 'Retoromana', NULL, NULL, NULL, 1,
+       ('Ce tara are cea mai veche monarhie din lume?', 'Japonia', NULL, NULL, NULL, 1, 'hard', 25),
+       ('Care este limba oficiala In Elvetia care nu este vorbita In alte tari?', 'Retoromana', NULL, NULL, NULL, 1,
         'hard', 25),
-       ('Câte continente există pe glob?', '7', NULL, NULL, NULL, 1, 'hard', 25),
-       ('Ce savant român a inventat stiloul?', 'Petrache Poenaru', NULL, NULL, NULL, 1, 'hard', 25);
+       ('Cate continente exista pe glob?', '7', NULL, NULL, NULL, 1, 'hard', 25),
+       ('Ce savant roman a inventat stiloul?', 'Petrache Poenaru', NULL, NULL, NULL, 1, 'hard', 25);
 
 
 INSERT INTO scenarios (part1, part2, part3, part4)
-VALUES ('Într-o noapte haotică, un portal interdimensional se deschide în mijlocul orasului. O versiune distorsionată a lumii tale apare prin el. Din oglindă te priveste un oraș rupt, inversat… și condus de [ENEMY_NAME].',
-        'Traversezi portalul. În această lume, eroii sunt venerați ca zei, iar cetățenii trăiesc în frică. În această lume, tu ești o legendă… dar și un dictator. [ENEMY_NAME] a deturnat imaginea ta și a construit o întreagă societate în jurul fricii.',
-        'Ajungi în centrul capitalei. Totul e tăcut. Roboții de patrulare te confundă cu „varianta ta malefică” și te conduc direct în palatul central. Acolo, [ENEMY_NAME] te așteaptă, cu un zâmbet rece: „Acum înțelegi cât de ușor e să controlezi lumea…”',
-        'Într-o confruntare de voințe, distrugi mecanismul care menținea deschis portalul și eliberezi populația din hipnoză. În haosul prăbușirii dimensiunii oglindă, te întorci în lumea ta. În urma ta, oglinda se sparge în mii de cioburi. Răul a fost închis. Pentru acum.'),
-       ('O alertă de grad zero vine direct de la o rețea satelitară de securitate. Cineva a declanșat „Codul Apocalipsei” — un set de protocoale de distrugere globală scrise în caz de invazie extraterestră. Dar nu a fost nicio invazie. Doar [ENEMY_NAME].',
-        'Ajungi într-un buncăr subteran vechi de decenii. Acolo, calculatoare masive, tuburi catodice, și un terminal aprins. Ecranul afișează un countdown. Lipsesc exact 9 minute până la declanșarea autodistrugerii a 3 continente.',
-        'Reușești să pătrunzi în sistem. Dar ai de rezolvat o serie de ecuații și coduri logice rămase din vremea Războiului Rece. [ENEMY_NAME] ți-a lăsat capcane. Greșești? Se accelerează timer-ul. Te concentrezi.',
-        'Cu 7 secunde rămase, tastezi ultimele caractere. Sirena se oprește. Ecranul devine negru. Aerul devine din nou respirabil. Pe camera de supraveghere, [ENEMY_NAME] îți face o reverență sarcastică. „Ai câștigat azi. Dar mâine… voi rescrie Codul.”');
+VALUES ('Intr-o noapte haotica, un portal interdimensional se deschide In mijlocul orasului. O versiune distorsionata a lumii tale apare prin el. Din oglinda te priveste un oraS rupt, inversat… Si condus de [ENEMY_NAME].',
+        'Traversezi portalul. In aceasta lume, eroii sunt venerati ca zei, iar cetatenii traiesc In frica. In aceasta lume, tu eSti o legenda… dar Si un dictator. [ENEMY_NAME] a deturnat imaginea ta Si a construit o Intreaga societate In jurul fricii.',
+        'Ajungi In centrul capitalei. Totul e tacut. Robotii de patrulare te confunda cu „varianta ta malefica” Si te conduc direct In palatul central. Acolo, [ENEMY_NAME] te aSteapta, cu un zambet rece: „Acum Intelegi cat de uSor e sa controlezi lumea…”',
+        'Intr-o confruntare de vointe, distrugi mecanismul care mentinea deschis portalul Si eliberezi populatia din hipnoza. In haosul prabuSirii dimensiunii oglinda, te Intorci In lumea ta. In urma ta, oglinda se sparge In mii de cioburi. Raul a fost Inchis. Pentru acum.'),
+       ('O alerta de grad zero vine direct de la o retea satelitara de securitate. Cineva a declanSat „Codul Apocalipsei” — un set de protocoale de distrugere globala scrise In caz de invazie extraterestra. Dar nu a fost nicio invazie. Doar [ENEMY_NAME].',
+        'Ajungi Intr-un buncar subteran vechi de decenii. Acolo, calculatoare masive, tuburi catodice, Si un terminal aprins. Ecranul afiSeaza un countdown. Lipsesc exact 9 minute pana la declanSarea autodistrugerii a 3 continente.',
+        'ReuSeSti sa patrunzi In sistem. Dar ai de rezolvat o serie de ecuatii Si coduri logice ramase din vremea Razboiului Rece. [ENEMY_NAME] ti-a lasat capcane. GreSeSti? Se accelereaza timer-ul. Te concentrezi.',
+        'Cu 7 secunde ramase, tastezi ultimele caractere. Sirena se opreSte. Ecranul devine negru. Aerul devine din nou respirabil. Pe camera de supraveghere, [ENEMY_NAME] Iti face o reverenta sarcastica. „Ai caStigat azi. Dar maine… voi rescrie Codul.”');
 
 ALTER TABLE villains
     ADD COLUMN image_url VARCHAR(255);
@@ -242,59 +242,59 @@ set image_url='front/images/captain-marvel.png'
 where id = 3;
 
 INSERT INTO scenarios (part1, part2, part3, part4)
-VALUES ('Un nor ciudat acoperă orașul peste noapte. Dimineața, oamenii descoperă că toate sursele de energie electrică au dispărut. În mijlocul pieței, un generator uriaș pulsând cu energie necunoscută, purtând semnătura lui [ENEMY_NAME].',
-        'Investigând generatorul, găsești dispozitive de control atașate la fiecare stâlp de iluminat. [ENEMY_NAME] apare pe toate ecranele din oraș: „Fără lumină, fără speranță! Vreau să văd cine se descurcă în întuneric.”',
-        'Reușești să dezactivezi o parte din dispozitive, dar generatorul începe să acumuleze energie periculos de repede. Ai la dispoziție doar câteva minute să dezamorsezi sistemul.',
-        'La limită, reușești să inversezi fluxul de energie și să restabilești curentul. [ENEMY_NAME] dispare din nou, lăsând în urmă promisiunea unui nou joc de umbre.'),
-       ('Un val de frig extrem lovește orașul în plină vară. Toate râurile și lacurile îngheață instantaneu. Pe un bloc de gheață uriaș, stă [ENEMY_NAME], scufundând orașul într-o iarnă veșnică.',
-        'Te aventurezi spre centrul fenomenului, unde descoperi un dispozitiv climatic controlat de [ENEMY_NAME]. Străzile sunt pustii, iar pericolele se ascund sub zăpadă.',
-        'Ajungi la laboratorul improvizat al lui [ENEMY_NAME], unde trebuie să rezolvi o serie de puzzle-uri pentru a dezactiva sistemul de răcire înainte ca orașul să fie îngropat sub un nou strat de gheață.',
-        'Reușești să oprești dispozitivul, iar temperaturile revin la normal. Oamenii ies din case, iar [ENEMY_NAME] te provoacă la „runda a doua” printr-un mesaj criptic.'),
-       ('O ceață violetă acoperă orașul. Oricine o inhalează începe să uite cine este. În centrul orașului, [ENEMY_NAME] orchestrează haosul dintr-un turn radio abandonat.',
-        'Încerci să navighezi printre locuitorii amnezici, evitând capcanele plasate de [ENEMY_NAME]. Găsești jurnalul unui om de știință care documentează antidotul pentru ceață.',
-        'Ajungi la turnul radio și descoperi că doar o frecvență anume poate dispersa ceața. Trebuie să setezi corect echipamentul înainte ca memoria tuturor să fie pierdută definitiv.',
-        'Activezi frecvența potrivită, ceața dispare, iar oamenii își recapătă amintirile. [ENEMY_NAME] jură să revină cu o toxină și mai puternică.'),
-       ('Zgomote ciudate se aud noaptea din subteranul orașului. O rețea de tunele vechi devine scena unor dispariții misterioase. [ENEMY_NAME] construiește acolo o armată de roboți.',
-        'Cobori în subteran și găsești planurile armatei. Roboții sunt programați să atace la miezul nopții. Timpul este scurt.',
-        'Trebuie să dezactivezi nucleul de control central înainte ca roboții să fie activați. Capcane mecanice și ghicitori blochează drumul către cameră de comandă.',
-        'Cu un efort supraomenesc, dezactivezi sistemul principal și salvezi orașul. Armata lui [ENEMY_NAME] rămâne inertă, dar amenințarea nu a dispărut definitiv.');
+VALUES ('Un nor ciudat acopera oraSul peste noapte. Dimineata, oamenii descopera ca toate sursele de energie electrica au disparut. In mijlocul pietei, un generator uriaS pulsand cu energie necunoscuta, purtand semnatura lui [ENEMY_NAME].',
+        'Investigand generatorul, gaseSti dispozitive de control ataSate la fiecare stalp de iluminat. [ENEMY_NAME] apare pe toate ecranele din oraS: „Fara lumina, fara speranta! Vreau sa vad cine se descurca In Intuneric.”',
+        'ReuSeSti sa dezactivezi o parte din dispozitive, dar generatorul Incepe sa acumuleze energie periculos de repede. Ai la dispozitie doar cateva minute sa dezamorsezi sistemul.',
+        'La limita, reuSeSti sa inversezi fluxul de energie Si sa restabileSti curentul. [ENEMY_NAME] dispare din nou, lasand In urma promisiunea unui nou joc de umbre.'),
+       ('Un val de frig extrem loveSte oraSul In plina vara. Toate raurile Si lacurile Ingheata instantaneu. Pe un bloc de gheata uriaS, sta [ENEMY_NAME], scufundand oraSul Intr-o iarna veSnica.',
+        'Te aventurezi spre centrul fenomenului, unde descoperi un dispozitiv climatic controlat de [ENEMY_NAME]. Strazile sunt pustii, iar pericolele se ascund sub zapada.',
+        'Ajungi la laboratorul improvizat al lui [ENEMY_NAME], unde trebuie sa rezolvi o serie de puzzle-uri pentru a dezactiva sistemul de racire Inainte ca oraSul sa fie Ingropat sub un nou strat de gheata.',
+        'ReuSeSti sa opreSti dispozitivul, iar temperaturile revin la normal. Oamenii ies din case, iar [ENEMY_NAME] te provoaca la „runda a doua” printr-un mesaj criptic.'),
+       ('O ceata violeta acopera oraSul. Oricine o inhaleaza Incepe sa uite cine este. In centrul oraSului, [ENEMY_NAME] orchestreaza haosul dintr-un turn radio abandonat.',
+        'Incerci sa navighezi printre locuitorii amnezici, evitand capcanele plasate de [ENEMY_NAME]. GaseSti jurnalul unui om de Stiinta care documenteaza antidotul pentru ceata.',
+        'Ajungi la turnul radio Si descoperi ca doar o frecventa anume poate dispersa ceata. Trebuie sa setezi corect echipamentul Inainte ca memoria tuturor sa fie pierduta definitiv.',
+        'Activezi frecventa potrivita, ceata dispare, iar oamenii ISi recapata amintirile. [ENEMY_NAME] jura sa revina cu o toxina Si mai puternica.'),
+       ('Zgomote ciudate se aud noaptea din subteranul oraSului. O retea de tunele vechi devine scena unor disparitii misterioase. [ENEMY_NAME] construieSte acolo o armata de roboti.',
+        'Cobori In subteran Si gaseSti planurile armatei. Robotii sunt programati sa atace la miezul noptii. Timpul este scurt.',
+        'Trebuie sa dezactivezi nucleul de control central Inainte ca robotii sa fie activati. Capcane mecanice Si ghicitori blocheaza drumul catre camera de comanda.',
+        'Cu un efort supraomenesc, dezactivezi sistemul principal Si salvezi oraSul. Armata lui [ENEMY_NAME] ramane inerta, dar amenintarea nu a disparut definitiv.');
 
 INSERT INTO questions (question_text, option1, option2, option3, option4, correct_option, difficulty, score)
-VALUES ('Ce culoare are cerul într-o zi senină?', 'Albastru', 'Galben', NULL, NULL, 1, 'easy', 5),
-       ('Care este cel mai mic număr par?', '0', '2', NULL, NULL, 1, 'easy', 5),
-       ('Câte zile are o săptămână?', '5', '7', NULL, NULL, 2, 'easy', 5),
-       ('Cum se numește planeta noastră?', 'Luna', 'Pământ', NULL, NULL, 2, 'easy', 5),
-       ('Ce animal face „miau”?', 'Pisica', 'Câinele', NULL, NULL, 1, 'easy', 5),
-       ('Care este anotimpul când ninge cel mai des?', 'Vară', 'Iarnă', NULL, NULL, 2, 'easy', 5),
-       ('Ce fruct este galben și acru?', 'Lămâie', 'Banana', NULL, NULL, 1, 'easy', 5),
-       ('Cum se spune la „good morning” în română?', 'Bună seara', 'Bună dimineața', NULL, NULL, 2, 'easy', 5),
-       ('Ce folosești ca să scrii pe hârtie?', 'Pix', 'Furculiță', NULL, NULL, 1, 'easy', 5),
-       ('Ce culoare are iarba?', 'Roșie', 'Verde', NULL, NULL, 2, 'easy', 5);
+VALUES ('Ce culoare are cerul Intr-o zi senina?', 'Albastru', 'Galben', NULL, NULL, 1, 'easy', 5),
+       ('Care este cel mai mic numar par?', '0', '2', NULL, NULL, 1, 'easy', 5),
+       ('Cate zile are o saptamana?', '5', '7', NULL, NULL, 2, 'easy', 5),
+       ('Cum se numeSte planeta noastra?', 'Luna', 'Pamant', NULL, NULL, 2, 'easy', 5),
+       ('Ce animal face „miau”?', 'Pisica', 'Cainele', NULL, NULL, 1, 'easy', 5),
+       ('Care este anotimpul cand ninge cel mai des?', 'Vara', 'Iarna', NULL, NULL, 2, 'easy', 5),
+       ('Ce fruct este galben Si acru?', 'Lamaie', 'Banana', NULL, NULL, 1, 'easy', 5),
+       ('Cum se spune la „good morning” In romana?', 'Buna seara', 'Buna dimineata', NULL, NULL, 2, 'easy', 5),
+       ('Ce foloseSti ca sa scrii pe hartie?', 'Pix', 'Furculita', NULL, NULL, 1, 'easy', 5),
+       ('Ce culoare are iarba?', 'RoSie', 'Verde', NULL, NULL, 2, 'easy', 5);
 
 INSERT INTO questions (question_text, option1, option2, option3, option4, correct_option, difficulty, score)
-VALUES ('Care este cel mai mare mamifer din lume?', 'Elefant', 'Balena albastră', 'Gorilă', 'Urs polar', 2, 'medium',
+VALUES ('Care este cel mai mare mamifer din lume?', 'Elefant', 'Balena albastra', 'Gorila', 'Urs polar', 2, 'medium',
         15),
-       ('Câți ani are un secol?', '10', '50', '100', '1000', 3, 'medium', 15),
+       ('Cati ani are un secol?', '10', '50', '100', '1000', 3, 'medium', 15),
        ('Cine a pictat „Mona Lisa”?', 'Picasso', 'Leonardo da Vinci', 'Van Gogh', 'Rembrandt', 2, 'medium', 15),
-       ('Ce țară este faimoasă pentru piramide?', 'Mexic', 'China', 'Egipt', 'Grecia', 3, 'medium', 15),
-       ('Cum se numește cel mai lung fluviu din Europa?', 'Dunărea', 'Volga', 'Rinul', 'Loara', 2, 'medium', 15),
-       ('Ce gaz respirăm pentru a trăi?', 'Azot', 'Oxigen', 'Dioxid de carbon', 'Heliu', 2, 'medium', 15),
+       ('Ce tara este faimoasa pentru piramide?', 'Mexic', 'China', 'Egipt', 'Grecia', 3, 'medium', 15),
+       ('Cum se numeSte cel mai lung fluviu din Europa?', 'Dunarea', 'Volga', 'Rinul', 'Loara', 2, 'medium', 15),
+       ('Ce gaz respiram pentru a trai?', 'Azot', 'Oxigen', 'Dioxid de carbon', 'Heliu', 2, 'medium', 15),
        ('Ce animal este simbolul Australiei?', 'Cangur', 'Leu', 'Tigru', 'Zebra', 1, 'medium', 15),
        ('Care este cel mai rapid animal terestru?', 'Ghepard', 'Leopard', 'Iepure', 'Cal', 1, 'medium', 15),
-       ('Ce continent are cei mai mulți locuitori?', 'Africa', 'America de Sud', 'Asia', 'Europa', 3, 'medium', 15),
+       ('Ce continent are cei mai multi locuitori?', 'Africa', 'America de Sud', 'Asia', 'Europa', 3, 'medium', 15),
        ('Cine a inventat becul electric?', 'Edison', 'Tesla', 'Galilei', 'Newton', 1, 'medium', 15);
 
 INSERT INTO questions (question_text, option1, option2, option3, option4, correct_option, difficulty, score)
-VALUES ('Care este formula chimică a apei?', 'H2O', NULL, NULL, NULL, 1, 'hard', 25),
-       ('Cum se numește cel mai înalt vârf montan din lume?', 'Everest', NULL, NULL, NULL, 1, 'hard', 25),
+VALUES ('Care este formula chimica a apei?', 'H2O', NULL, NULL, NULL, 1, 'hard', 25),
+       ('Cum se numeSte cel mai Inalt varf montan din lume?', 'Everest', NULL, NULL, NULL, 1, 'hard', 25),
        ('Cine a scris romanul „Ion”?', 'Liviu Rebreanu', NULL, NULL, NULL, 1, 'hard', 25),
        ('Ce organ al corpului uman produce insulina?', 'Pancreasul', NULL, NULL, NULL, 1, 'hard', 25),
-       ('Cine a compus muzica imnului național al României?', 'Anton Pann', NULL, NULL, NULL, 1, 'hard', 25),
-       ('Ce planetă are cea mai mare gravitație din sistemul solar?', 'Jupiter', NULL, NULL, NULL, 1, 'hard', 25),
-       ('În ce an a avut loc Revoluția Franceză?', '1789', NULL, NULL, NULL, 1, 'hard', 25),
+       ('Cine a compus muzica imnului national al Romaniei?', 'Anton Pann', NULL, NULL, NULL, 1, 'hard', 25),
+       ('Ce planeta are cea mai mare gravitatie din sistemul solar?', 'Jupiter', NULL, NULL, NULL, 1, 'hard', 25),
+       ('In ce an a avut loc Revolutia Franceza?', '1789', NULL, NULL, NULL, 1, 'hard', 25),
        ('Care este capitala Finlandei?', 'Helsinki', NULL, NULL, NULL, 1, 'hard', 25),
        ('Ce element chimic are simbolul „Fe”?', 'Fier', NULL, NULL, NULL, 1, 'hard', 25),
-       ('Cine a fost primul președinte al României după 1989?', 'Ion Iliescu', NULL, NULL, NULL, 1, 'hard', 25);
+       ('Cine a fost primul preSedinte al Romaniei dupa 1989?', 'Ion Iliescu', NULL, NULL, NULL, 1, 'hard', 25);
 
 Update users
 Set is_admin= TRUE
