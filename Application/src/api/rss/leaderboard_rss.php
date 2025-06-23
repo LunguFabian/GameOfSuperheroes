@@ -18,7 +18,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
 <rss version="2.0">
     <channel>
         <title>Top Players - The Game of SuperHeroes</title>
-        <link>http://localhost:8082/home</link>
+        <link>/home</link>
         <description>The leaderboard of the top 10 players</description>
         <language>en-en</language>
         <pubDate><?php echo date(DATE_RSS); ?></pubDate>
