@@ -282,7 +282,7 @@ h1 {
 .custom-popup {
     display: none;
     position: fixed;
-    bottom: 40px;
+    top: 40px;
     right: 40px;
     z-index: 10001;
     background: #fff;
