@@ -113,15 +113,42 @@ h1 {
     transition: color 0.18s;
 }
 
-.input-box .bx-lock-alt {
-    right: 44px;
-    font-size: 1.22em;
+.input-box label.custom-checkbox {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    z-index: 2;
+    cursor: pointer;
 }
 
-.input-box .eye {
-    right: 16px;
-    font-size: 1.22em;
-    color: var(--navy-blue);
+.password-checkbox input[type="checkbox"],
+.confirm-checkbox input[type="checkbox"]{
+    accent-color: var(--light-blue);
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    background: transparent;
+    cursor: pointer;
+    appearance: auto;
+    vertical-align: middle;
+    display: inline-block;
+    position: relative;
+}
+
+.confirm-checkbox, .password-checkbox{
+    position: absolute;
+    right: 18px;
+    padding: 0;
+    background: none;
+    border: none;
+    margin: 0 4px 0 0;
 }
 
 .btn {
@@ -225,3 +252,5 @@ h1 {
     border: 0;
     white-space: nowrap;
 }
+
+

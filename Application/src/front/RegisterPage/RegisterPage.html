@@ -33,18 +33,20 @@
             <div class="input-box">
                 <label for="password-input"></label>
                 <input id="password-input" type="password"
-                       style="-webkit-text-security: circle"
                        placeholder="Password"
                        required>
-                <i class='bx bxs-lock-alt' ></i>
+                <label class="password-checkbox">
+                    <input id="show-password" type="checkbox" onclick="document.getElementById('password-input').type = this.checked ? 'text' : 'password'">
+                </label>
             </div>
             <div class="input-box">
                 <label for="confirm-password-input"></label>
                 <input id="confirm-password-input" type="password"
-                       style="-webkit-text-security: circle"
                        placeholder="Confirm Password"
                        required>
-                <i class='bx bxs-lock-alt' ></i>
+                <label class="confirm-checkbox">
+                    <input id="show-confirm-password" type="checkbox" onclick="document.getElementById('confirm-password-input').type = this.checked ? 'text' : 'password'">
+                </label>
             </div>
             <button type="submit" class="btn" id="register-btn">Register</button>
             <div class="register-link">
