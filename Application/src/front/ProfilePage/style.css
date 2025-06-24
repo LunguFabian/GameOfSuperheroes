@@ -869,26 +869,3 @@ main {
     border: 0;
     white-space: nowrap;
 }
-@media (max-width: 600px) {
-    .game-history {
-        margin: 0 auto;
-        left: 0;
-        right: 0;
-        width: 90vw;
-        min-width: 0;
-        max-width: 95vw;
-        height: auto;
-        max-height: 340px;
-        overflow-y: auto;
-        padding: 18px 2vw 18px 2vw;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-    }
-
-    .list-games {
-        max-height: 220px;
-        overflow-y: auto;
-    }
-}
