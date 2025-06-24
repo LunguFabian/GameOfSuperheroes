@@ -9,14 +9,15 @@
 <body>
 <div id="admin-btn-container">
     <a href="/home" class="home-link">⌂</a>
-    <label for="lang-select" class="sr-only">Select language:</label><select id="lang-select">
-    <option value="en">En</option>
-    <option value="ro">Ro</option>
-</select>
+    <label for="lang-select" class="sr-only">Select language:</label>
+    <select id="lang-select">
+        <option value="en">En</option>
+        <option value="ro">Ro</option>
+    </select>
 </div>
 <div class="container">
     <h1 id="users-title">Users</h1>
-    <section id="users-section">
+    <section id="users-section" aria-labelledby="users-title">
         <div class="users-list">
             <table id="usersTable">
                 <thead>
@@ -37,7 +38,7 @@
     </section>
     <hr>
     <h1 id="scenarios-title">Scenarios</h1>
-    <section id="scenarios-section">
+    <section id="scenarios-section" aria-labelledby="scenarios-title">
         <form id="addScenarioForm">
             <div class="form-row">
                 <label id="label-part1">Part 1:<input type="text" name="part1" required></label>
@@ -50,7 +51,7 @@
             <div class="form-row">
                 <label id="label-language-scenarios">Language:
                     <select name="language" required>
-                        <option value="" id="option-choose-language">Choose language</option>
+                        <option value="" id="option-choose-language" disabled selected>Choose language</option>
                         <option value="ro">ro</option>
                         <option value="en">en</option>
                     </select>
@@ -77,7 +78,7 @@
         </div>
     </section>
     <h1 id="questions-title">Questions</h1>
-    <section id="questions-section">
+    <section id="questions-section" aria-labelledby="questions-title">
         <form id="addQuestionForm">
             <div class="form-row">
                 <label id="label-question-text">Question text:
@@ -85,7 +86,7 @@
                 </label>
                 <label id="label-difficulty">Difficulty:
                     <select name="difficulty" id="difficultySelect" required>
-                        <option value="" id="option-choose-difficulty">Choose</option>
+                        <option value="" id="option-choose-difficulty" disabled selected>Choose</option>
                         <option value="easy" id="option-easy">Easy</option>
                         <option value="medium" id="option-medium">Medium</option>
                         <option value="hard" id="option-hard">Hard</option>
@@ -93,6 +94,7 @@
                 </label>
                 <label id="label-language-questions">Language:
                     <select name="language" required>
+                        <option value="" id="option-language-placeholder" disabled selected>Choose language</option>
                         <option value="ro">ro</option>
                         <option value="en">en</option>
                     </select>

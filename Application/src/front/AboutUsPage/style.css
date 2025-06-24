@@ -63,7 +63,6 @@ header {
 #lang-select{
     font-size: 15px;
     font-family: 'Bangers', cursive;
-
     margin-left: 10px;
     border-radius: 18px;
     height: 30px;
@@ -197,15 +196,6 @@ ul.nav-menu {
     font-family: 'Bangers', cursive;
     letter-spacing: 1px;
     text-shadow: 1px 1px 0 var(--white), 2px 2px 0 var(--light-blue);
-}
-
-.description {
-    font-size: 1.07em;
-    color: var(--blue);
-    font-family: 'Bangers', cursive;
-    margin-bottom: 2px;
-    margin-top: 4px;
-    letter-spacing: 0.5px;
 }
 
 @media (max-width: 900px){

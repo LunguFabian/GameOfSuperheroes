@@ -14,7 +14,7 @@ const lang = getLangFromUrl();
 let transMessages = {};
 
 if (!token || isJwtExpired(token)) {
-    window.location.href = "/unauthorized";
+    //window.location.href = "/unauthorized";
 }
 
 applyTranslations();

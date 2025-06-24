@@ -208,17 +208,6 @@ section {
     font-weight: bold;
 }
 
-
-
-@media (max-width: 900px) {
-    .form-row {
-        flex-direction: column;
-    }
-    .container {
-        padding: 7px;
-    }
-}
-
 #question-options {
     display: flex;
     flex-direction: column;
@@ -236,3 +225,18 @@ section {
     border: 0;
     white-space: nowrap;
 }
+
+@media (max-width: 1500px) {
+    .container {
+        max-width: 85vw;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+    .container {
+        padding: 7px;
+    }
+}
+
+
