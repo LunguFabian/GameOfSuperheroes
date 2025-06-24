@@ -871,9 +871,9 @@ main {
 }
 @media (max-width: 600px) {
     .game-history {
-        width: 98vw;
+        width: 85vw;
         min-width: 0;
-        max-width: 98vw;
+        max-width: 90vw;
         height: auto;
         max-height: 340px;
         overflow-y: auto;
