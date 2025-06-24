@@ -234,6 +234,13 @@ h1 {
     .register-link {
         font-size: 0.98em;
     }
+
+    .custom-checkbox {
+        padding: 0;
+        background: none;
+        border: none;
+        margin: 0 1px 0 0;
+    }
 }
 
 .sr-only {
