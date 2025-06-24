@@ -171,5 +171,5 @@
   "question_added": "Question added!",
   "question_id_required": "Question id required",
   "question_deleted": "Question deleted!",
-  "project_description": "GameOfSuperheroes is an educational web game for teenagers, developed in PHP, which combines interactive scenario elements and educational questions from areas such as grammar, mathematics and general knowledge. The player goes through levels of progressive difficulty, answering questions correctly to advance in the story and defeat enemies. The game includes a scoring system, victory conditions, internationalization, accessibility, and a public leaderboard also available as an RSS feed"
+  "project_description": "GameOfSuperheroes is an educational web game for teenagers, developed in PHP, which combines interactive scenario elements and educational questions from areas such as grammar, mathematics and general knowledge."
 }

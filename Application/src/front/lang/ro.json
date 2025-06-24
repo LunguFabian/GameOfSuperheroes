@@ -169,5 +169,5 @@
   "question_added": "Intrebare adaugata!",
   "question_id_required": "ID-ul intrebarii este necesar",
   "question_deleted": "Intrebare stearsa!",
-  "project_description": "GameOfSuperheroes este un joc web educativ destinat adolescentilor, dezvoltat in PHP, care combina elemente de scenariu interactiv si intrebari educative din domenii precum gramatica, matematica si cultura generala. Jucatorul parcurge niveluri de dificultate progresiva, raspunzand corect la intrebari pentru a avansa in poveste si a invinge inamicii. Jocul include un sistem de scor, conditii de victorie, internationalizare, accesibilitate, si un clasament public disponibil si sub forma de flux RSS"
+  "project_description": "GameOfSuperheroes este un joc web educativ destinat adolescentilor, dezvoltat in PHP, care combina elemente de scenariu interactiv si intrebari educative din domenii precum gramatica, matematica si cultura generala."
 }
