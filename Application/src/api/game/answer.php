@@ -79,6 +79,10 @@ $is_correct= strtolower(trim($answer)) === strtolower(trim($correct_answer));
 $new_score=$game['score'];
 if($new_score==-1){
     $new_score=0;
+    $stmt = $conn->prepare("UPDATE games SET score = ? WHERE id = ?");
+    $stmt->bind_param("ii", $new_score, $game_id);
+    $stmt->execute();
+    $stmt->close();
 }
 if($is_correct){
     $question_score=$question['score'];
