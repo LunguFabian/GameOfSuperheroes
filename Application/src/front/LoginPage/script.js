@@ -94,3 +94,16 @@ document.getElementById("lang-select").addEventListener("change", function() {
 });
 
 document.getElementById("lang-select").value = lang;
+
+// script.js
+document.addEventListener("DOMContentLoaded", () => {
+    const checkbox = document.getElementById("show-password");
+    const passwordInput = document.getElementById("password-input");
+
+    if (checkbox && passwordInput) {
+        checkbox.addEventListener("change", () => {
+            passwordInput.type = checkbox.checked ? "text" : "password";
+        });
+    }
+});
+
