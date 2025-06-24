@@ -869,3 +869,37 @@ main {
     border: 0;
     white-space: nowrap;
 }
+@media (max-width: 600px) {
+    .game-history {
+        width: 98vw;
+        min-width: 0;
+        max-width: 100vw;
+        height: auto;
+        max-height: 340px;
+        overflow-y: auto;
+        padding: 18px 2vw 18px 2vw;
+    }
+
+    .list-games {
+        max-height: 220px;
+        overflow-y: auto;
+    }
+
+    .profile {
+        width: 94vw;
+        max-width: 99vw;
+        padding: 7vw 2vw 7vw 2vw;
+    }
+
+    #hero-img {
+        width: 85vw;
+        height: 180px;
+        max-width: 99vw;
+        margin-bottom: 16px;
+    }
+
+    .game-header, .game-info {
+        font-size: 0.9em;
+        padding: 8px 3px;
+    }
+}
