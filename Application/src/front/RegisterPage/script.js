@@ -126,3 +126,20 @@ langSelect.addEventListener("change", function () {
     localStorage.setItem("lang", this.value);
     location.reload();
 });
+document.addEventListener("DOMContentLoaded", () => {
+    const pairs = [
+        ["show-password", "password-input"],
+        ["show-confirm-password", "confirm-password-input"],
+    ];
+
+    pairs.forEach(([cbId, inputId]) => {
+        const checkbox = document.getElementById(cbId);
+        const pwdInput = document.getElementById(inputId);
+
+        if (checkbox && pwdInput) {
+            checkbox.addEventListener("change", () => {
+                pwdInput.type = checkbox.checked ? "text" : "password";
+            });
+        }
+    });
+});
