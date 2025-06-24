@@ -198,15 +198,6 @@ ul.nav-menu {
     text-shadow: 1px 1px 0 var(--white), 2px 2px 0 var(--light-blue);
 }
 
-.description {
-    font-size: 1.07em;
-    color: var(--blue);
-    font-family: 'Bangers', cursive;
-    margin-bottom: 2px;
-    margin-top: 4px;
-    letter-spacing: 0.5px;
-}
-
 @media (max-width: 900px){
     .main {
         max-width: 80vw;
