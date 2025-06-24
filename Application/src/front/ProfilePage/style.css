@@ -827,6 +827,40 @@ main {
         flex-direction: column;
         align-items: center;
     }
+
+    .game-history {
+        width: 96vw !important;
+        min-width: 0 !important;
+        max-width: 99vw !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+        padding: 15px 2vw !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow-x: auto;
+    }
+
+    .game-header, .game-info {
+        font-size: 0.98em;
+        padding: 10px 5px;
+        gap: 4px;
+    }
+    .game-header {
+        display: grid;
+        grid-template-columns: 1.1fr 2.4fr 1.7fr 1.7fr;
+        text-align: center;
+        align-items: center;
+    }
+    .col, .col-number, .col-name, .col-difficulty, .col-points {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        padding: 0 3px;
+        font-size: 0.98em;
+        text-align: center;
+    }
 }
 
 .sr-only {
