@@ -21,7 +21,10 @@ Key features include:
 
 ## 🖼️ Screenshots
 
-> 📷 A screenshot will be added manually from a local file.
+<p align="center">
+  <img src="screenshots/screenshot-scenario.png" alt="Gameplay Screen 1" width="45%"/>
+  <img src="screenshots/screenshot-question.png" alt="Gameplay Screen 2" width="45%"/>
+</p>
 
 ---
 
