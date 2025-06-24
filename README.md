@@ -91,12 +91,6 @@ The game is designed with accessibility in mind, following web standards for usa
 
 ---
 
-## 🗂️ Color Reference
-
-> 🎨 A superhero-themed color palette is applied.
-
----
-
 ## ⚙️ Installation / Run Locally
 
 ### Prerequisites
