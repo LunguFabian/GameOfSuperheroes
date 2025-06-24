@@ -42,7 +42,7 @@ popup.style.display = 'none';
 quizBox.style.display = 'none';
 
 if (!token || isJwtExpired(token) || gameId==null) {
-    //window.location.href = "/unauthorized";
+   // window.location.href = "/unauthorized";
 }
 
 applyTranslations();
@@ -103,7 +103,6 @@ function t(key) {
 }
 
 function showCustomPopup(message, duration = 5000) {
-    console.log(message);
     const popup = document.getElementById('customPopup');
     const msgElem = document.getElementById('customPopupMessage');
     msgElem.textContent = message;
@@ -218,7 +217,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 showCustomPopup(t("error"));
                 return;
             }
-
             storyParts = Object.values(data.scenario);
             questions = data.questions;
             typeStory(storyParts[currentPart]);

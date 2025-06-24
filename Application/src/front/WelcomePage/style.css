@@ -275,21 +275,12 @@ main {
         justify-content: center;
         align-items: center;
     }
-
-    header {
-        padding: 0.3em 0 0.2em 0;
-    }
     .navbar {
         flex-direction: row;
         padding: 0 4px;
     }
     .nav-logo {
         text-decoration: none;
-    }
-    .logo-text {
-        font-size: 1.08em;
-        padding: 0 3px 2px 3px;
-        border-radius: 4px;
     }
     ul.nav-menu {
         flex-direction: column;

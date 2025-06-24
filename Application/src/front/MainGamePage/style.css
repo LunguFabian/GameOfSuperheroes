@@ -55,7 +55,7 @@ header {
     background:  var(--white);
     border: 4px solid  var(--light-blue);
     border-radius: 22px;
-    margin: 2.5em auto 0 auto;
+    margin: 2.5em auto 2.5em auto;
     max-width: 380px;
     width: 95vw;
     box-shadow: 0 8px 0 var(--dark-yellow), 0 15px 0  var(--navy-blue);

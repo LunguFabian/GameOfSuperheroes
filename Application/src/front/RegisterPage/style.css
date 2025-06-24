@@ -50,6 +50,7 @@ body {
 .wrapper {
     background: var(--white);
     border-radius: 28px;
+    border: 4px solid var(--light-blue);
     box-shadow: 0 8px 0 var(--dark-yellow), 0 15px 0 var(--navy-blue);
     padding: 40px 44px 36px 44px;
     min-width: 330px;
@@ -220,11 +221,6 @@ h1 {
         padding: 21px 3vw 17px 3vw;
         min-width: 0;
         max-width: 60vw;
-        border-radius: 13px;
-    }
-    h1 {
-        font-size: 1.25em;
-        margin-bottom: 14px;
     }
     .input-box input {
         font-size: 1em;

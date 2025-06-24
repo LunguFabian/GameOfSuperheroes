@@ -57,7 +57,7 @@ header {
     box-shadow: none;
 }
 
-#lang-select{
+#lang-select {
     font-size: 15px;
     font-family: 'Bangers', cursive;
 
@@ -654,7 +654,7 @@ main {
     color: #222;
     border: 1px solid #888;
     border-radius: 8px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
     padding: 18px 24px 18px 18px;
     min-width: 220px;
     font-size: 17px;
@@ -697,21 +697,13 @@ main {
 
 @media (max-width: 900px) {
     .modal-content-hero {
-        width: 92vw;
+        width: 50vw;
         min-width: 0;
         max-width: 98vw;
         padding: 12px 3vw;
         max-height: 85vh;
     }
 
-    .hero-little-img {
-        width: 48px;
-        height: 48px;
-    }
-
-    .hero-name {
-        font-size: 1em;
-    }
 
     .close-btn {
         font-size: 1.4em;
@@ -760,42 +752,9 @@ main {
 
 
 @media (max-width: 600px) {
-    .modal-content-hero {
-        width: 99vw;
-        max-width: 99vw;
-        padding: 8px 1vw;
-        overflow-y: auto;
-    }
 
-    .hero-little-img {
-        width: 32px;
-        height: 32px;
-    }
-
-    .hero-name {
-        font-size: 0.95em;
-    }
-
-    .hero-list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .hero-option {
-        letter-spacing: 1px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 10px;
-        border-radius: 8px;
-        background-color: #f2f2f2;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    .hero-option:hover {
-        background-color: #ddd;
+    .main-wrapper {
+        margin: 20px 0 40px 0;
     }
 
     .close-btn {
@@ -806,7 +765,7 @@ main {
         cursor: pointer;
     }
 
-    .edit-profile-content{
+    .edit-profile-content {
         overflow-y: auto;
     }
 
@@ -867,40 +826,6 @@ main {
         display: flex;
         flex-direction: column;
         align-items: center;
-    }
-
-    .game-history {
-        width: 96vw !important;
-        min-width: 0 !important;
-        max-width: 99vw !important;
-        margin: 0 auto !important;
-        box-sizing: border-box !important;
-        padding: 15px 2vw !important;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        overflow-x: auto;
-    }
-
-    .game-header, .game-info {
-        font-size: 0.98em;
-        padding: 10px 5px;
-        gap: 4px;
-    }
-    .game-header {
-        display: grid;
-        grid-template-columns: 1.1fr 2.4fr 1.7fr 1.7fr;
-        text-align: center;
-        align-items: center;
-    }
-    .col, .col-number, .col-name, .col-difficulty, .col-points {
-        min-width: 0;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        padding: 0 3px;
-        font-size: 0.98em;
-        text-align: center;
     }
 }
 
