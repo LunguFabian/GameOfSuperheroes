@@ -8,8 +8,6 @@ const TRANSLATABLE_IDS = [
     ["logout-btn", "logout"],
     ["meet-the-team-title", "meet_the_team"],
     ["project-description", "project_description"],
-    ["fabian-description", "fabian_description"],
-    ["bianca-description", "bianca_description"]
 ];
 const menuOpenButton = document.querySelector("#menu-open-button");
 const token = localStorage.getItem("token");
@@ -36,6 +34,10 @@ function applyTranslations() {
                 }
             });
         });
+}
+
+function t(key) {
+    return transMessages[key] || key;
 }
 
 document.getElementById("lang-select").value = lang;
