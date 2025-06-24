@@ -131,7 +131,7 @@ main {
 }
 
 .hero-section {
-    width: 70%;
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -341,17 +341,11 @@ main {
     .hero-details {
         padding: 1.2em 0.7em 1em 0.7em;
         width: 60vw;
-        min-width: 600px;
-        min-height: 200px;
+        min-width: 80%;
+        min-height: 90%;
         font-size: 2em;
     }
 
-    .hero-details {
-        padding: 1.1em 0.4em 0.8em 0.4em;
-
-        width: 300px;
-        z-index: 0;
-    }
     .hero-details .title {
         font-size: 1.5em;
     }
@@ -378,8 +372,8 @@ main {
         padding: 1.1em 0.4em 0.8em 0.4em;
         font-size: 2em;
         z-index: 0;
-        min-width: 60%;
-        min-height: 70%;
+        min-width: 70%;
+        min-height: 80%;
     }
     .hero-details .title {
         font-size: 1.5em;
