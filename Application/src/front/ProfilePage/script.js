@@ -34,7 +34,7 @@ document.getElementById("lang-select").value = lang;
 applyTranslations();
 
 if (!token || isJwtExpired(token)) {
-    //window.location.href = "/unauthorized";
+    window.location.href = "/unauthorized";
 }
 
 function isJwtExpired(token) {
