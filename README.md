@@ -108,6 +108,7 @@ $ git clone https://github.com/your-username/GameOfSuperheroes.git
 
 # Navigate to the project folder
 $ cd GameOfSuperheroes
+$ cd Application
 
 # Run with Docker Compose
 $ docker-compose up --build
