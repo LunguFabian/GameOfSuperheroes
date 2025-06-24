@@ -1,4 +1,3 @@
-const token = localStorage.getItem("token");
 const menuOpenButton = document.querySelector("#menu-open-button");
 const TRANSLATABLE_IDS = [["page-title", "profile_title"],
     ["site-title", "title"],
@@ -33,6 +32,7 @@ document.getElementById("lang-select").value = lang;
 
 applyTranslations();
 
+const token = localStorage.getItem("token");
 if (!token || isJwtExpired(token)) {
     window.location.href = "/unauthorized";
 }
