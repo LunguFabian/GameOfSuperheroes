@@ -874,9 +874,9 @@ main {
         margin: 0 auto;
         left: 0;
         right: 0;
-        width: 75vw;
+        width: 80vw;
         min-width: 0;
-        max-width: 80vw;
+        max-width: 85vw;
         height: auto;
         max-height: 340px;
         overflow-y: auto;
