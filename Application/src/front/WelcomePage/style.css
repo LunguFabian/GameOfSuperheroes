@@ -287,18 +287,9 @@ main {
         text-decoration: none;
     }
     .logo-text {
-        font-size: 1.07em;
+        font-size: 1.08em;
         padding: 0 3px 2px 3px;
-        color: var(--navy-blue);
-        font-family: 'Bangers', cursive;
-        letter-spacing: 2px;
-        margin: 0;
-        text-shadow: 2px 2px 0 var(--white);
-        background: var(--dark-yellow);
-        display: inline-block;
         border-radius: 4px;
-        border:none;
-        text-decoration: none;
     }
     ul.nav-menu {
         flex-direction: column;
@@ -319,7 +310,7 @@ main {
     body.show-mobile-menu ul.nav-menu {
         left: 0;
     }
-    #menu-open-button, #menu-close-button {
+    #menu-open-button{
         display: block;
     }
     .nav-link {

@@ -32,13 +32,6 @@ if (token && isJwtExpired(token)) {
     localStorage.removeItem('token');
     window.location.href = '/home'
 }
-function isJwtExpired(token) {
-    if (!token) return true;
-    const payload = parseJwt(token);
-    if (!payload.exp) return true;
-    const now = Math.floor(Date.now() / 1000);
-    return now > payload.exp;
-}
 
 if (payload.is_admin) {
     const btn = document.createElement('button');
@@ -48,6 +41,14 @@ if (payload.is_admin) {
         window.location.href = '/admin';
     };
     document.getElementById('admin-btn-container').appendChild(btn);
+}
+
+function isJwtExpired(token) {
+    if (!token) return true;
+    const payload = parseJwt(token);
+    if (!payload.exp) return true;
+    const now = Math.floor(Date.now() / 1000);
+    return now > payload.exp;
 }
 
 function parseJwt(token) {
